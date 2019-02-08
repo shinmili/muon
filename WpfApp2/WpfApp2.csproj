@@ -63,17 +63,7 @@
     </ApplicationDefinition>
     <Compile Include="AuthorizationViewModel.cs" />
     <Compile Include="DelegateCommand.cs" />
-    <Compile Include="EnterAuthCodePage.xaml.cs">
-      <DependentUpon>EnterAuthCodePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="SelectInstancePage.xaml.cs">
-      <DependentUpon>SelectInstancePage.xaml</DependentUpon>
-    </Compile>
     <Page Include="AuthorizationWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="EnterAuthCodePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -92,10 +82,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="SelectInstancePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

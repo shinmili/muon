@@ -1,5 +1,6 @@
 ﻿using Mastonet;
 using Mastonet.Entities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,14 +22,14 @@ namespace WpfApp2
 
         private AuthenticationClient authenticationClient;
         private AppRegistration appRegistration;
+        private Auth auth;
 
-        public NavigationWindow Navigation { get; set; }
+        #region INotifyPropertyChanged implementations
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
             var handler = PropertyChanged;
             handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            //MessageBox.Show((string)typeof(AuthorizationViewModel).GetProperty(propertyName).GetValue(this));
         }
 
         private string instance = "";
@@ -39,7 +40,7 @@ namespace WpfApp2
             {
                 instance = value;
                 NotifyPropertyChanged();
-                OpenAuthorizationPage.RaiseCanExecuteChanged();
+                RequestTokenCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -51,27 +52,44 @@ namespace WpfApp2
             {
                 accessToken = value;
                 NotifyPropertyChanged();
+                AuthorizeCommand.RaiseCanExecuteChanged();
             }
         }
 
-        private DelegateCommand openAuthorizationPage;
-        public DelegateCommand OpenAuthorizationPage
+        private bool waitingForAuthCode = false;
+        public bool WaitingForAuthCode
+        {
+            get => waitingForAuthCode;
+            private set
+            {
+                waitingForAuthCode = value;
+                NotifyPropertyChanged();
+                AuthorizeCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        #endregion
+
+        #region Commands
+
+        private DelegateCommand requestTokenCommand;
+        public DelegateCommand RequestTokenCommand
         {
             get
             {
-                if (openAuthorizationPage == null)
+                if (requestTokenCommand == null)
                 {
-                    openAuthorizationPage = new DelegateCommand
+                    requestTokenCommand = new DelegateCommand
                     {
-                        ExecuteHandler = executeOpenAuthorizationPage,
-                        CanExecuteHandler = canExecuteOpenAuthorizationPage,
+                        ExecuteHandler = executeRequestTokenCommand,
+                        CanExecuteHandler = canExecuteRequestTokenCommand,
                     };
                 }
-                return openAuthorizationPage;
+                return requestTokenCommand;
             }
         }
 
-        private async void executeOpenAuthorizationPage(object parameter)
+        private async void executeRequestTokenCommand(object parameter)
         {
             authenticationClient = new AuthenticationClient(Instance);
             try
@@ -84,36 +102,38 @@ namespace WpfApp2
                 return;
             }
             Process.Start(authenticationClient.OAuthUrl());
-            Navigation.Navigate(new Uri("EnterAuthCodePage.xaml", UriKind.Relative));
+            WaitingForAuthCode = true;
         }
 
-        private bool canExecuteOpenAuthorizationPage(object parameter) => !string.IsNullOrEmpty(Instance);
+        private bool canExecuteRequestTokenCommand(object parameter) => !string.IsNullOrEmpty(Instance);
 
-        private DelegateCommand authorizeWithCode;
-        public DelegateCommand AuthorizeWithCode
+        private DelegateCommand authorizeCommand;
+        public DelegateCommand AuthorizeCommand
         {
             get
             {
-                if (authorizeWithCode == null)
+                if (authorizeCommand == null)
                 {
-                    authorizeWithCode = new DelegateCommand
+                    authorizeCommand = new DelegateCommand
                     {
-                        ExecuteHandler = executeAuthorizeWithCode,
-                        CanExecuteHandler = canExecuteAuthorizeWithCode,
+                        ExecuteHandler = executeAuthorizeCommand,
+                        CanExecuteHandler = canExecuteAuthorizeCommand,
                     };
                 }
-                return authorizeWithCode;
+                return authorizeCommand;
             }
         }
 
-        private async void executeAuthorizeWithCode(object parameter)
+        private async void executeAuthorizeCommand(object parameter)
         {
-            await authenticationClient.ConnectWithCode(AccessToken);
+            auth = await authenticationClient.ConnectWithCode(AccessToken);
         }
 
-        private bool canExecuteAuthorizeWithCode(object parameter)
+        private bool canExecuteAuthorizeCommand(object parameter)
         {
-            return true;
+            return WaitingForAuthCode && AccessToken.Length == 64;
         }
+
+        #endregion
     }
 }

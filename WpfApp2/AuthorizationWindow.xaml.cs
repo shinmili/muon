@@ -18,12 +18,12 @@ namespace WpfApp2
     /// <summary>
     /// AuthorizationWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class AuthorizationWindow : NavigationWindow
+    public partial class AuthorizationWindow : Window
     {
         public AuthorizationWindow()
         {
             InitializeComponent();
-            DataContext = new AuthorizationViewModel { Navigation = this };
+            DataContext = new AuthorizationViewModel();
         }
     }
 }
