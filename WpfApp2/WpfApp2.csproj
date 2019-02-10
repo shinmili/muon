@@ -62,6 +62,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AuthorizationViewModel.cs" />
+    <Compile Include="SettingsModel.cs" />
     <Compile Include="DelegateCommand.cs" />
     <Page Include="AuthorizationWindow.xaml">
       <SubType>Designer</SubType>

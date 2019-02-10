@@ -20,10 +20,18 @@ namespace WpfApp2
     /// </summary>
     public partial class AuthorizationWindow : Window
     {
+        private AuthorizationViewModel ViewModel = new AuthorizationViewModel();
+
         public AuthorizationWindow()
         {
             InitializeComponent();
-            DataContext = new AuthorizationViewModel();
+            DataContext = ViewModel;
+            ViewModel.Closing += (s, e) => Close();
+        }
+
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            ViewModel.LoadSettingsToUi();
         }
     }
 }

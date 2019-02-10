@@ -19,10 +19,10 @@ namespace WpfApp2
     class AuthorizationViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler Closing;
 
         private AuthenticationClient authenticationClient;
-        private AppRegistration appRegistration;
-        private Auth auth;
+        private SettingsModel settings = new SettingsModel();
 
         #region INotifyPropertyChanged implementations
 
@@ -32,7 +32,7 @@ namespace WpfApp2
             handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private string instance = "";
+        private string instance;
         public string Instance
         {
             get => instance;
@@ -44,7 +44,7 @@ namespace WpfApp2
             }
         }
 
-        private string accessToken = "";
+        private string accessToken;
         public string AccessToken
         {
             get => accessToken;
@@ -94,7 +94,7 @@ namespace WpfApp2
             authenticationClient = new AuthenticationClient(Instance);
             try
             {
-                appRegistration = await authenticationClient.CreateApp("Brillenetui", Scope.Read | Scope.Write | Scope.Follow);
+                settings.AppRegistration = await authenticationClient.CreateApp("Brillenetui", Scope.Read | Scope.Write | Scope.Follow);
             }
             catch (HttpRequestException e)
             {
@@ -126,7 +126,17 @@ namespace WpfApp2
 
         private async void executeAuthorizeCommand(object parameter)
         {
-            auth = await authenticationClient.ConnectWithCode(AccessToken);
+            try
+            {
+                settings.Auth = await authenticationClient.ConnectWithCode(AccessToken);
+            }
+            catch (ServerErrorException e)
+            {
+                MessageBox.Show("Authorization failed.");
+                return;
+            }
+            MessageBox.Show(JsonConvert.SerializeObject(settings.Auth));
+            WaitingForAuthCode = false;
         }
 
         private bool canExecuteAuthorizeCommand(object parameter)
@@ -134,6 +144,64 @@ namespace WpfApp2
             return WaitingForAuthCode && AccessToken.Length == 64;
         }
 
+        private DelegateCommand okCommand;
+        public DelegateCommand OkCommand
+        {
+            get
+            {
+                if (okCommand == null)
+                {
+                    okCommand = new DelegateCommand
+                    {
+                        ExecuteHandler = executeOkCommand,
+                        CanExecuteHandler = null,
+                    };
+                }
+                return okCommand;
+            }
+        }
+
+        private void executeOkCommand(object parameter)
+        {
+            settings.Save();
+            MessageBox.Show("Successfully saved.");
+            Closing(this, null);
+        }
+
+        private DelegateCommand cancelCommand;
+        public DelegateCommand CancelCommand
+        {
+            get
+            {
+                if (cancelCommand == null)
+                {
+                    cancelCommand = new DelegateCommand
+                    {
+                        ExecuteHandler = executeCancelCommand,
+                        CanExecuteHandler = null,
+                    };
+                }
+                return cancelCommand;
+            }
+        }
+
+        private void executeCancelCommand(object parameter)
+        {
+            settings.Reload();
+            Closing(this, null);
+        }
         #endregion
+
+        protected void OnClosing(EventArgs e)
+        {
+            var h = Closing;
+            h?.Invoke(this, null);
+        }
+
+        public void LoadSettingsToUi()
+        {
+            Instance = settings.AppRegistration.Instance;
+            AccessToken = settings.Auth.AccessToken;
+        }
     }
 }
