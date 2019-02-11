@@ -28,8 +28,7 @@ namespace WpfApp2
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            var handler = PropertyChanged;
-            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         private string instance;
@@ -75,18 +74,11 @@ namespace WpfApp2
         private DelegateCommand requestTokenCommand;
         public DelegateCommand RequestTokenCommand
         {
-            get
+            get => requestTokenCommand ?? (requestTokenCommand = new DelegateCommand
             {
-                if (requestTokenCommand == null)
-                {
-                    requestTokenCommand = new DelegateCommand
-                    {
-                        ExecuteHandler = executeRequestTokenCommand,
-                        CanExecuteHandler = canExecuteRequestTokenCommand,
-                    };
-                }
-                return requestTokenCommand;
-            }
+                ExecuteHandler = executeRequestTokenCommand,
+                CanExecuteHandler = canExecuteRequestTokenCommand,
+            });
         }
 
         private async void executeRequestTokenCommand(object parameter)
@@ -110,18 +102,11 @@ namespace WpfApp2
         private DelegateCommand authorizeCommand;
         public DelegateCommand AuthorizeCommand
         {
-            get
+            get => authorizeCommand ?? (authorizeCommand = new DelegateCommand
             {
-                if (authorizeCommand == null)
-                {
-                    authorizeCommand = new DelegateCommand
-                    {
-                        ExecuteHandler = executeAuthorizeCommand,
-                        CanExecuteHandler = canExecuteAuthorizeCommand,
-                    };
-                }
-                return authorizeCommand;
-            }
+                ExecuteHandler = executeAuthorizeCommand,
+                CanExecuteHandler = canExecuteAuthorizeCommand,
+            });
         }
 
         private async void executeAuthorizeCommand(object parameter)
@@ -147,18 +132,11 @@ namespace WpfApp2
         private DelegateCommand okCommand;
         public DelegateCommand OkCommand
         {
-            get
+            get => okCommand ?? (okCommand = new DelegateCommand
             {
-                if (okCommand == null)
-                {
-                    okCommand = new DelegateCommand
-                    {
-                        ExecuteHandler = executeOkCommand,
-                        CanExecuteHandler = null,
-                    };
-                }
-                return okCommand;
-            }
+                ExecuteHandler = executeOkCommand,
+                CanExecuteHandler = null,
+            });
         }
 
         private void executeOkCommand(object parameter)
@@ -171,18 +149,11 @@ namespace WpfApp2
         private DelegateCommand cancelCommand;
         public DelegateCommand CancelCommand
         {
-            get
+            get => cancelCommand ?? (cancelCommand = new DelegateCommand
             {
-                if (cancelCommand == null)
-                {
-                    cancelCommand = new DelegateCommand
-                    {
-                        ExecuteHandler = executeCancelCommand,
-                        CanExecuteHandler = null,
-                    };
-                }
-                return cancelCommand;
-            }
+                ExecuteHandler = executeCancelCommand,
+                CanExecuteHandler = null,
+            });
         }
 
         private void executeCancelCommand(object parameter)
