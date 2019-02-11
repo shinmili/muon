@@ -13,5 +13,19 @@ namespace WpfApp2
     /// </summary>
     public partial class App : Application
     {
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            var settings = new SettingsModel();
+            Window w;
+            if (string.IsNullOrEmpty(settings.Auth.CreatedAt))
+            {
+                w = new AuthorizationWindow();
+            }
+            else
+            {
+                w = new MainWindow();
+            }
+            w.Show();
+        }
     }
 }
