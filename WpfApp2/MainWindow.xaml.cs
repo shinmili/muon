@@ -20,9 +20,20 @@ namespace WpfApp2
     /// </summary>
     public partial class MainWindow : Window
     {
+        private MainViewModel vm = new MainViewModel();
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = vm;
+        }
+
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            if (vm.ReloadCommand.CanExecute(null))
+            {
+                vm.ReloadCommand.Execute(null);
+            }
         }
     }
 }
