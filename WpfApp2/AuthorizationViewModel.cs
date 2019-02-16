@@ -24,6 +24,13 @@ namespace WpfApp2
         private AuthenticationClient authenticationClient;
         private SettingsModel settings = new SettingsModel();
 
+        public AuthorizationViewModel()
+        {
+            Instance = settings.AppRegistration?.Instance;
+            AccessToken = settings.Auth?.AccessToken ?? "";
+            WaitingForAuthCode = false;
+        }
+
         #region INotifyPropertyChanged implementations
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
@@ -55,7 +62,7 @@ namespace WpfApp2
             }
         }
 
-        private bool waitingForAuthCode = false;
+        private bool waitingForAuthCode;
         public bool WaitingForAuthCode
         {
             get => waitingForAuthCode;
@@ -167,12 +174,6 @@ namespace WpfApp2
         {
             var h = Closing;
             h?.Invoke(this, null);
-        }
-
-        public void LoadSettingsToUi()
-        {
-            Instance = settings.AppRegistration.Instance;
-            AccessToken = settings.Auth.AccessToken;
         }
     }
 }

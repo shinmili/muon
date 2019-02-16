@@ -28,10 +28,5 @@ namespace WpfApp2
             DataContext = ViewModel;
             ViewModel.Closing += (s, e) => Close();
         }
-
-        private void Window_ContentRendered(object sender, EventArgs e)
-        {
-            ViewModel.LoadSettingsToUi();
-        }
     }
 }

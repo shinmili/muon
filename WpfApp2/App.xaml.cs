@@ -17,7 +17,7 @@ namespace WpfApp2
         {
             var settings = new SettingsModel();
             Window w;
-            if (string.IsNullOrEmpty(settings.Auth.CreatedAt))
+            if (string.IsNullOrEmpty(settings.Auth?.CreatedAt))
             {
                 w = new AuthorizationWindow();
             }
