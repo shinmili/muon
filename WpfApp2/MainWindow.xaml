@@ -9,6 +9,9 @@
     <Window.InputBindings>
         <KeyBinding Key="F5" Command="{Binding ReloadCommand}"/>
     </Window.InputBindings>
+    <Window.Resources>
+        <local:StatusConverter x:Key="StatusConv" />
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -20,12 +23,12 @@
         </Grid.ColumnDefinitions>
         <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Text}" />
         <Button Grid.Row="0" Grid.Column="1" Command="{Binding TootCommand}">Toot!</Button>
-        <ListView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Home}">
-            <ListView.ItemTemplate>
+        <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Home}">
+            <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Content}"></TextBlock>
+                    <local:StatusBlock InlineList="{Binding Content, Mode=OneTime, Converter={StaticResource StatusConv}}"/>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </Window>
