@@ -58,20 +58,37 @@ namespace WpfApp2
 
         #region Commands
 
+        private bool canExecuteTootCommand = true;
         private DelegateCommand tootCommand;
         public DelegateCommand TootCommand
         {
             get => tootCommand ?? (tootCommand = new DelegateCommand
             {
                 ExecuteHandler = executeTootCommand,
-                CanExecuteHandler = null
+                CanExecuteHandler = (o) => canExecuteTootCommand,
             });
         }
 
-        private void executeTootCommand(object parameter)
+        private async void executeTootCommand(object parameter)
         {
-
+            canExecuteTootCommand = false;
+            tootCommand.RaiseCanExecuteChanged();
+            try
+            {
+                Status status = await client.PostStatus((string)parameter, Mastonet.Visibility.Public);
+                Text = "";
+            }
+            catch (ServerErrorException e)
+            {
+                MessageBox.Show("ServerErrorException.");
+            }
+            finally
+            {
+                canExecuteTootCommand = true;
+                tootCommand.RaiseCanExecuteChanged();
+            }
         }
+
         private DelegateCommand reloadCommand;
         public DelegateCommand ReloadCommand
         {

@@ -22,7 +22,7 @@
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
         <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Text}" />
-        <Button Grid.Row="0" Grid.Column="1" Command="{Binding TootCommand}">Toot!</Button>
+        <Button Grid.Row="0" Grid.Column="1" Command="{Binding TootCommand}" CommandParameter="{Binding Text}">Toot!</Button>
         <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" ItemsSource="{Binding Home}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
