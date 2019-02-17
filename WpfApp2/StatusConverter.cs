@@ -19,7 +19,11 @@ namespace WpfApp2
             doc.LoadHtml((string)value);
             var pnodes = doc.DocumentNode.ChildNodes;
 
-            var result = pnodes[0].ChildNodes.Select(ConvertSingleNode).ToList<Inline>();
+            var result = new List<Inline>();
+            if (pnodes.Count > 0)
+            {
+                result.AddRange(pnodes[0].ChildNodes.Select(ConvertSingleNode));
+            }
             result.AddRange(pnodes.Skip(1).SelectMany(p =>
             {
                 var list = new List<Inline> { new LineBreak(), new LineBreak() };
