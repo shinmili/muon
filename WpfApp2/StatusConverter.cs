@@ -17,8 +17,16 @@ namespace WpfApp2
         {
             var doc = new HtmlDocument();
             doc.LoadHtml((string)value);
-            var root = doc.DocumentNode.SelectSingleNode("/p");
-            return root.ChildNodes.Select(ConvertSingleNode).ToList<Inline>();
+            var pnodes = doc.DocumentNode.ChildNodes;
+
+            var result = pnodes[0].ChildNodes.Select(ConvertSingleNode).ToList<Inline>();
+            result.AddRange(pnodes.Skip(1).SelectMany(p =>
+            {
+                var list = new List<Inline> { new LineBreak(), new LineBreak() };
+                list.AddRange(p.ChildNodes.Select(ConvertSingleNode));
+                return list;
+            }));
+            return result;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -26,7 +34,7 @@ namespace WpfApp2
             throw new NotImplementedException();
         }
 
-        private Inline ConvertSingleNode(HtmlNode node)
+        private static Inline ConvertSingleNode(HtmlNode node)
         {
             if (node.NodeType == HtmlNodeType.Text)
             {
