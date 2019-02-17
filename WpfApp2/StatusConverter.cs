@@ -38,7 +38,7 @@ namespace WpfApp2
         {
             if (node.NodeType == HtmlNodeType.Text)
             {
-                return new Run(node.InnerText);
+                return new Run(HtmlEntity.DeEntitize(node.InnerText));
             }
             switch (node.Name)
             {
