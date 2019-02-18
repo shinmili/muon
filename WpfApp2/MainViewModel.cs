@@ -40,6 +40,7 @@ namespace WpfApp2
             {
                 text = value;
                 NotifyPropertyChanged();
+                tootCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -58,20 +59,25 @@ namespace WpfApp2
 
         #region Commands
 
-        private bool canExecuteTootCommand = true;
+        private bool Posting = false;
         private DelegateCommand tootCommand;
         public DelegateCommand TootCommand
         {
             get => tootCommand ?? (tootCommand = new DelegateCommand
             {
                 ExecuteHandler = executeTootCommand,
-                CanExecuteHandler = (o) => canExecuteTootCommand,
+                CanExecuteHandler = canExecuteTootCommand,
             });
+        }
+
+        private bool canExecuteTootCommand(object parameter)
+        {
+            return Text.Length > 0 && Text.Length <= 500 && !Posting;
         }
 
         private async void executeTootCommand(object parameter)
         {
-            canExecuteTootCommand = false;
+            Posting = true;
             tootCommand.RaiseCanExecuteChanged();
             try
             {
@@ -84,7 +90,7 @@ namespace WpfApp2
             }
             finally
             {
-                canExecuteTootCommand = true;
+                Posting = false;
                 tootCommand.RaiseCanExecuteChanged();
             }
         }
