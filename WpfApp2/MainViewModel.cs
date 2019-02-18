@@ -72,7 +72,7 @@ namespace WpfApp2
 
         private bool canExecuteTootCommand(object parameter)
         {
-            return Text.Length > 0 && Text.Length <= 500 && !Posting;
+            return Text.Length > 0 && !Posting;
         }
 
         private async void executeTootCommand(object parameter)
