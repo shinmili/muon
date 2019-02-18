@@ -1,5 +1,4 @@
-﻿using HtmlAgilityPack;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,14 +15,15 @@ namespace WpfApp2
         public List<Inline> InlineList
         {
             get => (List<Inline>)GetValue(InlineListProperty);
-            set
-            {
-                SetValue(InlineListProperty, value);
-            }
+            set => SetValue(InlineListProperty, value);
         }
 
         public static readonly DependencyProperty InlineListProperty =
-            DependencyProperty.Register("InlineList", typeof(List<Inline>), typeof(StatusBlock), new PropertyMetadata(new PropertyChangedCallback(OnInlineListChanged)));
+            DependencyProperty.Register(
+                "InlineList",
+                typeof(List<Inline>),
+                typeof(StatusBlock),
+                new PropertyMetadata(new PropertyChangedCallback(OnInlineListChanged)));
 
         public static void OnInlineListChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {

@@ -15,7 +15,8 @@ namespace WpfApp2
         public AppRegistration AppRegistration
         {
             get => appRegistration;
-            set {
+            set
+            {
                 appRegistration = value;
                 Properties.Settings.Default.AppRegistration = JsonConvert.SerializeObject(appRegistration);
             }
