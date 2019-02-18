@@ -16,13 +16,13 @@ namespace WpfApp2
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private TimelineModel timeline = new TimelineModel();
         private SettingsModel settings = new SettingsModel();
         private MastodonClient client;
 
         public MainViewModel()
         {
             client = new MastodonClient(settings.AppRegistration, settings.Auth);
-            Home = new ObservableCollection<Status>();
         }
 
         #region INotifyPropertyChanged implementations
@@ -44,16 +44,7 @@ namespace WpfApp2
             }
         }
 
-        private ObservableCollection<Status> home;
-        public ObservableCollection<Status> Home
-        {
-            get => home;
-            set
-            {
-                home = value;
-                NotifyPropertyChanged();
-            }
-        }
+        public ReadOnlyObservableCollection<Status> Statuses { get => timeline.Statuses; }
 
         #endregion
 
@@ -107,12 +98,8 @@ namespace WpfApp2
 
         private async void executeReloadCommand(object parameter)
         {
-            var home = await client.GetHomeTimeline();
-            home.Reverse();
-            foreach (Status status in home)
-            {
-                Home.Insert(0, status);
-            }
+            await timeline.ReloadAsync();
+            NotifyPropertyChanged("Statuses");
         }
 
         #endregion
