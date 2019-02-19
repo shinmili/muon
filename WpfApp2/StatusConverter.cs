@@ -2,6 +2,7 @@
 using Mastonet.Entities;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -49,6 +50,7 @@ namespace WpfApp2
                 case "a":
                     var link = new Hyperlink();
                     link.NavigateUri = new Uri(node.Attributes["href"].Value);
+                    link.RequestNavigate += (sender, eventArgs) => Process.Start(eventArgs.Uri.AbsoluteUri);
                     foreach (var child in node.ChildNodes)
                     {
                         link.Inlines.Add(ConvertSingleNode(child));
