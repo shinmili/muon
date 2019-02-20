@@ -9,6 +9,7 @@
         Title="MainWindow" Height="450" Width="800" ContentRendered="Window_ContentRendered">
     <Window.InputBindings>
         <KeyBinding Key="F5" Command="{Binding ReloadCommand}"/>
+        <KeyBinding Gesture="ALT+S" Command="{Binding StartStreamingCommand}"/>
     </Window.InputBindings>
     <Window.Resources>
         <local:StatusConverter x:Key="StatusConv" />

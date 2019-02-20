@@ -102,6 +102,16 @@ namespace WpfApp2
             NotifyPropertyChanged("Statuses");
         }
 
+        private DelegateCommand startStreamingCommand;
+        public DelegateCommand StartStreamingCommand
+        {
+            get => startStreamingCommand ?? (startStreamingCommand = new DelegateCommand
+            {
+                ExecuteHandler = async _ => await timeline.StartStreamingAsync(),
+                CanExecuteHandler = null
+            });
+        }
+
         #endregion
     }
 }
