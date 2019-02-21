@@ -10,10 +10,6 @@
     <UserControl.DataContext>
         <local:TimelineViewModel x:Name="viewModel"/>
     </UserControl.DataContext>
-    <UserControl.InputBindings>
-        <KeyBinding Key="F5" Command="{Binding ReloadCommand}"/>
-        <KeyBinding Gesture="ALT+S" Command="{Binding StartStreamingCommand}"/>
-    </UserControl.InputBindings>
     <UserControl.Resources>
         <local:StatusConverter x:Key="StatusConv" />
         <CollectionViewSource x:Key="SortedStatus" Source="{Binding Statuses}">

@@ -9,6 +9,10 @@
     <Window.DataContext>
         <local:MainViewModel />
     </Window.DataContext>
+    <Window.InputBindings>
+        <KeyBinding Key="F5" Command="{Binding Path=DataContext.(local:TimelineViewModel.ReloadCommand), ElementName=timelineControl}"/>
+        <KeyBinding Gesture="ALT+S" Command="{Binding Path=DataContext.(local:TimelineViewModel.StartStreamingCommand), ElementName=timelineControl}"/>
+    </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
