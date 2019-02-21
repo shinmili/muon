@@ -70,7 +70,11 @@
     <Compile Include="DelegateCommand.cs" />
     <Compile Include="StatusBlock.cs" />
     <Compile Include="StatusConverter.cs" />
+    <Compile Include="TimelineControl.xaml.cs">
+      <DependentUpon>TimelineControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TimelineModel.cs" />
+    <Compile Include="TimelineViewModel.cs" />
     <Page Include="AuthorizationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -90,6 +94,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="TimelineControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

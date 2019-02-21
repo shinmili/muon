@@ -86,32 +86,6 @@ namespace WpfApp2
             }
         }
 
-        private DelegateCommand reloadCommand;
-        public DelegateCommand ReloadCommand
-        {
-            get => reloadCommand ?? (reloadCommand = new DelegateCommand
-            {
-                ExecuteHandler = executeReloadCommand,
-                CanExecuteHandler = null
-            });
-        }
-
-        private async void executeReloadCommand(object parameter)
-        {
-            await timeline.ReloadAsync();
-            NotifyPropertyChanged("Statuses");
-        }
-
-        private DelegateCommand startStreamingCommand;
-        public DelegateCommand StartStreamingCommand
-        {
-            get => startStreamingCommand ?? (startStreamingCommand = new DelegateCommand
-            {
-                ExecuteHandler = async _ => await timeline.StartStreamingAsync(),
-                CanExecuteHandler = null
-            });
-        }
-
         #endregion
     }
 }

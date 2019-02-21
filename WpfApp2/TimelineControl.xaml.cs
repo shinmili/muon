@@ -16,22 +16,13 @@ using System.Windows.Shapes;
 namespace WpfApp2
 {
     /// <summary>
-    /// MainWindow.xaml の相互作用ロジック
+    /// TimelineListBox.xaml の相互作用ロジック
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class TimelineControl : UserControl
     {
-        public MainWindow()
+        public TimelineControl()
         {
             InitializeComponent();
-        }
-
-        private void Window_ContentRendered(object sender, EventArgs e)
-        {
-            var tlvm = (TimelineViewModel)timelineControl.DataContext;
-            if (tlvm.ReloadCommand.CanExecute(null))
-            {
-                tlvm.ReloadCommand.Execute(null);
-            }
         }
     }
 }

@@ -3,22 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" ContentRendered="Window_ContentRendered">
-    <Window.InputBindings>
-        <KeyBinding Key="F5" Command="{Binding ReloadCommand}"/>
-        <KeyBinding Gesture="ALT+S" Command="{Binding StartStreamingCommand}"/>
-    </Window.InputBindings>
-    <Window.Resources>
-        <local:StatusConverter x:Key="StatusConv" />
-        <CollectionViewSource x:Key="SortedStatsus" Source="{Binding Statuses}">
-            <CollectionViewSource.SortDescriptions>
-                <cm:SortDescription Direction="Descending" PropertyName="Id" />
-            </CollectionViewSource.SortDescriptions>
-        </CollectionViewSource>
-    </Window.Resources>
+    <Window.DataContext>
+        <local:MainViewModel />
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -30,15 +20,6 @@
         </Grid.ColumnDefinitions>
         <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Text, UpdateSourceTrigger=PropertyChanged}" />
         <Button Grid.Row="0" Grid.Column="1" Command="{Binding TootCommand}" CommandParameter="{Binding Text}">Toot!</Button>
-        <ListBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                 ItemsSource="{Binding Source={StaticResource SortedStatsus}}"
-                 ScrollViewer.CanContentScroll="False"
-                 VirtualizingPanel.ScrollUnit="Pixel">
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <local:StatusBlock InlineList="{Binding Content, Mode=OneTime, Converter={StaticResource StatusConv}}"/>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <local:TimelineControl x:Name="timelineControl" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
     </Grid>
 </Window>
