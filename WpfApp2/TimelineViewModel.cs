@@ -12,34 +12,19 @@ namespace WpfApp2
 {
     class TimelineViewModel
     {
-        private TimelineModel timeline;
+        private TimelineModel model;
 
         public TimelineViewModel()
         {
-            timeline = new TimelineModel();
+            model = new TimelineModel();
+            ReloadCommand = new DelegateCommand { ExecuteHandler = async _ => await model.ReloadAsync() };
+            StartStreamingCommand = new DelegateCommand { ExecuteHandler = async _ => await model.ToggleStreamingAsync() };
         }
 
-        public ReadOnlyObservableCollection<Status> Statuses { get => timeline.Statuses; }
+        public ReadOnlyObservableCollection<Status> Statuses { get => model.Statuses; }
 
-        private DelegateCommand reloadCommand;
-        public DelegateCommand ReloadCommand
-        {
-            get => reloadCommand ?? (reloadCommand = new DelegateCommand
-            {
-                ExecuteHandler = async _ => await timeline.ReloadAsync(),
-                CanExecuteHandler = null
-            });
-        }
-
-        private DelegateCommand startStreamingCommand;
-        public DelegateCommand StartStreamingCommand
-        {
-            get => startStreamingCommand ?? (startStreamingCommand = new DelegateCommand
-            {
-                ExecuteHandler = async _ => await timeline.ToggleStreamingAsync(),
-                CanExecuteHandler = null
-            });
-        }
+        public DelegateCommand ReloadCommand { get; }
+        public DelegateCommand StartStreamingCommand { get; }
 
     }
 }
