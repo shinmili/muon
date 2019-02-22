@@ -44,8 +44,6 @@ namespace WpfApp2
             }
         }
 
-        public ReadOnlyObservableCollection<Status> Statuses { get => timeline.Statuses; }
-
         #endregion
 
         #region Commands
