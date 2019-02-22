@@ -49,7 +49,7 @@ namespace WpfApp2
         {
             get => startStreamingCommand ?? (startStreamingCommand = new DelegateCommand
             {
-                ExecuteHandler = async _ => await timeline.StartStreamingAsync(),
+                ExecuteHandler = async _ => await timeline.ToggleStreamingAsync(),
                 CanExecuteHandler = null
             });
         }

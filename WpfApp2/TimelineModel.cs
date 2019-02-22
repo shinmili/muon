@@ -17,6 +17,7 @@ namespace WpfApp2
         private SettingsModel settings;
         private ObservableCollection<Status> statuses;
         private TimelineStreaming streaming;
+        public bool IsStreamingOn { get; private set; }
         private long? sinceId;
 
         public ReadOnlyObservableCollection<Status> Statuses { get; }
@@ -32,8 +33,35 @@ namespace WpfApp2
 
         public async Task StartStreamingAsync()
         {
-            streaming.OnUpdate += (s, e) => addStatus(e.Status);
+            if (IsStreamingOn) return;
+            IsStreamingOn = true;
+            streaming.OnUpdate += Streaming_OnUpdate;
             await streaming.Start();
+        }
+
+        private void Streaming_OnUpdate(object sender, StreamUpdateEventArgs e)
+        {
+            addStatus(e.Status);
+        }
+
+        public void StopStreaming()
+        {
+            if (!IsStreamingOn) return;
+            streaming.OnUpdate -= Streaming_OnUpdate;
+            streaming.Stop();
+            IsStreamingOn = false;
+        }
+
+        public async Task ToggleStreamingAsync()
+        {
+            if (IsStreamingOn)
+            {
+                StopStreaming();
+            }
+            else
+            {
+                await StartStreamingAsync();
+            }
         }
 
         public async Task ReloadAsync()
