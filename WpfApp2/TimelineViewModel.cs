@@ -10,20 +10,13 @@ using System.Threading.Tasks;
 
 namespace WpfApp2
 {
-    class TimelineViewModel : INotifyPropertyChanged
+    class TimelineViewModel
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-
         private TimelineModel timeline;
 
         public TimelineViewModel()
         {
             timeline = new TimelineModel();
-        }
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public ReadOnlyObservableCollection<Status> Statuses { get => timeline.Statuses; }
