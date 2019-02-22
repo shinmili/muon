@@ -33,15 +33,9 @@ namespace WpfApp2
         {
             get => reloadCommand ?? (reloadCommand = new DelegateCommand
             {
-                ExecuteHandler = executeReloadCommand,
+                ExecuteHandler = async _ => await timeline.ReloadAsync(),
                 CanExecuteHandler = null
             });
-        }
-
-        private async void executeReloadCommand(object parameter)
-        {
-            await timeline.ReloadAsync();
-            NotifyPropertyChanged("Statuses");
         }
 
         private DelegateCommand startStreamingCommand;
