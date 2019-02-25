@@ -18,13 +18,34 @@
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
     </UserControl.Resources>
-    <ListBox ItemsSource="{Binding Source={StaticResource SortedStatus}}"
-             ScrollViewer.CanContentScroll="False"
-             VirtualizingPanel.ScrollUnit="Pixel">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <local:StatusBlock InlineList="{Binding Content, Mode=OneTime, Converter={StaticResource StatusConv}}"/>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+    <ListView ItemsSource="{Binding Source={StaticResource SortedStatus}}"
+              ScrollViewer.CanContentScroll="False"
+              VirtualizingPanel.ScrollUnit="Pixel">
+        <ListView.View>
+            <GridView>
+                <GridViewColumn><!-- Icon -->
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <DataTemplate.Resources>
+                                <Style TargetType="Image">
+                                    <Setter Property="RenderOptions.BitmapScalingMode" Value="Fant" />
+                                </Style>
+                            </DataTemplate.Resources>
+                            <Image Source="{Binding Account.AvatarUrl}" Margin="-6,0"/>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Account.AccountName}" />
+                <GridViewColumn Header="Content">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <local:StatusBlock InlineList="{Binding Content, Mode=OneTime, Converter={StaticResource StatusConv}}"/>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+                <GridViewColumn Header="CreatedAt" DisplayMemberBinding="{Binding CreatedAt}" />
+                <GridViewColumn Header="App" DisplayMemberBinding="{Binding Application.Name}" />
+            </GridView>
+        </ListView.View>
+    </ListView>
 </UserControl>
