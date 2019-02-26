@@ -10,7 +10,7 @@ using System.Xaml;
 
 namespace WpfApp2
 {
-    class StatusBlock : TextBlock
+    class InlineBindableTextBlock : TextBlock
     {
         public List<Inline> InlineList
         {
@@ -22,12 +22,12 @@ namespace WpfApp2
             DependencyProperty.Register(
                 "InlineList",
                 typeof(List<Inline>),
-                typeof(StatusBlock),
+                typeof(InlineBindableTextBlock),
                 new PropertyMetadata(new PropertyChangedCallback(OnInlineListChanged)));
 
         public static void OnInlineListChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-            var block = d as StatusBlock;
+            var block = d as InlineBindableTextBlock;
             foreach (var inline in (List<Inline>)e.NewValue)
             {
                 block.Inlines.Add(inline);

@@ -1,4 +1,5 @@
 ﻿using Mastonet.Entities;
+using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -21,7 +22,8 @@ namespace WpfApp2
             StartStreamingCommand = new DelegateCommand { ExecuteHandler = async _ => await model.ToggleStreamingAsync() };
         }
 
-        public ReadOnlyObservableCollection<Status> Statuses { get => model.Statuses; }
+        public ReadOnlyReactiveCollection<StatusViewModel> Statuses
+            => model.Statuses.ToReadOnlyReactiveCollection(s => new StatusViewModel(s));
 
         public DelegateCommand ReloadCommand { get; }
         public DelegateCommand StartStreamingCommand { get; }

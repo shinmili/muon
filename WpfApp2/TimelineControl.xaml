@@ -11,10 +11,9 @@
         <local:TimelineViewModel x:Name="viewModel"/>
     </UserControl.DataContext>
     <UserControl.Resources>
-        <local:StatusConverter x:Key="StatusConv" />
         <CollectionViewSource x:Key="SortedStatus" Source="{Binding Statuses}">
             <CollectionViewSource.SortDescriptions>
-                <cm:SortDescription Direction="Descending" PropertyName="Id" />
+                <cm:SortDescription Direction="Descending" PropertyName="Status.Id" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
     </UserControl.Resources>
@@ -28,23 +27,23 @@
                         <DataTemplate>
                             <DataTemplate.Resources>
                                 <Style TargetType="Image">
-                                    <Setter Property="RenderOptions.BitmapScalingMode" Value="Fant" />
+                                    <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
                                 </Style>
                             </DataTemplate.Resources>
-                            <Image Source="{Binding Account.AvatarUrl}" Margin="-6,0"/>
+                            <Image Source="{Binding StaticAvatarUrl, Mode=OneTime}" Margin="-6,0"/>
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
-                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Account.AccountName}" />
+                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding DisplayName, Mode=OneTime}" />
                 <GridViewColumn Header="Content">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <local:StatusBlock InlineList="{Binding Content, Mode=OneTime, Converter={StaticResource StatusConv}}"/>
+                            <local:InlineBindableTextBlock InlineList="{Binding ContentFlow, Mode=OneTime}"/>
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
-                <GridViewColumn Header="CreatedAt" DisplayMemberBinding="{Binding CreatedAt}" />
-                <GridViewColumn Header="App" DisplayMemberBinding="{Binding Application.Name}" />
+                <GridViewColumn Header="CreatedAt" DisplayMemberBinding="{Binding Status.CreatedAt, Mode=OneTime}" />
+                <GridViewColumn Header="App" DisplayMemberBinding="{Binding Status.Application.Name, Mode=OneTime}" />
             </GridView>
         </ListView.View>
     </ListView>

@@ -1,10 +1,12 @@
 ﻿using Mastonet;
 using Mastonet.Entities;
+using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,55 +25,28 @@ namespace WpfApp2
         public MainViewModel()
         {
             client = new MastodonClient(settings.AppRegistration, settings.Auth);
+            Text = new ReactiveProperty<string>("");
+            Posting = new ReactiveProperty<bool>(false);
+
+            TootCommand = Text
+                .CombineLatest(Posting, (t, p) => t.Length > 0 && !p)
+                .ToReactiveCommand();
+            TootCommand.Subscribe(executeTootCommand);
         }
 
-        #region INotifyPropertyChanged implementations
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private string text = "";
-        public string Text
-        {
-            get => text;
-            set
-            {
-                text = value;
-                NotifyPropertyChanged();
-                tootCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        #endregion
+        public ReactiveProperty<string> Text { get; }
+        private ReactiveProperty<bool> Posting;
+        public ReactiveCommand TootCommand { get; }
 
         #region Commands
 
-        private bool Posting = false;
-        private DelegateCommand tootCommand;
-        public DelegateCommand TootCommand
-        {
-            get => tootCommand ?? (tootCommand = new DelegateCommand
-            {
-                ExecuteHandler = executeTootCommand,
-                CanExecuteHandler = canExecuteTootCommand,
-            });
-        }
-
-        private bool canExecuteTootCommand(object parameter)
-        {
-            return Text.Length > 0 && !Posting;
-        }
-
         private async void executeTootCommand(object parameter)
         {
-            Posting = true;
-            tootCommand.RaiseCanExecuteChanged();
+            Posting.Value = true;
             try
             {
-                Status status = await client.PostStatus((string)parameter, Mastonet.Visibility.Public);
-                Text = "";
+                Status status = await client.PostStatus(Text.Value, Mastonet.Visibility.Public);
+                Text.Value = "";
             }
             catch (ServerErrorException e)
             {
@@ -79,8 +54,7 @@ namespace WpfApp2
             }
             finally
             {
-                Posting = false;
-                tootCommand.RaiseCanExecuteChanged();
+                Posting.Value = false;
             }
         }
 

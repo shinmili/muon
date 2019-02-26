@@ -1,12 +1,13 @@
 ﻿using Mastonet;
-using Mastonet.Entities;
 using Newtonsoft.Json;
+using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Reactive.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,71 +27,39 @@ namespace WpfApp2
 
         public AuthorizationViewModel()
         {
-            Instance = settings.AppRegistration?.Instance;
-            AccessToken = settings.Auth?.AccessToken ?? "";
-            WaitingForAuthCode = false;
+            Instance = new ReactiveProperty<string>(settings.AppRegistration?.Instance);
+            AccessToken = new ReactiveProperty<string>(settings.Auth?.AccessToken ?? "");
+            WaitingForAuthCode = new ReactiveProperty<bool>(false);
+
+            RequestTokenCommand = Instance.Select(x => !string.IsNullOrEmpty(x)).ToReactiveCommand();
+            RequestTokenCommand.Subscribe(executeRequestTokenCommand);
+
+            AuthorizeCommand = AccessToken
+                .CombineLatest(WaitingForAuthCode, (token, waiting) => waiting && token.Length == 64)
+                .ToReactiveCommand();
+            AuthorizeCommand.Subscribe(executeAuthorizeCommand);
+
+            OkCommand = new ReactiveCommand();
+            OkCommand.Subscribe(executeOkCommand);
+
+            CancelCommand = new ReactiveCommand();
+            CancelCommand.Subscribe(executeCancelCommand);
         }
 
-        #region INotifyPropertyChanged implementations
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        private string instance;
-        public string Instance
-        {
-            get => instance;
-            set
-            {
-                instance = value;
-                NotifyPropertyChanged();
-                RequestTokenCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        private string accessToken;
-        public string AccessToken
-        {
-            get => accessToken;
-            set
-            {
-                accessToken = value;
-                NotifyPropertyChanged();
-                AuthorizeCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        private bool waitingForAuthCode;
-        public bool WaitingForAuthCode
-        {
-            get => waitingForAuthCode;
-            private set
-            {
-                waitingForAuthCode = value;
-                NotifyPropertyChanged();
-                AuthorizeCommand.RaiseCanExecuteChanged();
-            }
-        }
-
-        #endregion
+        public ReactiveProperty<string> Instance { get; }
+        public ReactiveProperty<string> AccessToken { get; }
+        private ReactiveProperty<bool> WaitingForAuthCode;
 
         #region Commands
 
-        private DelegateCommand requestTokenCommand;
-        public DelegateCommand RequestTokenCommand
-        {
-            get => requestTokenCommand ?? (requestTokenCommand = new DelegateCommand
-            {
-                ExecuteHandler = executeRequestTokenCommand,
-                CanExecuteHandler = canExecuteRequestTokenCommand,
-            });
-        }
+        public ReactiveCommand RequestTokenCommand { get; }
+        public ReactiveCommand AuthorizeCommand { get; }
+        public ReactiveCommand OkCommand { get; }
+        public ReactiveCommand CancelCommand { get; }
 
         private async void executeRequestTokenCommand(object parameter)
         {
-            authenticationClient = new AuthenticationClient(Instance);
+            authenticationClient = new AuthenticationClient(Instance.Value);
             try
             {
                 settings.AppRegistration = await authenticationClient.CreateApp("Brillenetui", Scope.Read | Scope.Write | Scope.Follow);
@@ -101,26 +70,14 @@ namespace WpfApp2
                 return;
             }
             Process.Start(authenticationClient.OAuthUrl());
-            WaitingForAuthCode = true;
-        }
-
-        private bool canExecuteRequestTokenCommand(object parameter) => !string.IsNullOrEmpty(Instance);
-
-        private DelegateCommand authorizeCommand;
-        public DelegateCommand AuthorizeCommand
-        {
-            get => authorizeCommand ?? (authorizeCommand = new DelegateCommand
-            {
-                ExecuteHandler = executeAuthorizeCommand,
-                CanExecuteHandler = canExecuteAuthorizeCommand,
-            });
+            WaitingForAuthCode.Value = true;
         }
 
         private async void executeAuthorizeCommand(object parameter)
         {
             try
             {
-                settings.Auth = await authenticationClient.ConnectWithCode(AccessToken);
+                settings.Auth = await authenticationClient.ConnectWithCode(AccessToken.Value);
             }
             catch (ServerErrorException e)
             {
@@ -128,22 +85,7 @@ namespace WpfApp2
                 return;
             }
             MessageBox.Show(JsonConvert.SerializeObject(settings.Auth));
-            WaitingForAuthCode = false;
-        }
-
-        private bool canExecuteAuthorizeCommand(object parameter)
-        {
-            return WaitingForAuthCode && AccessToken.Length == 64;
-        }
-
-        private DelegateCommand okCommand;
-        public DelegateCommand OkCommand
-        {
-            get => okCommand ?? (okCommand = new DelegateCommand
-            {
-                ExecuteHandler = executeOkCommand,
-                CanExecuteHandler = null,
-            });
+            WaitingForAuthCode.Value = false;
         }
 
         private void executeOkCommand(object parameter)
@@ -151,16 +93,6 @@ namespace WpfApp2
             settings.Save();
             MessageBox.Show("Successfully saved.");
             Closing(this, null);
-        }
-
-        private DelegateCommand cancelCommand;
-        public DelegateCommand CancelCommand
-        {
-            get => cancelCommand ?? (cancelCommand = new DelegateCommand
-            {
-                ExecuteHandler = executeCancelCommand,
-                CanExecuteHandler = null,
-            });
         }
 
         private void executeCancelCommand(object parameter)

@@ -52,10 +52,10 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Grid.Column="0">Instance to connect</TextBlock>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Instance, UpdateSourceTrigger=PropertyChanged}" />
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Instance.Value, UpdateSourceTrigger=PropertyChanged}" />
             <Button Grid.Row="1" Grid.ColumnSpan="2" Content="Open authorization page" Command="{Binding RequestTokenCommand}" />
             <TextBlock Grid.Row="2" Grid.Column="0">Authorization code</TextBlock>
-            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding AccessToken, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding WaitingForAuthCode}" />
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding AccessToken.Value, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding WaitingForAuthCode}" />
             <Button Grid.Row="3" Grid.ColumnSpan="2" Content="Authorize Brillenetui" Command="{Binding AuthorizeCommand}" />
         </Grid>
     </DockPanel>

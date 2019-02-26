@@ -1,5 +1,6 @@
 ﻿using Mastonet;
 using Mastonet.Entities;
+using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,27 +16,27 @@ namespace WpfApp2
     {
         private MastodonClient client;
         private SettingsModel settings;
-        private ObservableCollection<Status> statuses;
+        private ReactiveCollection<Status> statuses;
         private TimelineStreaming streaming;
         public bool IsStreamingOn { get; private set; }
         private long? sinceId;
 
-        public ReadOnlyObservableCollection<Status> Statuses { get; }
+        public ReadOnlyReactiveCollection<Status> Statuses { get; }
 
         public TimelineModel()
         {
             settings = new SettingsModel();
             client = new MastodonClient(settings.AppRegistration, settings.Auth);
-            statuses = new ObservableCollection<Status>();
+            statuses = new ReactiveCollection<Status>();
             streaming = client.GetUserStreaming();
-            Statuses = new ReadOnlyObservableCollection<Status>(statuses);
+            streaming.OnUpdate += Streaming_OnUpdate;
+            Statuses = statuses.ToReadOnlyReactiveCollection();
         }
 
         public async Task StartStreamingAsync()
         {
             if (IsStreamingOn) return;
             IsStreamingOn = true;
-            streaming.OnUpdate += Streaming_OnUpdate;
             await streaming.Start();
         }
 
@@ -47,7 +48,6 @@ namespace WpfApp2
         public void StopStreaming()
         {
             if (!IsStreamingOn) return;
-            streaming.OnUpdate -= Streaming_OnUpdate;
             streaming.Stop();
             IsStreamingOn = false;
         }
