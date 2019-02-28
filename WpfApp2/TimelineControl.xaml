@@ -19,7 +19,8 @@
     </UserControl.Resources>
     <ListView ItemsSource="{Binding Source={StaticResource SortedStatus}}"
               ScrollViewer.CanContentScroll="False"
-              VirtualizingPanel.ScrollUnit="Pixel">
+              VirtualizingPanel.ScrollUnit="Pixel"
+              BorderThickness="0">
         <ListView.View>
             <GridView>
                 <GridViewColumn><!-- Icon -->
@@ -30,7 +31,7 @@
                                     <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
                                 </Style>
                             </DataTemplate.Resources>
-                            <Image Source="{Binding StaticAvatarUrl, Mode=OneTime}" Margin="-6,0"/>
+                            <Image Source="{Binding StaticAvatarUrl, Mode=OneTime}" Margin="-6,-2"/>
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
