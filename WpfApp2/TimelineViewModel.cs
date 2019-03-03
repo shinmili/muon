@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp2
 {
-    class TimelineViewModel
+    class TimelineViewModel : INotifyPropertyChanged
     {
         private TimelineModel model;
 
@@ -30,5 +30,6 @@ namespace WpfApp2
         public DelegateCommand ReloadCommand { get; }
         public DelegateCommand ToggleStreamingCommand { get; }
 
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
