@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             xmlns:g="clr-namespace:System.Globalization;assembly=mscorlib"
              xmlns:local="clr-namespace:WpfApp2"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -43,7 +44,7 @@
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
-                <GridViewColumn Header="CreatedAt" DisplayMemberBinding="{Binding Status.CreatedAt, Mode=OneTime}" />
+                <GridViewColumn Header="CreatedAt" DisplayMemberBinding="{Binding Status.CreatedAt, ConverterCulture={x:Static g:CultureInfo.CurrentCulture}, Mode=OneTime}" />
                 <GridViewColumn Header="App" DisplayMemberBinding="{Binding Status.Application.Name, Mode=OneTime}" />
             </GridView>
         </ListView.View>
