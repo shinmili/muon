@@ -37,7 +37,8 @@ namespace WpfApp2
         {
             if (IsStreaming.Value) return;
             IsStreaming.Value = true;
-            await streaming.Start();
+            try { await streaming.Start(); }
+            catch (TaskCanceledException) { }
         }
 
         private void Streaming_OnUpdate(object sender, StreamUpdateEventArgs e)
