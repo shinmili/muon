@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp2"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance local:MainViewModel}"
         Title="MainWindow" Height="450" Width="800" ContentRendered="Window_ContentRendered">
     <Window.DataContext>
         <local:MainViewModel />
     </Window.DataContext>
     <Window.InputBindings>
         <KeyBinding Key="F5" Command="{Binding Path=DataContext.(local:TimelineViewModel.ReloadCommand), ElementName=timelineControl}"/>
-        <KeyBinding Gesture="ALT+S" Command="{Binding Path=DataContext.(local:TimelineViewModel.StartStreamingCommand), ElementName=timelineControl}"/>
+        <KeyBinding Gesture="Ctrl+S" Command="{Binding Path=DataContext.(local:TimelineViewModel.ToggleStreamingCommand), ElementName=timelineControl}"/>
     </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
@@ -22,8 +24,14 @@
             <ColumnDefinition />
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <TextBox Grid.Row="0" Grid.Column="0" Text="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged}" />
-        <Button Grid.Row="0" Grid.Column="1" Command="{Binding TootCommand}">Toot!</Button>
-        <local:TimelineControl x:Name="timelineControl" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <MenuItem Header="_Timeline">
+                <MenuItem Header="_Reload" InputGestureText="F5" Command="{Binding Path=DataContext.(local:TimelineViewModel.ReloadCommand), ElementName=timelineControl}"/>
+                <MenuItem Header="_Streaming" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding Path=DataContext.(local:TimelineViewModel.IsStreaming).Value, ElementName=timelineControl, Mode=OneWay}" Command="{Binding Path=DataContext.(local:TimelineViewModel.ToggleStreamingCommand), ElementName=timelineControl}"/>
+            </MenuItem>
+        </Menu>
+        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged}" />
+        <Button Grid.Row="1" Grid.Column="1" Command="{Binding TootCommand}">Toot!</Button>
+        <local:TimelineControl x:Name="timelineControl" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" />
     </Grid>
 </Window>

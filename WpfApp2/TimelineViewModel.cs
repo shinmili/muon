@@ -18,15 +18,17 @@ namespace WpfApp2
         public TimelineViewModel()
         {
             model = new TimelineModel();
+            IsStreaming = model.IsStreaming.ToReadOnlyReactiveProperty();
             ReloadCommand = new DelegateCommand { ExecuteHandler = async _ => await model.ReloadAsync() };
-            StartStreamingCommand = new DelegateCommand { ExecuteHandler = async _ => await model.ToggleStreamingAsync() };
+            ToggleStreamingCommand = new DelegateCommand { ExecuteHandler = async _ => await model.ToggleStreamingAsync() };
         }
 
         public ReadOnlyReactiveCollection<StatusViewModel> Statuses
             => model.Statuses.ToReadOnlyReactiveCollection(s => new StatusViewModel(s));
+        public ReadOnlyReactiveProperty<bool> IsStreaming { get; }
 
         public DelegateCommand ReloadCommand { get; }
-        public DelegateCommand StartStreamingCommand { get; }
+        public DelegateCommand ToggleStreamingCommand { get; }
 
     }
 }

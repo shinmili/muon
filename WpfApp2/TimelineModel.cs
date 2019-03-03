@@ -18,7 +18,7 @@ namespace WpfApp2
         private SettingsModel settings;
         private ReactiveCollection<Status> statuses;
         private TimelineStreaming streaming;
-        public bool IsStreamingOn { get; private set; }
+        public ReactiveProperty<bool> IsStreaming = new ReactiveProperty<bool>(false);
         private long? sinceId;
 
         public ReadOnlyReactiveCollection<Status> Statuses { get; }
@@ -35,8 +35,8 @@ namespace WpfApp2
 
         public async Task StartStreamingAsync()
         {
-            if (IsStreamingOn) return;
-            IsStreamingOn = true;
+            if (IsStreaming.Value) return;
+            IsStreaming.Value = true;
             await streaming.Start();
         }
 
@@ -47,14 +47,14 @@ namespace WpfApp2
 
         public void StopStreaming()
         {
-            if (!IsStreamingOn) return;
+            if (!IsStreaming.Value) return;
             streaming.Stop();
-            IsStreamingOn = false;
+            IsStreaming.Value = false;
         }
 
         public async Task ToggleStreamingAsync()
         {
-            if (IsStreamingOn)
+            if (IsStreaming.Value)
             {
                 StopStreaming();
             }

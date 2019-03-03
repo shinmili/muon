@@ -32,7 +32,7 @@ namespace WpfApp2
             ContentFlow = ConvertHtmlToFlow(s.Content).ToList();
         }
 
-        #region Emoji processing
+        #region Emoji Processing
 
         private static IEnumerable<Inline> UnfoldEmojis(string text, IEnumerable<Emoji> emojis)
         {
@@ -88,7 +88,7 @@ namespace WpfApp2
         }
 
         #endregion
-
+        #region HTML Processing
         private static IEnumerable<Inline> ConvertHtmlToFlow(string text)
         {
             var doc = new HtmlDocument();
@@ -144,5 +144,6 @@ namespace WpfApp2
                     break;
             }
         }
+        #endregion
     }
 }
