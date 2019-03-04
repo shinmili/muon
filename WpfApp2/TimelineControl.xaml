@@ -17,11 +17,21 @@
                 <cm:SortDescription Direction="Descending" PropertyName="Status.Id" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
+        <local:IsNotNullConverter x:Key="IsNotNullConverter"/>
     </UserControl.Resources>
     <ListView ItemsSource="{Binding Source={StaticResource SortedStatus}}"
               ScrollViewer.CanContentScroll="False"
               VirtualizingPanel.ScrollUnit="Pixel"
               BorderThickness="0">
+        <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Status.Reblog, Converter={StaticResource IsNotNullConverter}}" Value="True">
+                        <Setter Property="Background" Value="LightGreen"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ListView.ItemContainerStyle>
         <ListView.View>
             <GridView>
                 <GridViewColumn><!-- Icon -->

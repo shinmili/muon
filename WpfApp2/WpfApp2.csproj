@@ -91,6 +91,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AuthorizationViewModel.cs" />
+    <Compile Include="Converters.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="SettingsModel.cs" />
     <Compile Include="DelegateCommand.cs" />

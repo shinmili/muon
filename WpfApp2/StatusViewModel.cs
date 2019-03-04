@@ -27,8 +27,10 @@ namespace WpfApp2
         {
             Status = s;
 
-            StaticAvatarUrl = s.Account.StaticAvatarUrl;
-            DisplayName = s.Account.DisplayName;
+            Status originalStatus = s.Reblog ?? s;
+
+            StaticAvatarUrl = originalStatus.Account.StaticAvatarUrl;
+            DisplayName = originalStatus.Account.DisplayName + (s.Reblog == null ? "" : $"(RT:{s.Account.AccountName})");
             ContentFlow = ConvertHtmlToFlow(s.Content).ToList();
         }
 
