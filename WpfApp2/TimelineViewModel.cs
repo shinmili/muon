@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -21,6 +22,7 @@ namespace WpfApp2
             IsStreaming = model.IsStreaming.ToReadOnlyReactiveProperty();
             ReloadCommand = new DelegateCommand { ExecuteHandler = async _ => await model.ReloadAsync() };
             ToggleStreamingCommand = new DelegateCommand { ExecuteHandler = async _ => await model.ToggleStreamingAsync() };
+            OpenCommand = new DelegateCommand { ExecuteHandler = p => Process.Start(((StatusViewModel)p).Status.Url ?? ((StatusViewModel)p).Status.Reblog.Url) };
         }
 
         public ReadOnlyReactiveCollection<StatusViewModel> Statuses
@@ -29,6 +31,7 @@ namespace WpfApp2
 
         public DelegateCommand ReloadCommand { get; }
         public DelegateCommand ToggleStreamingCommand { get; }
+        public DelegateCommand OpenCommand { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }

@@ -22,7 +22,8 @@
     <ListView ItemsSource="{Binding Source={StaticResource SortedStatus}}"
               ScrollViewer.CanContentScroll="False"
               VirtualizingPanel.ScrollUnit="Pixel"
-              BorderThickness="0">
+              BorderThickness="0"
+              x:Name="ListView">
         <ListView.ItemContainerStyle>
             <Style TargetType="ListViewItem">
                 <Style.Triggers>
@@ -32,6 +33,9 @@
                 </Style.Triggers>
             </Style>
         </ListView.ItemContainerStyle>
+        <ListView.InputBindings>
+            <KeyBinding Key="O" Command="{Binding OpenCommand, ElementName=viewModel}" CommandParameter="{Binding SelectedItems[0], ElementName=ListView}"/>
+        </ListView.InputBindings>
         <ListView.View>
             <GridView>
                 <GridViewColumn><!-- Icon -->
