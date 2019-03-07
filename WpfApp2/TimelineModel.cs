@@ -30,7 +30,21 @@ namespace WpfApp2
             statuses = new ReactiveCollection<Status>();
             streaming = client.GetUserStreaming();
             streaming.OnUpdate += Streaming_OnUpdate;
+            streaming.OnDelete += Streaming_OnDelete;
             Statuses = statuses.ToReadOnlyReactiveCollection();
+        }
+
+        private void Streaming_OnDelete(object sender, StreamDeleteEventArgs e)
+        {
+            int index = statuses.Select((s, i) => new { s, i })
+                .First(x => x.s.Id == e.StatusId)
+                .i;
+            statuses.RemoveAt(index);
+        }
+
+        private void Streaming_OnUpdate(object sender, StreamUpdateEventArgs e)
+        {
+            addStatus(e.Status);
         }
 
         public async Task StartStreamingAsync()
@@ -39,11 +53,6 @@ namespace WpfApp2
             IsStreaming.Value = true;
             try { await streaming.Start(); }
             catch (TaskCanceledException) { }
-        }
-
-        private void Streaming_OnUpdate(object sender, StreamUpdateEventArgs e)
-        {
-            addStatus(e.Status);
         }
 
         public void StopStreaming()

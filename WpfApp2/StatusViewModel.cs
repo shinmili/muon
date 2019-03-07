@@ -22,6 +22,7 @@ namespace WpfApp2
         public string StaticAvatarUrl { get; }
         public string DisplayName { get; }
         public List<Inline> ContentFlow { get; }
+        public ReactiveProperty<bool> Deleted { get; }
 
         public StatusViewModel(Status s)
         {
