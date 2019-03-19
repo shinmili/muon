@@ -14,11 +14,11 @@ namespace WpfApp2
 {
     class TimelineViewModel : INotifyPropertyChanged
     {
-        private TimelineModel model;
+        private TimelineModelBase model;
 
         public TimelineViewModel()
         {
-            model = new TimelineModel();
+            model = new HomeTimelineModel();
             IsStreaming = model.IsStreaming.ToReadOnlyReactiveProperty();
             ReloadCommand = new DelegateCommand { ExecuteHandler = async _ => await model.ReloadAsync() };
             ToggleStreamingCommand = new DelegateCommand { ExecuteHandler = async _ => await model.ToggleStreamingAsync() };

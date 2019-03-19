@@ -12,7 +12,7 @@ using System.Windows;
 
 namespace WpfApp2
 {
-    class TimelineModel
+    class TimelineModelBase
     {
         private MastodonClient client;
         private SettingsModel settings;
@@ -23,12 +23,17 @@ namespace WpfApp2
 
         public ReadOnlyReactiveCollection<Status> Statuses { get; }
 
-        public TimelineModel()
+        private Func<MastodonClient, long?, long?, int?, Task<MastodonList<Status>>> GetTimeline;
+        private Func<MastodonClient, TimelineStreaming> GetStreaming;
+
+        public TimelineModelBase(Func<MastodonClient, long?, long?, int?, Task<MastodonList<Status>>> getTimeline, Func<MastodonClient, TimelineStreaming> getStreaming)
         {
+            GetTimeline = getTimeline;
+            GetStreaming = getStreaming;
             settings = new SettingsModel();
             client = new MastodonClient(settings.AppRegistration, settings.Auth);
             statuses = new ReactiveCollection<Status>();
-            streaming = client.GetUserStreaming();
+            streaming = GetStreaming(client);
             streaming.OnUpdate += Streaming_OnUpdate;
             streaming.OnDelete += Streaming_OnDelete;
             Statuses = statuses.ToReadOnlyReactiveCollection();
@@ -76,7 +81,7 @@ namespace WpfApp2
 
         public async Task ReloadAsync()
         {
-            var newStatuses = await client.GetHomeTimeline(null, sinceId);
+            var newStatuses = await GetTimeline(client, null, sinceId, null);
             newStatuses.Reverse();
             newStatuses.ForEach(addStatus);
         }
@@ -86,5 +91,13 @@ namespace WpfApp2
             statuses.Add(status);
             sinceId = status.Id;
         }
+    }
+
+    class HomeTimelineModel : TimelineModelBase
+    {
+        public HomeTimelineModel() : base(
+            (client, maxId, sinceId, limit) => client.GetHomeTimeline(maxId, sinceId, limit),
+            client => client.GetUserStreaming())
+        { }
     }
 }

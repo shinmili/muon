@@ -18,7 +18,6 @@ namespace WpfApp2
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private TimelineModel timeline = new TimelineModel();
         private SettingsModel settings = new SettingsModel();
         private MastodonClient client;
 
