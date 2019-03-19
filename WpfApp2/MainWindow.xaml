@@ -32,6 +32,10 @@
         </Menu>
         <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged}" />
         <Button Grid.Row="1" Grid.Column="1" Command="{Binding TootCommand}">Toot!</Button>
-        <local:TimelineControl x:Name="timelineControl" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" />
+        <TabControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" TabStripPlacement="Bottom">
+            <TabItem Header="Home">
+                <local:TimelineControl x:Name="timelineControl" />
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
