@@ -11,8 +11,8 @@
         <local:MainViewModel />
     </Window.DataContext>
     <Window.InputBindings>
-        <KeyBinding Key="F5" Command="{Binding Path=DataContext.(local:TimelineViewModel.ReloadCommand), ElementName=timelineControl}"/>
-        <KeyBinding Gesture="Ctrl+S" Command="{Binding Path=DataContext.(local:TimelineViewModel.ToggleStreamingCommand), ElementName=timelineControl}"/>
+        <KeyBinding Key="F5" Command="{Binding SelectedContent.DataContext.ReloadCommand, ElementName=Tab}"/>
+        <KeyBinding Gesture="Ctrl+S" Command="{Binding SelectedContent.DataContext.ToggleStreamingCommand, ElementName=Tab}"/>
     </Window.InputBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -26,15 +26,21 @@
         </Grid.ColumnDefinitions>
         <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
             <MenuItem Header="_Timeline">
-                <MenuItem Header="_Reload" InputGestureText="F5" Command="{Binding Path=DataContext.(local:TimelineViewModel.ReloadCommand), ElementName=timelineControl}"/>
-                <MenuItem Header="_Streaming" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding Path=DataContext.(local:TimelineViewModel.IsStreaming).Value, ElementName=timelineControl, Mode=OneWay}" Command="{Binding Path=DataContext.(local:TimelineViewModel.ToggleStreamingCommand), ElementName=timelineControl}"/>
+                <MenuItem Header="_Reload" InputGestureText="F5" Command="{Binding SelectedContent.DataContext.ReloadCommand, ElementName=Tab}"/>
+                <MenuItem Header="_Streaming" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding SelectedContent.DataContext.IsStreaming.Value, ElementName=Tab, Mode=OneWay}" Command="{Binding SelectedContent.DataContext.ToggleStreamingCommand, ElementName=Tab}"/>
             </MenuItem>
         </Menu>
         <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged}" />
         <Button Grid.Row="1" Grid.Column="1" Command="{Binding TootCommand}">Toot!</Button>
-        <TabControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" TabStripPlacement="Bottom">
+        <TabControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" TabStripPlacement="Bottom" x:Name="Tab">
             <TabItem Header="Home">
-                <local:TimelineControl x:Name="timelineControl" />
+                <local:TimelineControl Type="Home" x:Name="timelineControl" />
+            </TabItem>
+            <TabItem Header="Local">
+                <local:TimelineControl Type="Local"/>
+            </TabItem>
+            <TabItem Header="Federated">
+                <local:TimelineControl Type="Federated"/>
             </TabItem>
         </TabControl>
     </Grid>

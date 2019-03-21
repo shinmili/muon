@@ -16,9 +16,9 @@ namespace WpfApp2
     {
         private TimelineModelBase model;
 
-        public TimelineViewModel()
+        public TimelineViewModel(TimelineModelBase model)
         {
-            model = new HomeTimelineModel();
+            this.model = model;
             IsStreaming = model.IsStreaming.ToReadOnlyReactiveProperty();
             ReloadCommand = new DelegateCommand { ExecuteHandler = async _ => await model.ReloadAsync() };
             ToggleStreamingCommand = new DelegateCommand { ExecuteHandler = async _ => await model.ToggleStreamingAsync() };

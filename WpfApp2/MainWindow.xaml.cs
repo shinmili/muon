@@ -27,10 +27,13 @@ namespace WpfApp2
 
         private void Window_ContentRendered(object sender, EventArgs e)
         {
-            var tlvm = (TimelineViewModel)timelineControl.DataContext;
-            if (tlvm.ReloadCommand.CanExecute(null))
+            foreach (TabItem item in Tab.Items)
             {
-                tlvm.ReloadCommand.Execute(null);
+                TimelineViewModel tlvm = (TimelineViewModel)((TimelineControl)item.Content).DataContext;
+                if (tlvm.ReloadCommand.CanExecute(null))
+                {
+                    tlvm.ReloadCommand.Execute(null);
+                }
             }
         }
     }

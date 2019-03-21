@@ -20,6 +20,28 @@ namespace WpfApp2
     /// </summary>
     public partial class TimelineControl : UserControl
     {
+        private string type;
+        public string Type
+        {
+            get => type;
+            set
+            {
+                type = value;
+                switch (type)
+                {
+                    case "Home":
+                        DataContext = new TimelineViewModel(new HomeTimelineModel());
+                        break;
+                    case "Local":
+                        DataContext = new TimelineViewModel(new LocalTimelineModel());
+                        break;
+                    case "Federated":
+                        DataContext = new TimelineViewModel(new FederatedTimelineModel());
+                        break;
+                }
+            }
+        }
+
         public TimelineControl()
         {
             InitializeComponent();

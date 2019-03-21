@@ -34,8 +34,11 @@ namespace WpfApp2
             client = new MastodonClient(settings.AppRegistration, settings.Auth);
             statuses = new ReactiveCollection<Status>();
             streaming = GetStreaming(client);
-            streaming.OnUpdate += Streaming_OnUpdate;
-            streaming.OnDelete += Streaming_OnDelete;
+            if (streaming != null)
+            {
+                streaming.OnUpdate += Streaming_OnUpdate;
+                streaming.OnDelete += Streaming_OnDelete;
+            }
             Statuses = statuses.ToReadOnlyReactiveCollection();
         }
 
@@ -54,7 +57,7 @@ namespace WpfApp2
 
         public async Task StartStreamingAsync()
         {
-            if (IsStreaming.Value) return;
+            if (IsStreaming.Value || streaming == null) return;
             IsStreaming.Value = true;
             try { await streaming.Start(); }
             catch (TaskCanceledException) { }
@@ -62,7 +65,7 @@ namespace WpfApp2
 
         public void StopStreaming()
         {
-            if (!IsStreaming.Value) return;
+            if (!IsStreaming.Value || streaming == null) return;
             streaming.Stop();
             IsStreaming.Value = false;
         }
@@ -98,6 +101,22 @@ namespace WpfApp2
         public HomeTimelineModel() : base(
             (client, maxId, sinceId, limit) => client.GetHomeTimeline(maxId, sinceId, limit),
             client => client.GetUserStreaming())
+        { }
+    }
+
+    class LocalTimelineModel : TimelineModelBase
+    {
+        public LocalTimelineModel() : base(
+            (client, maxId, sinceId, limit) => client.GetPublicTimeline(maxId, sinceId, limit, true),
+            client => null)
+        { }
+    }
+
+    class FederatedTimelineModel : TimelineModelBase
+    {
+        public FederatedTimelineModel() : base(
+            (client, maxId, sinceId, limit) => client.GetPublicTimeline(maxId, sinceId, limit),
+            client => client.GetPublicStreaming())
         { }
     }
 }

@@ -8,9 +8,6 @@
              xmlns:local="clr-namespace:WpfApp2"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.DataContext>
-        <local:TimelineViewModel x:Name="viewModel"/>
-    </UserControl.DataContext>
     <UserControl.Resources>
         <CollectionViewSource x:Key="SortedStatus" Source="{Binding Statuses}">
             <CollectionViewSource.SortDescriptions>
