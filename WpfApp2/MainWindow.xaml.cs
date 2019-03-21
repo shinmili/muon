@@ -27,9 +27,9 @@ namespace WpfApp2
 
         private void Window_ContentRendered(object sender, EventArgs e)
         {
-            foreach (TabItem item in Tab.Items)
+            foreach (dynamic item in Tab.Items)
             {
-                TimelineViewModel tlvm = (TimelineViewModel)((TimelineControl)item.Content).DataContext;
+                TimelineViewModel tlvm = item.Content.DataContext;
                 if (tlvm.ReloadCommand.CanExecute(null))
                 {
                     tlvm.ReloadCommand.Execute(null);
