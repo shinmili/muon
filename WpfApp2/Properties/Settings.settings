@@ -2,10 +2,10 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WpfApp2.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="AppRegistration" Type="System.String" Scope="User">
+    <Setting Name="AppRegistration" Type="Mastonet.Entities.AppRegistration" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="Auth" Type="System.String" Scope="User">
+    <Setting Name="Auth" Type="Mastonet.Entities.Auth" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

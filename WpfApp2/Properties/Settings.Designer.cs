@@ -25,10 +25,9 @@ namespace WpfApp2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string AppRegistration {
+        public global::Mastonet.Entities.AppRegistration AppRegistration {
             get {
-                return ((string)(this["AppRegistration"]));
+                return ((global::Mastonet.Entities.AppRegistration)(this["AppRegistration"]));
             }
             set {
                 this["AppRegistration"] = value;
@@ -37,10 +36,9 @@ namespace WpfApp2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string Auth {
+        public global::Mastonet.Entities.Auth Auth {
             get {
-                return ((string)(this["Auth"]));
+                return ((global::Mastonet.Entities.Auth)(this["Auth"]));
             }
             set {
                 this["Auth"] = value;
