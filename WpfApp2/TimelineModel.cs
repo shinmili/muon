@@ -18,15 +18,17 @@ namespace WpfApp2
         private SettingsModel settings;
         private ReactiveCollection<Status> statuses;
         private TimelineStreaming streaming;
-        public ReactiveProperty<bool> IsStreaming = new ReactiveProperty<bool>(false);
         private long? sinceId;
 
+        public ReactiveProperty<bool> IsStreaming = new ReactiveProperty<bool>(false);
         public ReadOnlyReactiveCollection<Status> Statuses { get; }
 
-        private Func<MastodonClient, long?, long?, int?, Task<MastodonList<Status>>> GetTimeline;
-        private Func<MastodonClient, TimelineStreaming> GetStreaming;
+        private readonly Func<MastodonClient, long?, long?, int?, Task<MastodonList<Status>>> GetTimeline;
+        private readonly Func<MastodonClient, TimelineStreaming> GetStreaming;
 
-        public TimelineModelBase(Func<MastodonClient, long?, long?, int?, Task<MastodonList<Status>>> getTimeline, Func<MastodonClient, TimelineStreaming> getStreaming)
+        public TimelineModelBase(
+            Func<MastodonClient, long?, long?, int?, Task<MastodonList<Status>>> getTimeline,
+            Func<MastodonClient, TimelineStreaming> getStreaming)
         {
             GetTimeline = getTimeline;
             GetStreaming = getStreaming;
