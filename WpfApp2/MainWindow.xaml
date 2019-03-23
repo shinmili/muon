@@ -34,7 +34,7 @@
         <Button Grid.Row="1" Grid.Column="1" Command="{Binding TootCommand}">Toot!</Button>
         <TabControl Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" TabStripPlacement="Bottom" x:Name="Tab">
             <TabItem Header="Home">
-                <local:TimelineControl Type="Home" x:Name="timelineControl" />
+                <local:TimelineControl Type="Home"/>
             </TabItem>
             <TabItem Header="Local">
                 <local:TimelineControl Type="Local"/>
