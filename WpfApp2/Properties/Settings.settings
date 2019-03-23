@@ -8,5 +8,8 @@
     <Setting Name="Auth" Type="Mastonet.Entities.Auth" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="AppName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">S(K(SII))(S(S(KS)K)(K(SII)))</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

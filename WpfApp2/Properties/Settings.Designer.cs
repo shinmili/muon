@@ -44,5 +44,17 @@ namespace WpfApp2.Properties {
                 this["Auth"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("S(K(SII))(S(S(KS)K)(K(SII)))")]
+        public string AppName {
+            get {
+                return ((string)(this["AppName"]));
+            }
+            set {
+                this["AppName"] = value;
+            }
+        }
     }
 }

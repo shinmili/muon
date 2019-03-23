@@ -11,6 +11,17 @@ namespace WpfApp2
 {
     class SettingsModel
     {
+        private string appName = Properties.Settings.Default.AppName;
+        public string AppName
+        {
+            get => appName;
+            set
+            {
+                appName = value;
+                Properties.Settings.Default.AppName = appName;
+            }
+        }
+
         private AppRegistration appRegistration = Properties.Settings.Default.AppRegistration;
         public AppRegistration AppRegistration
         {

@@ -62,7 +62,7 @@ namespace WpfApp2
             authenticationClient = new AuthenticationClient(Instance.Value);
             try
             {
-                settings.AppRegistration = await authenticationClient.CreateApp("Brillenetui", Scope.Read | Scope.Write | Scope.Follow);
+                settings.AppRegistration = await authenticationClient.CreateApp(settings.AppName, Scope.Read | Scope.Write | Scope.Follow);
             }
             catch (HttpRequestException e)
             {
