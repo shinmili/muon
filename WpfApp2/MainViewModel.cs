@@ -25,23 +25,18 @@ namespace WpfApp2
         {
             client = new MastodonClient(settings.AppRegistration, settings.Auth);
             Text = new ReactiveProperty<string>("");
-            Posting = new ReactiveProperty<bool>(false);
 
-            TootCommand = Text
-                .CombineLatest(Posting, (t, p) => t.Length > 0 && !p)
-                .ToReactiveCommand();
+            TootCommand = Text.Select(t => t.Length > 0).ToAsyncReactiveCommand();
             TootCommand.Subscribe(executeTootCommand);
         }
 
         public ReactiveProperty<string> Text { get; }
-        private ReactiveProperty<bool> Posting;
-        public ReactiveCommand TootCommand { get; }
+        public AsyncReactiveCommand TootCommand { get; }
 
         #region Commands
 
-        private async void executeTootCommand(object parameter)
+        private async Task executeTootCommand(object parameter)
         {
-            Posting.Value = true;
             try
             {
                 Status status = await client.PostStatus(Text.Value, Mastonet.Visibility.Public);
@@ -50,10 +45,6 @@ namespace WpfApp2
             catch (ServerErrorException e)
             {
                 MessageBox.Show("ServerErrorException.");
-            }
-            finally
-            {
-                Posting.Value = false;
             }
         }
 

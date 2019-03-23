@@ -31,12 +31,12 @@ namespace WpfApp2
             AccessToken = new ReactiveProperty<string>(settings.Auth?.AccessToken ?? "");
             WaitingForAuthCode = new ReactiveProperty<bool>(false);
 
-            RequestTokenCommand = Instance.Select(x => !string.IsNullOrEmpty(x)).ToReactiveCommand();
+            RequestTokenCommand = Instance.Select(x => !string.IsNullOrEmpty(x)).ToAsyncReactiveCommand();
             RequestTokenCommand.Subscribe(executeRequestTokenCommand);
 
             AuthorizeCommand = AccessToken
                 .CombineLatest(WaitingForAuthCode, (token, waiting) => waiting && token.Length == 64)
-                .ToReactiveCommand();
+                .ToAsyncReactiveCommand();
             AuthorizeCommand.Subscribe(executeAuthorizeCommand);
 
             OkCommand = new ReactiveCommand();
@@ -52,12 +52,12 @@ namespace WpfApp2
 
         #region Commands
 
-        public ReactiveCommand RequestTokenCommand { get; }
-        public ReactiveCommand AuthorizeCommand { get; }
+        public AsyncReactiveCommand RequestTokenCommand { get; }
+        public AsyncReactiveCommand AuthorizeCommand { get; }
         public ReactiveCommand OkCommand { get; }
         public ReactiveCommand CancelCommand { get; }
 
-        private async void executeRequestTokenCommand(object parameter)
+        private async Task executeRequestTokenCommand(object parameter)
         {
             authenticationClient = new AuthenticationClient(Instance.Value);
             try
@@ -73,7 +73,7 @@ namespace WpfApp2
             WaitingForAuthCode.Value = true;
         }
 
-        private async void executeAuthorizeCommand(object parameter)
+        private async Task executeAuthorizeCommand(object parameter)
         {
             try
             {
