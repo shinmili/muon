@@ -18,24 +18,22 @@ namespace WpfApp2
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public ReactiveProperty<string> Text { get; } = new ReactiveProperty<string>("");
+        public AsyncReactiveCommand TootCommand { get; }
+
         private SettingsModel settings = new SettingsModel();
         private MastodonClient client;
 
         public MainViewModel()
         {
             client = new MastodonClient(settings.AppRegistration, settings.Auth);
-            Text = new ReactiveProperty<string>("");
 
-            TootCommand = Text.Select(t => t.Length > 0).ToAsyncReactiveCommand();
-            TootCommand.Subscribe(executeTootCommand);
+            TootCommand = Text.Select(t => t.Length > 0)
+                .ToAsyncReactiveCommand()
+                .WithSubscribe(executeTootCommand);
         }
 
-        public ReactiveProperty<string> Text { get; }
-        public AsyncReactiveCommand TootCommand { get; }
-
-        #region Commands
-
-        private async Task executeTootCommand(object parameter)
+        private async Task executeTootCommand()
         {
             try
             {
@@ -44,10 +42,8 @@ namespace WpfApp2
             }
             catch (ServerErrorException e)
             {
-                MessageBox.Show("ServerErrorException.");
+                MessageBox.Show(e.Message);
             }
         }
-
-        #endregion
     }
 }

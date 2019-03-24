@@ -29,26 +29,24 @@ namespace WpfApp2
         {
             Instance = new ReactiveProperty<string>(settings.AppRegistration?.Instance);
             AccessToken = new ReactiveProperty<string>(settings.Auth?.AccessToken ?? "");
-            WaitingForAuthCode = new ReactiveProperty<bool>(false);
 
-            RequestTokenCommand = Instance.Select(x => !string.IsNullOrEmpty(x)).ToAsyncReactiveCommand();
-            RequestTokenCommand.Subscribe(executeRequestTokenCommand);
+            RequestTokenCommand = Instance
+                .Select(x => !string.IsNullOrEmpty(x))
+                .ToAsyncReactiveCommand()
+                .WithSubscribe(executeRequestTokenCommand);
 
             AuthorizeCommand = AccessToken
                 .CombineLatest(WaitingForAuthCode, (token, waiting) => waiting && token.Length == 64)
-                .ToAsyncReactiveCommand();
-            AuthorizeCommand.Subscribe(executeAuthorizeCommand);
+                .ToAsyncReactiveCommand()
+                .WithSubscribe(executeAuthorizeCommand);
 
-            OkCommand = new ReactiveCommand();
-            OkCommand.Subscribe(executeOkCommand);
-
-            CancelCommand = new ReactiveCommand();
-            CancelCommand.Subscribe(executeCancelCommand);
+            OkCommand = new ReactiveCommand().WithSubscribe(executeOkCommand);
+            CancelCommand = new ReactiveCommand().WithSubscribe(executeCancelCommand);
         }
 
         public ReactiveProperty<string> Instance { get; }
         public ReactiveProperty<string> AccessToken { get; }
-        private ReactiveProperty<bool> WaitingForAuthCode;
+        private ReactiveProperty<bool> WaitingForAuthCode = new ReactiveProperty<bool>(false);
 
         #region Commands
 
@@ -57,7 +55,7 @@ namespace WpfApp2
         public ReactiveCommand OkCommand { get; }
         public ReactiveCommand CancelCommand { get; }
 
-        private async Task executeRequestTokenCommand(object parameter)
+        private async Task executeRequestTokenCommand()
         {
             authenticationClient = new AuthenticationClient(Instance.Value);
             try
@@ -73,7 +71,7 @@ namespace WpfApp2
             WaitingForAuthCode.Value = true;
         }
 
-        private async Task executeAuthorizeCommand(object parameter)
+        private async Task executeAuthorizeCommand()
         {
             try
             {
@@ -88,14 +86,14 @@ namespace WpfApp2
             WaitingForAuthCode.Value = false;
         }
 
-        private void executeOkCommand(object parameter)
+        private void executeOkCommand()
         {
             settings.Save();
             MessageBox.Show("Successfully saved.");
             Closing(this, null);
         }
 
-        private void executeCancelCommand(object parameter)
+        private void executeCancelCommand()
         {
             settings.Reload();
             Closing(this, null);
