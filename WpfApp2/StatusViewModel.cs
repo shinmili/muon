@@ -32,7 +32,7 @@ namespace WpfApp2
 
             StaticAvatarUrl = originalStatus.Account.StaticAvatarUrl;
             DisplayName = originalStatus.Account.DisplayName + (s.Reblog == null ? "" : $"(RT:{s.Account.AccountName})");
-            ContentFlow = ConvertHtmlToFlow(s.Content).ToList();
+            ContentFlow = ConvertHtmlToFlow(originalStatus.Content).ToList();
         }
 
         #region Emoji Processing
