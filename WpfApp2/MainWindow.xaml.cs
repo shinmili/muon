@@ -29,11 +29,7 @@ namespace WpfApp2
         {
             foreach (dynamic item in Tab.Items)
             {
-                TimelineViewModel tlvm = item.Content.DataContext;
-                if (tlvm.ReloadCommand.CanExecute(null))
-                {
-                    tlvm.ReloadCommand.Execute(null);
-                }
+                item.Content.DataContext.ReloadCommand.Execute();
             }
         }
     }
