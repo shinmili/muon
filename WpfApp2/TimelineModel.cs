@@ -91,6 +91,9 @@ namespace WpfApp2
             newStatuses.ForEach(addStatus);
         }
 
+        public async Task<Status> FavouriteAsync(long id) => await client.Favourite(id);
+        public async Task<Status> ReblogAsync(long id) => await client.Reblog(id);
+
         private void addStatus(Status status)
         {
             statuses.Add(status);
