@@ -22,7 +22,7 @@ namespace WpfApp2
             IsStreaming = model.IsStreaming.ToReadOnlyReactiveProperty();
             ReloadCommand = new AsyncReactiveCommand()
                 .WithSubscribe(async () => await model.ReloadAsync());
-            ToggleStreamingCommand = new AsyncReactiveCommand()
+            ToggleStreamingCommand = new ReactiveCommand()
                 .WithSubscribe(async () => await model.ToggleStreamingAsync());
             OpenCommand = new ReactiveCommand<StatusViewModel>()
                 .WithSubscribe(p => Process.Start(p.Status.Url ?? p.Status.Reblog.Url));
@@ -37,7 +37,7 @@ namespace WpfApp2
         public ReadOnlyReactiveProperty<bool> IsStreaming { get; }
 
         public AsyncReactiveCommand ReloadCommand { get; }
-        public AsyncReactiveCommand ToggleStreamingCommand { get; }
+        public ReactiveCommand ToggleStreamingCommand { get; }
         public ReactiveCommand<StatusViewModel> OpenCommand { get; }
         public AsyncReactiveCommand<StatusViewModel> FavouriteCommand { get; }
         public AsyncReactiveCommand<StatusViewModel> ReblogCommand { get; }
