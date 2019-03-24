@@ -22,6 +22,7 @@ namespace WpfApp2
         public string StaticAvatarUrl { get; }
         public string DisplayName { get; }
         public List<Inline> ContentFlow { get; }
+        public List<Inline> ContentFlowOneLine { get; }
         public ReactiveProperty<bool> Deleted { get; }
 
         public StatusViewModel(Status s)
@@ -33,6 +34,7 @@ namespace WpfApp2
             StaticAvatarUrl = originalStatus.Account.StaticAvatarUrl;
             DisplayName = originalStatus.Account.DisplayName + (s.Reblog == null ? "" : $"(RT:{s.Account.AccountName})");
             ContentFlow = ConvertHtmlToFlow(originalStatus.Content).ToList();
+            ContentFlowOneLine = ContentFlow.Select(x => x is LineBreak ? new Run (" ") : x).ToList();
         }
 
         #region Emoji Processing

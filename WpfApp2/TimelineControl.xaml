@@ -51,7 +51,7 @@
                 <GridViewColumn Header="Content">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <local:InlineBindableTextBlock InlineList="{Binding ContentFlow, Mode=OneTime}"/>
+                            <local:InlineBindableTextBlock InlineList="{Binding ContentFlowOneLine, Mode=OneTime}"/>
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
