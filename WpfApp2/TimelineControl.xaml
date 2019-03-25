@@ -34,6 +34,7 @@
             <KeyBinding Key="O" Command="{Binding OpenCommand}" CommandParameter="{Binding SelectedItem, ElementName=ListView}"/>
             <KeyBinding Key="F" Command="{Binding FavouriteCommand}" CommandParameter="{Binding SelectedItem, ElementName=ListView}"/>
             <KeyBinding Key="R" Command="{Binding ReblogCommand}" CommandParameter="{Binding SelectedItem, ElementName=ListView}"/>
+            <KeyBinding Key="M" Command="{Binding MentionCommand}" CommandParameter="{Binding SelectedItem, ElementName=ListView}"/>
         </ListView.InputBindings>
         <ListView.View>
             <GridView>

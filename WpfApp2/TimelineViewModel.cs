@@ -30,15 +30,19 @@ namespace WpfApp2
                 .WithSubscribe(async p => await model.FavouriteAsync(p.Status.Id));
             ReblogCommand = new AsyncReactiveCommand<StatusViewModel>()
                 .WithSubscribe(async p => await model.ReblogAsync(p.Status.Id));
+            MentionCommand = new ReactiveCommand<StatusViewModel>()
+                .WithSubscribe(p => InReplyTo.Value = p);
         }
 
         public ReadOnlyReactiveCollection<StatusViewModel> Statuses
             => model.Statuses.ToReadOnlyReactiveCollection(s => new StatusViewModel(s));
         public ReadOnlyReactiveProperty<bool> IsStreaming { get; }
+        public ReactiveProperty<StatusViewModel> InReplyTo { get; } = new ReactiveProperty<StatusViewModel>();
 
         public AsyncReactiveCommand ReloadCommand { get; }
         public ReactiveCommand ToggleStreamingCommand { get; }
         public ReactiveCommand<StatusViewModel> OpenCommand { get; }
+        public ReactiveCommand<StatusViewModel> MentionCommand { get; }
         public AsyncReactiveCommand<StatusViewModel> FavouriteCommand { get; }
         public AsyncReactiveCommand<StatusViewModel> ReblogCommand { get; }
 
