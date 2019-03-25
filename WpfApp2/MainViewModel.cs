@@ -22,6 +22,7 @@ namespace WpfApp2
         public ReactiveProperty<StatusViewModel> InReplyTo { get; } = new ReactiveProperty<StatusViewModel>();
         public ReactiveProperty<string> InReplyToText { get; } = new ReactiveProperty<string>("");
         public AsyncReactiveCommand TootCommand { get; }
+        public ReactiveCommand CancelMentionCommand { get; }
 
         private SettingsModel settings = new SettingsModel();
         private MastodonClient client;
@@ -33,6 +34,11 @@ namespace WpfApp2
             TootCommand = Text.Select(t => t.Length > 0)
                 .ToAsyncReactiveCommand()
                 .WithSubscribe(executeTootCommand);
+            CancelMentionCommand = InReplyTo
+                .Select(svm => svm != null)
+                .ToReactiveCommand()
+                .WithSubscribe(() => InReplyTo.Value = null);
+
             InReplyTo.Subscribe(svm =>
             {
                 if (svm == null)

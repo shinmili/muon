@@ -25,17 +25,19 @@
             <Button DockPanel.Dock="Right" Command="{Binding TootCommand}">Toot!</Button>
             <TextBox Text="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged}"/>
         </DockPanel>
-        <TextBlock DockPanel.Dock="Top" Text="{Binding InReplyToText.Value}">
-            <TextBlock.Style>
-                <Style TargetType="{x:Type TextBlock}">
+        <DockPanel DockPanel.Dock="Top">
+            <DockPanel.Style>
+                <Style TargetType="{x:Type DockPanel}">
                     <Style.Triggers>
-                        <Trigger Property="Text" Value="">
+                        <DataTrigger Binding="{Binding InReplyToText.Value}" Value="">
                             <Setter Property="Visibility" Value="Collapsed"/>
-                        </Trigger>
+                        </DataTrigger>
                     </Style.Triggers>
                 </Style>
-            </TextBlock.Style>
-        </TextBlock>
+            </DockPanel.Style>
+            <Button DockPanel.Dock="Left" Command="{Binding CancelMentionCommand}">:shiitake:</Button>
+            <TextBlock Text="{Binding InReplyToText.Value}" />
+        </DockPanel>
         <TabControl TabStripPlacement="Bottom" x:Name="Tab" Height="auto">
             <TabItem Header="Home">
                 <local:TimelineControl Type="Home"/>
