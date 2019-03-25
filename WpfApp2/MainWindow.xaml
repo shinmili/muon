@@ -14,26 +14,18 @@
         <KeyBinding Key="F5" Command="{Binding SelectedContent.DataContext.ReloadCommand, ElementName=Tab}"/>
         <KeyBinding Gesture="Ctrl+S" Command="{Binding SelectedContent.DataContext.ToggleStreamingCommand, ElementName=Tab}"/>
     </Window.InputBindings>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition Width="auto"/>
-        </Grid.ColumnDefinitions>
-        <Menu Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Timeline">
                 <MenuItem Header="_Reload" InputGestureText="F5" Command="{Binding SelectedContent.DataContext.ReloadCommand, ElementName=Tab}"/>
                 <MenuItem Header="_Streaming" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding SelectedContent.DataContext.IsStreaming.Value, ElementName=Tab, Mode=OneWay}" Command="{Binding SelectedContent.DataContext.ToggleStreamingCommand, ElementName=Tab}"/>
             </MenuItem>
         </Menu>
-        <TextBox Grid.Row="1" Grid.Column="0" Text="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged}" />
-        <Button Grid.Row="1" Grid.Column="1" Command="{Binding TootCommand}">Toot!</Button>
-        <TextBlock Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding InReplyToText.Value}">
+        <DockPanel DockPanel.Dock="Top">
+            <Button DockPanel.Dock="Right" Command="{Binding TootCommand}">Toot!</Button>
+            <TextBox Text="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged}"/>
+        </DockPanel>
+        <TextBlock DockPanel.Dock="Top" Text="{Binding InReplyToText.Value}">
             <TextBlock.Style>
                 <Style TargetType="{x:Type TextBlock}">
                     <Style.Triggers>
@@ -44,7 +36,7 @@
                 </Style>
             </TextBlock.Style>
         </TextBlock>
-        <TabControl Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" TabStripPlacement="Bottom" x:Name="Tab">
+        <TabControl TabStripPlacement="Bottom" x:Name="Tab" Height="auto">
             <TabItem Header="Home">
                 <local:TimelineControl Type="Home"/>
             </TabItem>
@@ -55,5 +47,5 @@
                 <local:TimelineControl Type="Federated"/>
             </TabItem>
         </TabControl>
-    </Grid>
+    </DockPanel>
 </Window>
