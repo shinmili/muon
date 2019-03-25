@@ -47,7 +47,8 @@ namespace WpfApp2
                 }
                 else
                 {
-                    InReplyToText.Value = $"To: {svm.Status.Account.UserName}: {svm.Status.Content}";
+                    InReplyToText.Value = $"To: {svm.OriginalStatus.Account.UserName}: {svm.OriginalStatus.Content}";
+                    Text.Value = $"@{svm.OriginalStatus.Account.AccountName} {Text.Value}";
                 }
             });
         }

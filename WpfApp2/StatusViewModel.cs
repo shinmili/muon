@@ -19,6 +19,7 @@ namespace WpfApp2
         public event PropertyChangedEventHandler PropertyChanged;
 
         public Status Status { get; private set; }
+        public Status OriginalStatus { get; private set; }
         public string StaticAvatarUrl { get; }
         public string DisplayName { get; }
         public List<Inline> ContentFlow { get; }
@@ -28,12 +29,11 @@ namespace WpfApp2
         public StatusViewModel(Status s)
         {
             Status = s;
+            OriginalStatus = s.Reblog ?? s;
 
-            Status originalStatus = s.Reblog ?? s;
-
-            StaticAvatarUrl = originalStatus.Account.StaticAvatarUrl;
-            DisplayName = originalStatus.Account.DisplayName + (s.Reblog == null ? "" : $"(RT:{s.Account.AccountName})");
-            ContentFlow = ConvertHtmlToFlow(originalStatus.Content).ToList();
+            StaticAvatarUrl = OriginalStatus.Account.StaticAvatarUrl;
+            DisplayName = OriginalStatus.Account.DisplayName + (s.Reblog == null ? "" : $"(RT:{s.Account.AccountName})");
+            ContentFlow = ConvertHtmlToFlow(OriginalStatus.Content).ToList();
             ContentFlowOneLine = ContentFlow.Select(x => x is LineBreak ? new Run (" ") : x).ToList();
         }
 

@@ -23,7 +23,7 @@
         </Menu>
         <DockPanel DockPanel.Dock="Top">
             <Button DockPanel.Dock="Right" Command="{Binding TootCommand}">Toot!</Button>
-            <TextBox Text="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="TextBox" Text="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged}"/>
         </DockPanel>
         <DockPanel DockPanel.Dock="Top">
             <DockPanel.Style>
