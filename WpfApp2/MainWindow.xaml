@@ -21,10 +21,14 @@
                 <MenuItem Header="_Streaming" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding SelectedContent.DataContext.IsStreaming.Value, ElementName=Tab, Mode=OneWay}" Command="{Binding SelectedContent.DataContext.ToggleStreamingCommand, ElementName=Tab}"/>
             </MenuItem>
         </Menu>
-        <DockPanel DockPanel.Dock="Top">
-            <Button DockPanel.Dock="Right" Command="{Binding TootCommand}">Toot!</Button>
-            <TextBox x:Name="TextBox" Text="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged}"/>
-        </DockPanel>
+        <Grid DockPanel.Dock="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBox x:Name="TextBox" Grid.Column="0" Text="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Grid.Column="1" Command="{Binding TootCommand}">Toot!</Button>
+        </Grid>
         <DockPanel DockPanel.Dock="Top">
             <DockPanel.Style>
                 <Style TargetType="{x:Type DockPanel}">
