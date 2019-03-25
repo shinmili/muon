@@ -46,10 +46,10 @@ namespace WpfApp2
 
         private void Streaming_OnDelete(object sender, StreamDeleteEventArgs e)
         {
-            int index = statuses.Select((s, i) => new { s, i })
-                .First(x => x.s.Id == e.StatusId)
-                .i;
-            statuses.RemoveAt(index);
+            int? index = statuses.Select((s, i) => new { s, i })
+                .FirstOrDefault(x => x.s.Id == e.StatusId)
+                ?.i;
+            if (index.HasValue) statuses.RemoveAt(index.Value);
         }
 
         private void Streaming_OnUpdate(object sender, StreamUpdateEventArgs e)
