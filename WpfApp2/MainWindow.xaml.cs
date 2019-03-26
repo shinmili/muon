@@ -35,17 +35,15 @@ namespace WpfApp2
                 TimelineViewModel tlvm = item.Content.DataContext;
                 tlvm.InReplyTo
                     .Where(svm => svm != null)
-                    .Subscribe(svm =>
-                    {
-                        mvm.InReplyTo.Value = svm;
-                        Observable.FromEventPattern(TextBox, "TextChanged")
-                            .Take(1)
-                            .Subscribe(_ =>
-                            {
-                                TextBox.Focus();
-                                TextBox.CaretIndex = TextBox.Text.Length;
-                            });
-                    });
+                    .Subscribe(svm => mvm.InReplyTo.Value = svm);
+                tlvm.MentionCommand.Subscribe(_ =>
+                    Observable.FromEventPattern(TextBox, "TextChanged")
+                        .Take(1)
+                        .Subscribe(__ =>
+                        {
+                            TextBox.Focus();
+                            TextBox.CaretIndex = TextBox.Text.Length;
+                        }));
                 mvm.InReplyTo
                     .Where(svm => svm != tlvm.InReplyTo.Value)
                     .Subscribe(svm => tlvm.InReplyTo.Value = null);
