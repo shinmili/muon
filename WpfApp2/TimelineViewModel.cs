@@ -21,6 +21,7 @@ namespace WpfApp2
         {
             this.model = model;
             IsStreaming = model.IsStreaming.ToReadOnlyReactiveProperty();
+            Statuses = model.Statuses.ToReadOnlyReactiveCollection(s => new StatusViewModel(s));
 
             ReloadCommand = new AsyncReactiveCommand()
                 .WithSubscribe(async () => await model.ReloadAsync());
@@ -38,8 +39,7 @@ namespace WpfApp2
                 .WithSubscribe(p => InReplyTo.Value = p);
         }
 
-        public ReadOnlyReactiveCollection<StatusViewModel> Statuses
-            => model.Statuses.ToReadOnlyReactiveCollection(s => new StatusViewModel(s));
+        public ReadOnlyReactiveCollection<StatusViewModel> Statuses { get; }
         public ReadOnlyReactiveProperty<bool> IsStreaming { get; }
         public ReactiveProperty<StatusViewModel> InReplyTo { get; } = new ReactiveProperty<StatusViewModel>();
         public ReactiveProperty<StatusViewModel> SelectedItem { get; } = new ReactiveProperty<StatusViewModel>();
