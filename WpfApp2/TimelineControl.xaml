@@ -33,8 +33,8 @@
         <ListView.InputBindings>
             <KeyBinding Key="O" Command="{Binding OpenCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
             <KeyBinding Key="F" Command="{Binding FavouriteCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
-            <KeyBinding Key="R" Command="{Binding ReblogCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
-            <KeyBinding Key="M" Command="{Binding MentionCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
+            <KeyBinding Key="B" Command="{Binding ReblogCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
+            <KeyBinding Key="R" Command="{Binding ReplyCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
         </ListView.InputBindings>
         <ListView.View>
             <GridView>
@@ -66,8 +66,8 @@
             <ContextMenu>
                 <MenuItem Header="_Open" InputGestureText="O" Command="{Binding OpenCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
                 <MenuItem Header="_Favourite" InputGestureText="F" Command="{Binding FavouriteCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
-                <MenuItem Header="_Reblog" InputGestureText="R" Command="{Binding ReblogCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
-                <MenuItem Header="_Mention" InputGestureText="M" Command="{Binding MentionCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
+                <MenuItem Header="_Boost" InputGestureText="B" Command="{Binding ReblogCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
+                <MenuItem Header="_Reply" InputGestureText="R" Command="{Binding ReplyCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
             </ContextMenu>
         </ContextMenuService.ContextMenu>
     </ListView>

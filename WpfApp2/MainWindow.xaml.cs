@@ -36,7 +36,7 @@ namespace WpfApp2
                 tlvm.InReplyTo
                     .Where(svm => svm != null)
                     .Subscribe(svm => mvm.InReplyTo.Value = svm);
-                tlvm.MentionCommand.Subscribe(_ =>
+                tlvm.ReplyCommand.Subscribe(_ =>
                     Observable.FromEventPattern(TextBox, "TextChanged")
                         .Take(1)
                         .Subscribe(__ =>

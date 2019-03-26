@@ -39,7 +39,7 @@
                     </Style.Triggers>
                 </Style>
             </DockPanel.Style>
-            <Button DockPanel.Dock="Left" Command="{Binding CancelMentionCommand}">:shiitake:</Button>
+            <Button DockPanel.Dock="Left" Command="{Binding CancelReplyCommand}">:shiitake:</Button>
             <TextBlock Text="{Binding InReplyToText.Value}" />
         </DockPanel>
         <TabControl TabStripPlacement="Bottom" x:Name="Tab" Height="auto">
