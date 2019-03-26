@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,17 +21,20 @@ namespace WpfApp2
         {
             this.model = model;
             IsStreaming = model.IsStreaming.ToReadOnlyReactiveProperty();
+
             ReloadCommand = new AsyncReactiveCommand()
                 .WithSubscribe(async () => await model.ReloadAsync());
             ToggleStreamingCommand = new ReactiveCommand()
                 .WithSubscribe(async () => await model.ToggleStreamingAsync());
-            OpenCommand = new ReactiveCommand<StatusViewModel>()
+
+            var IsStatusSelected = SelectedItem.Select(x => x != null);
+            OpenCommand = IsStatusSelected.ToReactiveCommand<StatusViewModel>()
                 .WithSubscribe(p => Process.Start(p.Status.Url ?? p.Status.Reblog.Url));
-            FavouriteCommand = new AsyncReactiveCommand<StatusViewModel>()
+            FavouriteCommand = IsStatusSelected.ToAsyncReactiveCommand<StatusViewModel>()
                 .WithSubscribe(async p => await model.FavouriteAsync(p.Status.Id));
-            ReblogCommand = new AsyncReactiveCommand<StatusViewModel>()
+            ReblogCommand = IsStatusSelected.ToAsyncReactiveCommand<StatusViewModel>()
                 .WithSubscribe(async p => await model.ReblogAsync(p.Status.Id));
-            MentionCommand = new ReactiveCommand<StatusViewModel>()
+            MentionCommand = IsStatusSelected.ToReactiveCommand<StatusViewModel>()
                 .WithSubscribe(p => InReplyTo.Value = p);
         }
 
@@ -38,6 +42,7 @@ namespace WpfApp2
             => model.Statuses.ToReadOnlyReactiveCollection(s => new StatusViewModel(s));
         public ReadOnlyReactiveProperty<bool> IsStreaming { get; }
         public ReactiveProperty<StatusViewModel> InReplyTo { get; } = new ReactiveProperty<StatusViewModel>();
+        public ReactiveProperty<StatusViewModel> SelectedItem { get; } = new ReactiveProperty<StatusViewModel>();
 
         public AsyncReactiveCommand ReloadCommand { get; }
         public ReactiveCommand ToggleStreamingCommand { get; }
