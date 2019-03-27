@@ -56,5 +56,32 @@ namespace WpfApp2.Properties {
                 this["AppName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"
+          <ArrayOfTabParameters xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+            <TabParameters>
+              <Type>Home</Type>
+              <StreamingOnStartup>true</StreamingOnStartup>
+            </TabParameters>
+            <TabParameters>
+              <Type>Local</Type>
+              <StreamingOnStartup>false</StreamingOnStartup>
+            </TabParameters>
+            <TabParameters>
+              <Type>Federated</Type>
+              <StreamingOnStartup>true</StreamingOnStartup>
+            </TabParameters>
+          </ArrayOfTabParameters>
+        ")]
+        public global::WpfApp2.TabParametersCollection Tabs {
+            get {
+                return ((global::WpfApp2.TabParametersCollection)(this["Tabs"]));
+            }
+            set {
+                this["Tabs"] = value;
+            }
+        }
     }
 }

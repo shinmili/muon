@@ -31,11 +31,7 @@ namespace WpfApp2
         {
             MainViewModel mvm = (MainViewModel)DataContext;
 
-            ObservableCollection<TabParameters> tabs = new ObservableCollection<TabParameters> {
-                new TabParameters { Type = TimelineType.Home, StreamingOnStartup = true },
-                new TabParameters { Type = TimelineType.Local, StreamingOnStartup = true },
-                new TabParameters { Type = TimelineType.Federated, StreamingOnStartup = true },
-            };
+            TabParametersCollection tabs = Properties.Settings.Default.Tabs;
 
             foreach (TabParameters tabParams in tabs)
             {
