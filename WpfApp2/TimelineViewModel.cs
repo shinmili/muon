@@ -17,17 +17,18 @@ namespace WpfApp2
     {
         private TimelineModelBase model;
 
-        public TimelineViewModel(TimelineControl.TimelineType type)
+        public TimelineViewModel(TimelineType type)
         {
+            Type = type;
             switch (type)
             {
-                case TimelineControl.TimelineType.Home:
+                case TimelineType.Home:
                     model = new HomeTimelineModel();
                     break;
-                case TimelineControl.TimelineType.Local:
+                case TimelineType.Local:
                     model = new LocalTimelineModel();
                     break;
-                case TimelineControl.TimelineType.Federated:
+                case TimelineType.Federated:
                     model = new FederatedTimelineModel();
                     break;
             }
@@ -50,6 +51,7 @@ namespace WpfApp2
                 .WithSubscribe(p => InReplyTo.Value = p);
         }
 
+        public TimelineType Type { get; set; }
         public ReadOnlyReactiveCollection<StatusViewModel> Statuses { get; }
         public ReadOnlyReactiveProperty<bool> IsStreaming { get; }
         public ReactiveProperty<StatusViewModel> InReplyTo { get; } = new ReactiveProperty<StatusViewModel>();
@@ -64,4 +66,7 @@ namespace WpfApp2
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
+
+    public enum TimelineType { Home, Local, Federated }
+
 }

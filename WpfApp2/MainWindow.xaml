@@ -11,14 +11,14 @@
         <local:MainViewModel />
     </Window.DataContext>
     <Window.InputBindings>
-        <KeyBinding Key="F5" Command="{Binding SelectedContent.DataContext.ReloadCommand, ElementName=Tab}"/>
-        <KeyBinding Gesture="Ctrl+S" Command="{Binding SelectedContent.DataContext.ToggleStreamingCommand, ElementName=Tab}"/>
+        <KeyBinding Key="F5" Command="{Binding SelectedItem.ReloadCommand, ElementName=Tab}"/>
+        <KeyBinding Gesture="Ctrl+S" Command="{Binding SelectedItem.ToggleStreamingCommand, ElementName=Tab}"/>
     </Window.InputBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <MenuItem Header="_Timeline">
-                <MenuItem Header="_Reload" InputGestureText="F5" Command="{Binding SelectedContent.DataContext.ReloadCommand, ElementName=Tab}"/>
-                <MenuItem Header="_Streaming" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding SelectedContent.DataContext.IsStreaming.Value, ElementName=Tab, Mode=OneWay}" Command="{Binding SelectedContent.DataContext.ToggleStreamingCommand, ElementName=Tab}"/>
+                <MenuItem Header="_Reload" InputGestureText="F5" Command="{Binding SelectedItem.ReloadCommand, ElementName=Tab}"/>
+                <MenuItem Header="_Streaming" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding SelectedItem.IsStreaming.Value, ElementName=Tab, Mode=OneWay}" Command="{Binding SelectedItem.ToggleStreamingCommand, ElementName=Tab}"/>
             </MenuItem>
         </Menu>
         <Grid DockPanel.Dock="Top">
@@ -43,15 +43,16 @@
             <TextBlock Text="{Binding InReplyToText.Value}" />
         </DockPanel>
         <TabControl TabStripPlacement="Bottom" x:Name="Tab" Height="auto">
-            <TabItem Header="Home">
-                <local:TimelineControl Type="Home"/>
-            </TabItem>
-            <TabItem Header="Local">
-                <local:TimelineControl Type="Local"/>
-            </TabItem>
-            <TabItem Header="Federated">
-                <local:TimelineControl Type="Federated"/>
-            </TabItem>
+            <TabControl.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Type, Mode=OneTime}"/>
+                </DataTemplate>
+            </TabControl.ItemTemplate>
+            <TabControl.ContentTemplate>
+                <DataTemplate>
+                    <local:TimelineControl />
+                </DataTemplate>
+            </TabControl.ContentTemplate>
         </TabControl>
     </DockPanel>
 </Window>

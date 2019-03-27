@@ -20,19 +20,6 @@ namespace WpfApp2
     /// </summary>
     public partial class TimelineControl : UserControl
     {
-        public enum TimelineType { Home, Local, Federated }
-
-        private TimelineType type;
-        public TimelineType Type
-        {
-            get => type;
-            set
-            {
-                type = value;
-                DataContext = new TimelineViewModel(type);
-            }
-        }
-
         public TimelineControl()
         {
             InitializeComponent();

@@ -94,6 +94,7 @@
     <Compile Include="InlineBindableTextBlock.cs" />
     <Compile Include="StatusConverter.cs" />
     <Compile Include="StatusViewModel.cs" />
+    <Compile Include="TabSettings.cs" />
     <Compile Include="TimelineControl.xaml.cs">
       <DependentUpon>TimelineControl.xaml</DependentUpon>
     </Compile>

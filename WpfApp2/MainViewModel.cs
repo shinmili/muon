@@ -21,6 +21,7 @@ namespace WpfApp2
         public ReactiveProperty<string> Text { get; } = new ReactiveProperty<string>("");
         public ReactiveProperty<StatusViewModel> InReplyTo { get; } = new ReactiveProperty<StatusViewModel>();
         public ReactiveProperty<string> InReplyToText { get; } = new ReactiveProperty<string>("");
+
         public AsyncReactiveCommand TootCommand { get; }
         public ReactiveCommand CancelReplyCommand { get; }
 

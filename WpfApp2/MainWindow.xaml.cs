@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
@@ -30,9 +31,16 @@ namespace WpfApp2
         {
             MainViewModel mvm = (MainViewModel)DataContext;
 
-            foreach (dynamic item in Tab.Items)
+            ObservableCollection<TabParameters> tabs = new ObservableCollection<TabParameters> {
+                new TabParameters { Type = TimelineType.Home, StreamingOnStartup = true },
+                new TabParameters { Type = TimelineType.Local, StreamingOnStartup = true },
+                new TabParameters { Type = TimelineType.Federated, StreamingOnStartup = true },
+            };
+
+            foreach (TabParameters tabParams in tabs)
             {
-                TimelineViewModel tlvm = item.Content.DataContext;
+                TimelineViewModel tlvm = new TimelineViewModel(tabParams.Type);
+                Tab.Items.Add(tlvm);
                 tlvm.InReplyTo
                     .Where(svm => svm != null)
                     .Subscribe(svm => mvm.InReplyTo.Value = svm);
@@ -48,6 +56,7 @@ namespace WpfApp2
                     .Where(svm => svm != tlvm.InReplyTo.Value)
                     .Subscribe(svm => tlvm.InReplyTo.Value = null);
                 tlvm.ReloadCommand.Execute();
+                if (tabParams.StreamingOnStartup) tlvm.ToggleStreamingCommand.Execute();
             }
         }
     }
