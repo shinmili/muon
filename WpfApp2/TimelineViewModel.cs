@@ -17,9 +17,20 @@ namespace WpfApp2
     {
         private TimelineModelBase model;
 
-        public TimelineViewModel(TimelineModelBase model)
+        public TimelineViewModel(TimelineControl.TimelineType type)
         {
-            this.model = model;
+            switch (type)
+            {
+                case TimelineControl.TimelineType.Home:
+                    model = new HomeTimelineModel();
+                    break;
+                case TimelineControl.TimelineType.Local:
+                    model = new LocalTimelineModel();
+                    break;
+                case TimelineControl.TimelineType.Federated:
+                    model = new FederatedTimelineModel();
+                    break;
+            }
             IsStreaming = model.IsStreaming.ToReadOnlyReactiveProperty();
             Statuses = model.Statuses.ToReadOnlyReactiveCollection(s => new StatusViewModel(s));
 
