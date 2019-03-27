@@ -15,7 +15,6 @@ namespace WpfApp2
     class TimelineModelBase
     {
         private MastodonClient client;
-        private SettingsModel settings;
         private ReactiveCollection<Status> statuses;
         private TimelineStreaming streaming;
         private long? sinceId;
@@ -32,8 +31,7 @@ namespace WpfApp2
         {
             GetTimeline = getTimeline;
             GetStreaming = getStreaming;
-            settings = new SettingsModel();
-            client = new MastodonClient(settings.AppRegistration, settings.Auth);
+            client = new MastodonClient(Properties.Settings.Default.AppRegistration, Properties.Settings.Default.Auth);
             statuses = new ReactiveCollection<Status>();
             streaming = GetStreaming(client);
             if (streaming != null)

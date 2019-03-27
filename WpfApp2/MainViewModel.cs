@@ -24,12 +24,11 @@ namespace WpfApp2
         public AsyncReactiveCommand TootCommand { get; }
         public ReactiveCommand CancelReplyCommand { get; }
 
-        private SettingsModel settings = new SettingsModel();
         private MastodonClient client;
 
         public MainViewModel()
         {
-            client = new MastodonClient(settings.AppRegistration, settings.Auth);
+            client = new MastodonClient(Properties.Settings.Default.AppRegistration, Properties.Settings.Default.Auth);
 
             TootCommand = Text.Select(t => t.Length > 0)
                 .ToAsyncReactiveCommand()

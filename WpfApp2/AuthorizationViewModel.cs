@@ -20,15 +20,14 @@ namespace WpfApp2
     class AuthorizationViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        public event EventHandler Closing;
+        public event EventHandler<DialogClosingEventArgs> Closing;
 
         private AuthenticationClient authenticationClient;
-        private SettingsModel settings = new SettingsModel();
 
         public AuthorizationViewModel()
         {
-            Instance = new ReactiveProperty<string>(settings.AppRegistration?.Instance);
-            AccessToken = new ReactiveProperty<string>(settings.Auth?.AccessToken ?? "");
+            Instance = new ReactiveProperty<string>(Properties.Settings.Default.AppRegistration?.Instance);
+            AccessToken = new ReactiveProperty<string>(Properties.Settings.Default.Auth?.AccessToken ?? "");
 
             RequestTokenCommand = Instance
                 .Select(x => !string.IsNullOrEmpty(x))
@@ -60,7 +59,7 @@ namespace WpfApp2
             authenticationClient = new AuthenticationClient(Instance.Value);
             try
             {
-                settings.AppRegistration = await authenticationClient.CreateApp(settings.AppName, Scope.Read | Scope.Write | Scope.Follow);
+                Properties.Settings.Default.AppRegistration = await authenticationClient.CreateApp(Properties.Settings.Default.AppName, Scope.Read | Scope.Write | Scope.Follow);
             }
             catch (HttpRequestException e)
             {
@@ -75,35 +74,37 @@ namespace WpfApp2
         {
             try
             {
-                settings.Auth = await authenticationClient.ConnectWithCode(AccessToken.Value);
+                Properties.Settings.Default.Auth = await authenticationClient.ConnectWithCode(AccessToken.Value);
             }
             catch (ServerErrorException e)
             {
                 MessageBox.Show("Authorization failed.");
                 return;
             }
-            MessageBox.Show(JsonConvert.SerializeObject(settings.Auth));
+            MessageBox.Show(JsonConvert.SerializeObject(Properties.Settings.Default.Auth));
             WaitingForAuthCode.Value = false;
         }
 
         private void executeOkCommand()
         {
-            settings.Save();
+            Properties.Settings.Default.Save();
             MessageBox.Show("Successfully saved.");
-            Closing(this, null);
+            Closing(this, new DialogClosingEventArgs(true));
         }
 
         private void executeCancelCommand()
         {
-            settings.Reload();
-            Closing(this, null);
+            Properties.Settings.Default.Reload();
+            Closing(this, new DialogClosingEventArgs(false));
         }
         #endregion
 
-        protected void OnClosing(EventArgs e)
-        {
-            var h = Closing;
-            h?.Invoke(this, null);
-        }
+        protected void OnClosing(DialogClosingEventArgs e) => Closing?.Invoke(this, e);
+    }
+
+    class DialogClosingEventArgs : EventArgs
+    {
+        public bool DialogResult { get; private set; }
+        public DialogClosingEventArgs(bool dialogResult) { DialogResult = dialogResult; }
     }
 }

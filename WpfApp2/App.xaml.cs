@@ -15,17 +15,18 @@ namespace WpfApp2
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            var settings = new SettingsModel();
-            Window w;
-            if (string.IsNullOrEmpty(settings.Auth?.CreatedAt))
+            if (WpfApp2.Properties.Settings.Default.Auth == null)
             {
-                w = new AuthorizationWindow();
+                ShutdownMode = ShutdownMode.OnExplicitShutdown;
+                bool? authResult = new AuthorizationWindow().ShowDialog();
+                if (!authResult.HasValue || authResult.Value == false)
+                {
+                    Shutdown();
+                }
             }
-            else
-            {
-                w = new MainWindow();
-            }
+            Window w = new MainWindow();
             w.Show();
+            ShutdownMode = ShutdownMode.OnLastWindowClose;
         }
     }
 }

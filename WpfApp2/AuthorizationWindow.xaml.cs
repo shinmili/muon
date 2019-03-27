@@ -26,7 +26,7 @@ namespace WpfApp2
         {
             InitializeComponent();
             DataContext = ViewModel;
-            ViewModel.Closing += (s, e) => Close();
+            ViewModel.Closing += (s, e) => { DialogResult = e.DialogResult; Close(); };
         }
     }
 }

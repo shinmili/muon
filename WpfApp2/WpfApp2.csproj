@@ -91,7 +91,6 @@
     <Compile Include="AuthorizationViewModel.cs" />
     <Compile Include="Converters.cs" />
     <Compile Include="MainViewModel.cs" />
-    <Compile Include="SettingsModel.cs" />
     <Compile Include="InlineBindableTextBlock.cs" />
     <Compile Include="StatusConverter.cs" />
     <Compile Include="StatusViewModel.cs" />
