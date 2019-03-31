@@ -18,8 +18,6 @@
     </UserControl.Resources>
     <ListView ItemsSource="{Binding Source={StaticResource SortedStatus}}"
               SelectedItem="{Binding SelectedItem.Value}"
-              ScrollViewer.CanContentScroll="False"
-              VirtualizingPanel.ScrollUnit="Pixel"
               BorderThickness="0">
         <ListView.ItemContainerStyle>
             <Style TargetType="ListViewItem">
