@@ -18,7 +18,7 @@ namespace WpfApp2
             if (WpfApp2.Properties.Settings.Default.Auth == null)
             {
                 ShutdownMode = ShutdownMode.OnExplicitShutdown;
-                bool? authResult = new AuthorizationWindow().ShowDialog();
+                bool? authResult = new SettingsWindow().ShowDialog();
                 if (!authResult.HasValue || authResult.Value == false)
                 {
                     Shutdown();

@@ -88,7 +88,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AuthorizationViewModel.cs" />
+    <Compile Include="SettingsViewModel.cs" />
     <Compile Include="Converters.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="InlineBindableTextBlock.cs" />
@@ -100,7 +100,7 @@
     </Compile>
     <Compile Include="TimelineModel.cs" />
     <Compile Include="TimelineViewModel.cs" />
-    <Page Include="AuthorizationWindow.xaml">
+    <Page Include="SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,8 +112,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AuthorizationWindow.xaml.cs">
-      <DependentUpon>AuthorizationWindow.xaml</DependentUpon>
+    <Compile Include="SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

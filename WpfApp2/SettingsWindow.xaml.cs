@@ -16,13 +16,13 @@ using System.Windows.Shapes;
 namespace WpfApp2
 {
     /// <summary>
-    /// AuthorizationWindow.xaml の相互作用ロジック
+    /// SettingsWindow.xaml の相互作用ロジック
     /// </summary>
-    public partial class AuthorizationWindow : Window
+    public partial class SettingsWindow : Window
     {
-        private AuthorizationViewModel ViewModel = new AuthorizationViewModel();
+        private SettingsViewModel ViewModel = new SettingsViewModel();
 
-        public AuthorizationWindow()
+        public SettingsWindow()
         {
             InitializeComponent();
             DataContext = ViewModel;

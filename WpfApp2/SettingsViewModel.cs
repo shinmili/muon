@@ -17,14 +17,14 @@ using System.Windows.Navigation;
 
 namespace WpfApp2
 {
-    class AuthorizationViewModel : INotifyPropertyChanged
+    class SettingsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<DialogClosingEventArgs> Closing;
 
         private AuthenticationClient authenticationClient;
 
-        public AuthorizationViewModel()
+        public SettingsViewModel()
         {
             Instance = new ReactiveProperty<string>(Properties.Settings.Default.AppRegistration?.Instance);
             AccessToken = new ReactiveProperty<string>(Properties.Settings.Default.Auth?.AccessToken ?? "");
