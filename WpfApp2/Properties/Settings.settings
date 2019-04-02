@@ -11,7 +11,7 @@
     <Setting Name="AppName" Type="System.String" Scope="User">
       <Value Profile="(Default)">S(K(SII))(S(S(KS)K)(K(SII)))</Value>
     </Setting>
-    <Setting Name="Tabs" Type="WpfApp2.TabParametersCollection" Scope="User">
+    <Setting Name="Tabs" Type="System.Collections.Generic.List&lt;TabParameters&gt;" Scope="User">
       <Value Profile="(Default)">
           &lt;ArrayOfTabParameters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
             &lt;TabParameters&gt;

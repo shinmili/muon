@@ -7,12 +7,6 @@ using System.Threading.Tasks;
 
 namespace WpfApp2
 {
-    public class TabParametersCollection : ObservableCollection<TabParameters>
-    {
-        public TabParametersCollection() { }
-        public TabParametersCollection(IEnumerable<TabParameters> xs) : base(xs) { }
-    }
-
     public class TabParameters
     {
         public TimelineType Type { get; set; }

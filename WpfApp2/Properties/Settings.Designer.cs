@@ -75,9 +75,9 @@ namespace WpfApp2.Properties {
             </TabParameters>
           </ArrayOfTabParameters>
         ")]
-        public global::WpfApp2.TabParametersCollection Tabs {
+        public global::System.Collections.Generic.List<TabParameters> Tabs {
             get {
-                return ((global::WpfApp2.TabParametersCollection)(this["Tabs"]));
+                return ((global::System.Collections.Generic.List<TabParameters>)(this["Tabs"]));
             }
             set {
                 this["Tabs"] = value;
