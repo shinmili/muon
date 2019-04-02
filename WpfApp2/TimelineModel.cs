@@ -95,7 +95,7 @@ namespace WpfApp2
         private void addStatus(Status status)
         {
             statuses.Add(status);
-            sinceId = status.Id;
+            sinceId = sinceId > status.Id ? sinceId : status.Id;
         }
     }
 
