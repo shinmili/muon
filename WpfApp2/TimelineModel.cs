@@ -22,11 +22,11 @@ namespace WpfApp2
         public ReactiveProperty<bool> IsStreaming = new ReactiveProperty<bool>(false);
         public ReadOnlyReactiveCollection<Status> Statuses { get; }
 
-        private readonly Func<MastodonClient, long?, long?, int?, Task<MastodonList<Status>>> GetTimeline;
+        private readonly Func<MastodonClient, ArrayOptions, Task<MastodonList<Status>>> GetTimeline;
         private readonly Func<MastodonClient, TimelineStreaming> GetStreaming;
 
         public TimelineModelBase(
-            Func<MastodonClient, long?, long?, int?, Task<MastodonList<Status>>> getTimeline,
+            Func<MastodonClient, ArrayOptions, Task<MastodonList<Status>>> getTimeline,
             Func<MastodonClient, TimelineStreaming> getStreaming)
         {
             GetTimeline = getTimeline;
@@ -84,7 +84,7 @@ namespace WpfApp2
 
         public async Task ReloadAsync()
         {
-            var newStatuses = await GetTimeline(client, null, sinceId, null);
+            var newStatuses = await GetTimeline(client, new ArrayOptions() { SinceId = sinceId });
             newStatuses.Reverse();
             newStatuses.ForEach(addStatus);
         }
@@ -102,7 +102,7 @@ namespace WpfApp2
     class HomeTimelineModel : TimelineModelBase
     {
         public HomeTimelineModel() : base(
-            (client, maxId, sinceId, limit) => client.GetHomeTimeline(maxId, sinceId, limit),
+            (client, opts) => client.GetHomeTimeline(opts),
             client => client.GetUserStreaming())
         { }
     }
@@ -110,7 +110,7 @@ namespace WpfApp2
     class LocalTimelineModel : TimelineModelBase
     {
         public LocalTimelineModel() : base(
-            (client, maxId, sinceId, limit) => client.GetPublicTimeline(maxId, sinceId, limit, true),
+            (client, opts) => client.GetPublicTimeline(opts, true),
             client => null)
         { }
     }
@@ -118,7 +118,7 @@ namespace WpfApp2
     class FederatedTimelineModel : TimelineModelBase
     {
         public FederatedTimelineModel() : base(
-            (client, maxId, sinceId, limit) => client.GetPublicTimeline(maxId, sinceId, limit),
+            (client, opts) => client.GetPublicTimeline(opts),
             client => client.GetPublicStreaming())
         { }
     }
