@@ -61,7 +61,7 @@ namespace WpfApp2
             {
                 Properties.Settings.Default.AppRegistration = await authenticationClient.CreateApp(Properties.Settings.Default.AppName, Scope.Read | Scope.Write | Scope.Follow);
             }
-            catch (HttpRequestException e)
+            catch (HttpRequestException)
             {
                 MessageBox.Show("Cannot connect to the instance.");
                 return;
@@ -76,7 +76,7 @@ namespace WpfApp2
             {
                 Properties.Settings.Default.Auth = await authenticationClient.ConnectWithCode(AccessToken.Value);
             }
-            catch (ServerErrorException e)
+            catch (ServerErrorException)
             {
                 MessageBox.Show("Authorization failed.");
                 return;
