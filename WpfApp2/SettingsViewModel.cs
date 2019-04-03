@@ -60,18 +60,17 @@ namespace WpfApp2
 
         private async Task executeRequestTokenCommand()
         {
-            authenticationClient = new AuthenticationClient(Instance.Value);
             try
             {
+                authenticationClient = new AuthenticationClient(Instance.Value);
                 Properties.Settings.Default.AppRegistration = await authenticationClient.CreateApp(Properties.Settings.Default.AppName, Scope.Read | Scope.Write | Scope.Follow);
+                Process.Start(authenticationClient.OAuthUrl());
+                WaitingForAuthCode.Value = true;
             }
             catch (HttpRequestException)
             {
                 MessageBox.Show("Cannot connect to the instance.");
-                return;
             }
-            Process.Start(authenticationClient.OAuthUrl());
-            WaitingForAuthCode.Value = true;
         }
 
         private async Task executeAuthorizeCommand()
@@ -79,27 +78,25 @@ namespace WpfApp2
             try
             {
                 Properties.Settings.Default.Auth = await authenticationClient.ConnectWithCode(AccessToken.Value);
+                MessageBox.Show("Successfully authorized!");
+                WaitingForAuthCode.Value = false;
             }
             catch (ServerErrorException)
             {
                 MessageBox.Show("Authorization failed.");
-                return;
             }
-            MessageBox.Show(JsonConvert.SerializeObject(Properties.Settings.Default.Auth));
-            WaitingForAuthCode.Value = false;
         }
 
         private void executeOkCommand()
         {
             Properties.Settings.Default.Save();
-            MessageBox.Show("Successfully saved.");
-            Closing(this, new DialogClosingEventArgs(true));
+            OnClosing(new DialogClosingEventArgs(true));
         }
 
         private void executeCancelCommand()
         {
             Properties.Settings.Default.Reload();
-            Closing(this, new DialogClosingEventArgs(false));
+            OnClosing(new DialogClosingEventArgs(false));
         }
         #endregion
 
