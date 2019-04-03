@@ -24,6 +24,7 @@ namespace WpfApp2
 
         public AsyncReactiveCommand TootCommand { get; }
         public ReactiveCommand CancelReplyCommand { get; }
+        public ReactiveCommand OpenSettingsCommand { get; }
 
         private MastodonClient client;
 
@@ -38,6 +39,8 @@ namespace WpfApp2
                 .Select(svm => svm != null)
                 .ToReactiveCommand()
                 .WithSubscribe(() => InReplyTo.Value = null);
+            OpenSettingsCommand = new ReactiveCommand()
+                .WithSubscribe(() => new SettingsWindow().ShowDialog());
 
             InReplyTo.Subscribe(svm =>
             {

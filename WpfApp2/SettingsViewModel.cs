@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -46,6 +47,9 @@ namespace WpfApp2
         public ReactiveProperty<string> Instance { get; }
         public ReactiveProperty<string> AccessToken { get; }
         private ReactiveProperty<bool> WaitingForAuthCode = new ReactiveProperty<bool>(false);
+
+        public ObservableCollection<TabParameters> Tabs => Properties.Settings.Default.Tabs;
+        public ReactiveProperty<TabParameters> SelectedTab { get; } = new ReactiveProperty<TabParameters>();
 
         #region Commands
 

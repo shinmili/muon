@@ -9,6 +9,7 @@ namespace WpfApp2
 {
     public class TabParameters
     {
+        public string Name { get; set; }
         public TimelineType Type { get; set; }
         public bool StreamingOnStartup { get; set; }
     }

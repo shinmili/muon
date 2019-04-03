@@ -22,53 +22,96 @@
             <Button Grid.Column="1" Command="{Binding OkCommand}">OK</Button>
             <Button Grid.Column="2" Command="{Binding CancelCommand}">Cancel</Button>
         </Grid>
-        <Separator DockPanel.Dock="Bottom" Height="2"/>
-        <TreeView>
-            <TreeView.Style>
-                <Style TargetType="{x:Type TreeView}">
-                    <Setter Property="Margin" Value="5" />
+        <TabControl>
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabControl}">
+                    <Setter Property="Margin" Value="5"/>
                 </Style>
-            </TreeView.Style>
-            <TreeViewItem Header="Accounts">
-                <TreeViewItem Header="Main"/>
-            </TreeViewItem>
-            <TreeViewItem Header="Tabs"/>
-        </TreeView>
-        <StackPanel>
-            <StackPanel.Style>
-                <Style TargetType="StackPanel">
-                    <Setter Property="Margin" Value="5" />
-                </Style>
-            </StackPanel.Style>
-            <StackPanel.Resources>
-                <Style TargetType="Button">
-                    <Setter Property="Margin" Value="0,0,0,5" />
-                </Style>
-                <Style TargetType="TextBlock">
-                    <Setter Property="Margin" Value="0,0,0,5" />
-                </Style>
-                <Style TargetType="TextBox">
-                    <Setter Property="Margin" Value="0,0,0,5" />
-                </Style>
-            </StackPanel.Resources>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0">Instance to connect</TextBlock>
-                <TextBox Grid.Column="1" Text="{Binding Instance.Value, UpdateSourceTrigger=PropertyChanged}" />
-            </Grid>
-            <Button Content="Open authorization page" Command="{Binding RequestTokenCommand}" />
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0">Authorization code</TextBlock>
-                <TextBox Grid.Column="1" Text="{Binding AccessToken.Value, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding WaitingForAuthCode}" />
-            </Grid>
-            <Button Content="Authorize Brillenetui" Command="{Binding AuthorizeCommand}" />
-        </StackPanel>
+            </TabControl.Resources>
+            <TabItem Header="Account">
+                <StackPanel>
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Margin" Value="5" />
+                        </Style>
+                    </StackPanel.Style>
+                    <StackPanel.Resources>
+                        <Style TargetType="Button">
+                            <Setter Property="Margin" Value="0,0,0,5" />
+                        </Style>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Margin" Value="0,0,0,5" />
+                        </Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="Margin" Value="0,0,0,5" />
+                        </Style>
+                    </StackPanel.Resources>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0">Instance to connect</TextBlock>
+                        <TextBox Grid.Column="1" Text="{Binding Instance.Value, UpdateSourceTrigger=PropertyChanged}" />
+                    </Grid>
+                    <Button Content="Open authorization page" Command="{Binding RequestTokenCommand}" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0">Authorization code</TextBlock>
+                        <TextBox Grid.Column="1" Text="{Binding AccessToken.Value, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding WaitingForAuthCode}" />
+                    </Grid>
+                    <Button Content="Authorize Brillenetui" Command="{Binding AuthorizeCommand}" />
+                </StackPanel>
+            </TabItem>
+            <TabItem Header="Tabs">
+                <TabItem.Resources>
+                    <Style TargetType="{x:Type ListBox}">
+                        <Setter Property="Margin" Value="5"/>
+                    </Style>
+                </TabItem.Resources>
+                <StackPanel Orientation="Horizontal">
+                    <ListBox ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedTab.Value}" DisplayMemberPath="Name"/>
+                    <StackPanel>
+                        <Grid>
+                            <Grid.Style>
+                                <Style TargetType="{x:Type Grid}">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding SelectedTab.Value}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Grid.Style>
+                            <Grid.Resources>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Margin" Value="5"/>
+                                </Style>
+                                <Style TargetType="{x:Type TextBox}">
+                                    <Setter Property="Margin" Value="5"/>
+                                </Style>
+                                <Style TargetType="{x:Type CheckBox}">
+                                    <Setter Property="Margin" Value="5"/>
+                                </Style>
+                            </Grid.Resources>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name"/>
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedTab.Value.Name, UpdateSourceTrigger=PropertyChanged}"/>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Text="Enable streaming on startup"/>
+                            <CheckBox Grid.Row="1" Grid.Column="1" IsChecked="{Binding SelectedTab.Value.StreamingOnStartup}"/>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
     </DockPanel>
 </Window>

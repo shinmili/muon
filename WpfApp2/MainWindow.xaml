@@ -16,6 +16,9 @@
     </Window.InputBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top">
+            <MenuItem Header="_App">
+                <MenuItem Header="_Settings" Command="{Binding OpenSettingsCommand}"/>
+            </MenuItem>
             <MenuItem Header="_Timeline">
                 <MenuItem Header="_Reload" InputGestureText="F5" Command="{Binding SelectedItem.ReloadCommand, ElementName=Tab}"/>
                 <MenuItem Header="_Streaming" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding SelectedItem.IsStreaming.Value, ElementName=Tab, Mode=OneWay}" Command="{Binding SelectedItem.ToggleStreamingCommand, ElementName=Tab}"/>

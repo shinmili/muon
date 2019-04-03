@@ -31,7 +31,7 @@ namespace WpfApp2
         {
             MainViewModel mvm = (MainViewModel)DataContext;
 
-            List<TabParameters> tabs = Properties.Settings.Default.Tabs;
+            IEnumerable<TabParameters> tabs = Properties.Settings.Default.Tabs;
 
             foreach (TabParameters tabParams in tabs)
             {
