@@ -91,6 +91,7 @@ namespace WpfApp2
 
         public async Task<Status> FavouriteAsync(long id) => await client.Favourite(id);
         public async Task<Status> ReblogAsync(long id) => await client.Reblog(id);
+        public async Task DeleteAsync(long id) => await client.DeleteStatus(id);
 
         private void addStatus(Status status)
         {

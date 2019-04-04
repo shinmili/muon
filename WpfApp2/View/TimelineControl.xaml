@@ -33,6 +33,7 @@
             <KeyBinding Key="F" Command="{Binding FavouriteCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
             <KeyBinding Key="B" Command="{Binding ReblogCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
             <KeyBinding Key="R" Command="{Binding ReplyCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
+            <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
         </ListView.InputBindings>
         <ListView.View>
             <GridView>
@@ -66,6 +67,7 @@
                 <MenuItem Header="_Favourite" InputGestureText="F" Command="{Binding FavouriteCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
                 <MenuItem Header="_Boost" InputGestureText="B" Command="{Binding ReblogCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
                 <MenuItem Header="_Reply" InputGestureText="R" Command="{Binding ReplyCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
+                <MenuItem Header="_Delete" InputGestureText="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
             </ContextMenu>
         </ContextMenuService.ContextMenu>
     </ListView>

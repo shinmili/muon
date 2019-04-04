@@ -36,7 +36,7 @@ namespace WpfApp2
             Statuses = model.Statuses.ToReadOnlyReactiveCollection(s => new StatusViewModel(s));
 
             ReloadCommand = new AsyncReactiveCommand()
-                .WithSubscribe(async () => await model.ReloadAsync());
+                .WithSubscribe(() => model.ReloadAsync());
             ToggleStreamingCommand = new ReactiveCommand()
                 .WithSubscribe(async () => await model.ToggleStreamingAsync());
 
@@ -44,11 +44,13 @@ namespace WpfApp2
             OpenCommand = IsStatusSelected.ToReactiveCommand<StatusViewModel>()
                 .WithSubscribe(p => Process.Start(p.Status.Url ?? p.Status.Reblog.Url));
             FavouriteCommand = IsStatusSelected.ToAsyncReactiveCommand<StatusViewModel>()
-                .WithSubscribe(async p => await model.FavouriteAsync(p.Status.Id));
+                .WithSubscribe(p => model.FavouriteAsync(p.Status.Id));
             ReblogCommand = IsStatusSelected.ToAsyncReactiveCommand<StatusViewModel>()
-                .WithSubscribe(async p => await model.ReblogAsync(p.Status.Id));
+                .WithSubscribe(p => model.ReblogAsync(p.Status.Id));
             ReplyCommand = IsStatusSelected.ToReactiveCommand<StatusViewModel>()
                 .WithSubscribe(p => InReplyTo.Value = p);
+            DeleteCommand = IsStatusSelected.ToAsyncReactiveCommand<StatusViewModel>()
+                .WithSubscribe(p => model.DeleteAsync(p.Status.Id));
         }
 
         public TimelineType Type { get; set; }
@@ -63,6 +65,7 @@ namespace WpfApp2
         public ReactiveCommand<StatusViewModel> ReplyCommand { get; }
         public AsyncReactiveCommand<StatusViewModel> FavouriteCommand { get; }
         public AsyncReactiveCommand<StatusViewModel> ReblogCommand { get; }
+        public AsyncReactiveCommand<StatusViewModel> DeleteCommand { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
