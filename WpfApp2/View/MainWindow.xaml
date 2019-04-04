@@ -29,7 +29,11 @@
                 <ColumnDefinition/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="TextBox" Grid.Column="0" Text="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="TextBox" Grid.Column="0" Text="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged}">
+                <TextBox.InputBindings>
+                    <KeyBinding Gesture="Ctrl+Enter" Command="{Binding TootCommand}" />
+                </TextBox.InputBindings>
+            </TextBox>
             <Button Grid.Column="1" Command="{Binding TootCommand}">Toot!</Button>
         </Grid>
         <DockPanel DockPanel.Dock="Top">
