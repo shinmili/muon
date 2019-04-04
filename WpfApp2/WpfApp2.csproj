@@ -88,23 +88,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="SettingsViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="Converters.cs" />
-    <Compile Include="MainViewModel.cs" />
-    <Compile Include="InlineBindableTextBlock.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="View\InlineBindableTextBlock.cs" />
     <Compile Include="StatusConverter.cs" />
-    <Compile Include="StatusViewModel.cs" />
-    <Compile Include="TabSettings.cs" />
-    <Compile Include="TimelineControl.xaml.cs">
+    <Compile Include="ViewModel\StatusViewModel.cs" />
+    <Compile Include="Model\TabSettings.cs" />
+    <Compile Include="View\TimelineControl.xaml.cs">
       <DependentUpon>TimelineControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TimelineModel.cs" />
-    <Compile Include="TimelineViewModel.cs" />
-    <Page Include="SettingsWindow.xaml">
+    <Compile Include="Model\TimelineModel.cs" />
+    <Compile Include="ViewModel\TimelineViewModel.cs" />
+    <Page Include="View\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -112,14 +112,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="SettingsWindow.xaml.cs">
+    <Compile Include="View\SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="TimelineControl.xaml">
+    <Page Include="View\TimelineControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -152,5 +152,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
