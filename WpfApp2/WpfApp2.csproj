@@ -91,10 +91,9 @@
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="Converters.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="View\InlineBindableTextBlock.cs" />
-    <Compile Include="StatusConverter.cs" />
     <Compile Include="ViewModel\StatusViewModel.cs" />
     <Compile Include="Model\TabSettings.cs" />
+    <Compile Include="View\TextBlockEx.cs" />
     <Compile Include="View\TimelineControl.xaml.cs">
       <DependentUpon>TimelineControl.xaml</DependentUpon>
     </Compile>

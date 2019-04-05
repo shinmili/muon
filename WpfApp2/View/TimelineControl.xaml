@@ -6,6 +6,7 @@
              xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:g="clr-namespace:System.Globalization;assembly=mscorlib"
              xmlns:local="clr-namespace:WpfApp2"
+             xmlns:v="clr-namespace:WpfApp2.View"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -50,11 +51,17 @@
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
-                <GridViewColumn Header="Name" DisplayMemberBinding="{Binding DisplayName, Mode=OneTime}" />
+                <GridViewColumn Header="Name">
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <v:TextBlockEx Text="{Binding DisplayName, Mode=OneTime}" Emojis="{Binding Status.Account.Emojis}"/>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn> 
                 <GridViewColumn Header="Content">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <local:InlineBindableTextBlock InlineList="{Binding ContentFlowOneLine, Mode=OneTime}"/>
+                            <v:TextBlockEx Text="{Binding OriginalStatus.Content, Mode=OneTime}" ParseHTML="True" Emojis="{Binding OriginalStatus.Emojis}" />
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
