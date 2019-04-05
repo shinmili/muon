@@ -15,6 +15,7 @@
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
         <local:IsNotNullConverter x:Key="IsNotNullConverter"/>
+        <local:UtcToLocalConverter x:Key="UtcToLocalConverter"/>
     </UserControl.Resources>
     <ListView ItemsSource="{Binding Source={StaticResource SortedStatus}}"
               SelectedItem="{Binding SelectedItem.Value}"
@@ -57,7 +58,7 @@
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
-                <GridViewColumn Header="CreatedAt" DisplayMemberBinding="{Binding Status.CreatedAt, ConverterCulture={x:Static g:CultureInfo.CurrentCulture}, Mode=OneTime}" />
+                <GridViewColumn Header="CreatedAt" DisplayMemberBinding="{Binding Status.CreatedAt, Converter={StaticResource UtcToLocalConverter}, ConverterCulture={x:Static g:CultureInfo.CurrentCulture}, Mode=OneTime}" />
                 <GridViewColumn Header="App" DisplayMemberBinding="{Binding Status.Application.Name, Mode=OneTime}" />
             </GridView>
         </ListView.View>

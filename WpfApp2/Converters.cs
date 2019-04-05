@@ -12,8 +12,14 @@ namespace WpfApp2
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture) => value != null;
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+            => throw new NotImplementedException();
+    }
+
+    class UtcToLocalConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+            => TimeZoneInfo.ConvertTimeFromUtc((DateTime)value, TimeZoneInfo.Local);
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+            => throw new NotImplementedException();
     }
 }
