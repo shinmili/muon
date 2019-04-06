@@ -38,7 +38,13 @@ namespace WpfApp2
             ReloadCommand = new AsyncReactiveCommand()
                 .WithSubscribe(() => model.ReloadAsync());
             ToggleStreamingCommand = new ReactiveCommand()
-                .WithSubscribe(async () => await model.ToggleStreamingAsync());
+                .WithSubscribe(async () =>
+                {
+                    if (model.IsStreaming.Value)
+                        model.StopStreaming();
+                    else
+                        await model.StartStreamingAsync();
+                });
 
             var IsStatusSelected = SelectedItem.Select(x => x != null);
             OpenCommand = IsStatusSelected.ToReactiveCommand<StatusViewModel>()

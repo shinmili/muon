@@ -14,8 +14,8 @@ namespace WpfApp2
 {
     class TimelineModelBase
     {
-        private MastodonClient client;
-        private ObservableCollection<Status> statuses;
+        private MastodonClient client = new MastodonClient(Properties.Settings.Default.AppRegistration, Properties.Settings.Default.Auth);
+        private ObservableCollection<Status> statuses = new ObservableCollection<Status>();
         private TimelineStreaming streaming;
         private long? sinceId;
 
@@ -31,15 +31,13 @@ namespace WpfApp2
         {
             GetTimeline = getTimeline;
             GetStreaming = getStreaming;
-            client = new MastodonClient(Properties.Settings.Default.AppRegistration, Properties.Settings.Default.Auth);
-            statuses = new ObservableCollection<Status>();
+            Statuses = statuses.ToReadOnlyReactiveCollection();
             streaming = GetStreaming(client);
             if (streaming != null)
             {
                 streaming.OnUpdate += Streaming_OnUpdate;
                 streaming.OnDelete += Streaming_OnDelete;
             }
-            Statuses = statuses.ToReadOnlyReactiveCollection();
         }
 
         private void Streaming_OnDelete(object sender, StreamDeleteEventArgs e)
@@ -68,18 +66,6 @@ namespace WpfApp2
             if (!IsStreaming.Value || streaming == null) return;
             streaming.Stop();
             IsStreaming.Value = false;
-        }
-
-        public async Task ToggleStreamingAsync()
-        {
-            if (IsStreaming.Value)
-            {
-                StopStreaming();
-            }
-            else
-            {
-                await StartStreamingAsync();
-            }
         }
 
         public async Task ReloadAsync()
