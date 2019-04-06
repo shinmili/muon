@@ -17,7 +17,7 @@ namespace WpfApp2
     {
         private TimelineModelBase model;
 
-        public TimelineViewModel(TimelineType type)
+        public TimelineViewModel(TimelineType type, bool streaming)
         {
             Type = type;
             switch (type)
@@ -51,6 +51,8 @@ namespace WpfApp2
                 .WithSubscribe(p => InReplyTo.Value = p);
             DeleteCommand = IsStatusSelected.ToAsyncReactiveCommand<StatusViewModel>()
                 .WithSubscribe(p => model.DeleteAsync(p.Status.Id));
+
+            model.StreamingStarting.Value = streaming;
         }
 
         public TimelineType Type { get; }

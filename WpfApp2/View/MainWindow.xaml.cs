@@ -35,7 +35,7 @@ namespace WpfApp2
 
             foreach (TabParameters tabParams in tabs)
             {
-                TimelineViewModel tlvm = new TimelineViewModel(tabParams.Type);
+                TimelineViewModel tlvm = new TimelineViewModel(tabParams.Type, tabParams.StreamingOnStartup);
                 Tab.Items.Add(tlvm);
                 tlvm.InReplyTo
                     .Where(svm => svm != null)
@@ -52,7 +52,6 @@ namespace WpfApp2
                     .Where(svm => svm != tlvm.InReplyTo.Value)
                     .Subscribe(svm => tlvm.InReplyTo.Value = null);
                 tlvm.ReloadCommand.Execute();
-                if (tabParams.StreamingOnStartup) tlvm.ToggleStreamingCommand.Execute();
             }
         }
     }
