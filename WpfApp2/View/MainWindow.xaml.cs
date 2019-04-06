@@ -31,9 +31,7 @@ namespace WpfApp2
         {
             MainViewModel mvm = (MainViewModel)DataContext;
 
-            IEnumerable<TabParameters> tabs = Properties.Settings.Default.Tabs;
-
-            foreach (TabParameters tabParams in tabs)
+            foreach (TabParameters tabParams in Properties.Settings.Default.Tabs)
             {
                 TimelineViewModel tlvm = new TimelineViewModel(tabParams.Type, tabParams.StreamingOnStartup);
                 Tab.Items.Add(tlvm);
