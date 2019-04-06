@@ -18,10 +18,14 @@ namespace WpfApp2
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        public ReadOnlyReactiveCollection<TimelineViewModel> TimelineViewModels { get; }
+
         public ReactiveCommand OpenSettingsCommand { get; }
 
         public MainViewModel()
         {
+            TimelineViewModels = Properties.Settings.Default.Tabs.ToReadOnlyReactiveCollection(p => new TimelineViewModel(p.Type, p.StreamingOnStartup));
+
             OpenSettingsCommand = new ReactiveCommand()
                 .WithSubscribe(() => new SettingsWindow().ShowDialog());
         }

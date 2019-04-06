@@ -29,10 +29,8 @@ namespace WpfApp2
 
         private void Window_ContentRendered(object sender, EventArgs e)
         {
-            foreach (TabParameters tabParams in Properties.Settings.Default.Tabs)
+            foreach (TimelineViewModel tlvm in Tab.Items)
             {
-                TimelineViewModel tlvm = new TimelineViewModel(tabParams.Type, tabParams.StreamingOnStartup);
-                Tab.Items.Add(tlvm);
                 tlvm.ReloadCommand.Execute();
             }
         }

@@ -26,7 +26,7 @@
             </MenuItem>
         </Menu>
         <v:NewTootBox x:Name="TootBox" DockPanel.Dock="Top"/>
-        <TabControl TabStripPlacement="Bottom" x:Name="Tab" Height="auto">
+        <TabControl TabStripPlacement="Bottom" x:Name="Tab" Height="auto" ItemsSource="{Binding TimelineViewModels}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Type, Mode=OneTime}"/>
