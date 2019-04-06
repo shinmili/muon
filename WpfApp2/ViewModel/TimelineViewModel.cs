@@ -10,12 +10,14 @@ using System.Reactive.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using WpfApp2.Model;
 
 namespace WpfApp2
 {
     class TimelineViewModel : INotifyPropertyChanged
     {
         private TimelineModelBase model;
+        private InReplyToModel inReplyToModel = InReplyToModel.Instance;
 
         public TimelineViewModel(TimelineType type, bool streaming)
         {
@@ -48,7 +50,7 @@ namespace WpfApp2
             ReblogCommand = IsStatusSelected.ToAsyncReactiveCommand<StatusViewModel>()
                 .WithSubscribe(p => model.ReblogAsync(p.Status.Id));
             ReplyCommand = IsStatusSelected.ToReactiveCommand<StatusViewModel>()
-                .WithSubscribe(p => InReplyTo.Value = p);
+                .WithSubscribe(p => inReplyToModel.InReplyTo.Value = p.Status);
             DeleteCommand = IsStatusSelected.ToAsyncReactiveCommand<StatusViewModel>()
                 .WithSubscribe(p => model.DeleteAsync(p.Status.Id));
 
@@ -58,7 +60,6 @@ namespace WpfApp2
         public TimelineType Type { get; }
         public ReadOnlyReactiveCollection<StatusViewModel> Statuses { get; }
         public ReadOnlyReactiveProperty<bool> IsStreaming { get; }
-        public ReactiveProperty<StatusViewModel> InReplyTo { get; } = new ReactiveProperty<StatusViewModel>();
         public ReactiveProperty<StatusViewModel> SelectedItem { get; } = new ReactiveProperty<StatusViewModel>();
 
         public AsyncReactiveCommand ReloadCommand { get; }

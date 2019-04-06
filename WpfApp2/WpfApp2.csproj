@@ -88,17 +88,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\InReplyToModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="Converters.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\StatusViewModel.cs" />
     <Compile Include="Model\TabSettings.cs" />
+    <Compile Include="ViewModel\NewTootBoxViewModel.cs" />
     <Compile Include="View\TextBlockEx.cs" />
     <Compile Include="View\TimelineControl.xaml.cs">
       <DependentUpon>TimelineControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\TimelineModel.cs" />
     <Compile Include="ViewModel\TimelineViewModel.cs" />
+    <Compile Include="View\NewTootBox.xaml.cs">
+      <DependentUpon>NewTootBox.xaml</DependentUpon>
+    </Compile>
     <Page Include="View\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +124,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\TimelineControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NewTootBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

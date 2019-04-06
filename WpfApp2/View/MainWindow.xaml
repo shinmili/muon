@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp2"
+        xmlns:v="clr-namespace:WpfApp2.View"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance local:MainViewModel}"
         Title="MainWindow" Height="450" Width="800" ContentRendered="Window_ContentRendered">
@@ -24,31 +25,7 @@
                 <MenuItem Header="_Streaming" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding SelectedItem.IsStreaming.Value, ElementName=Tab, Mode=OneWay}" Command="{Binding SelectedItem.ToggleStreamingCommand, ElementName=Tab}"/>
             </MenuItem>
         </Menu>
-        <Grid DockPanel.Dock="Top">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <TextBox x:Name="TextBox" Grid.Column="0" Text="{Binding Text.Value, UpdateSourceTrigger=PropertyChanged}">
-                <TextBox.InputBindings>
-                    <KeyBinding Gesture="Ctrl+Enter" Command="{Binding TootCommand}" />
-                </TextBox.InputBindings>
-            </TextBox>
-            <Button Grid.Column="1" Command="{Binding TootCommand}">Toot!</Button>
-        </Grid>
-        <DockPanel DockPanel.Dock="Top">
-            <DockPanel.Style>
-                <Style TargetType="{x:Type DockPanel}">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding InReplyToText.Value}" Value="">
-                            <Setter Property="Visibility" Value="Collapsed"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </DockPanel.Style>
-            <Button DockPanel.Dock="Left" Command="{Binding CancelReplyCommand}">:shiitake:</Button>
-            <TextBlock Text="{Binding InReplyToText.Value}" />
-        </DockPanel>
+        <v:NewTootBox x:Name="TootBox" DockPanel.Dock="Top"/>
         <TabControl TabStripPlacement="Bottom" x:Name="Tab" Height="auto">
             <TabControl.ItemTemplate>
                 <DataTemplate>
