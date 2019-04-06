@@ -16,7 +16,7 @@
     </Window.InputBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top" Focusable="False">
-            <MenuItem Header="_App">
+            <MenuItem Header="_App" Focusable="False">
                 <MenuItem Header="_Settings" Command="{Binding OpenSettingsCommand}"/>
             </MenuItem>
             <MenuItem Header="_Timeline" Focusable="False">
