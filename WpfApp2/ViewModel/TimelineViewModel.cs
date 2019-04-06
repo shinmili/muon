@@ -32,19 +32,13 @@ namespace WpfApp2
                     model = new FederatedTimelineModel();
                     break;
             }
-            IsStreaming = model.IsStreaming.ToReadOnlyReactiveProperty();
+            IsStreaming = model.StreamingStarted;
             Statuses = model.Statuses.ToReadOnlyReactiveCollection(s => new StatusViewModel(s));
 
             ReloadCommand = new AsyncReactiveCommand()
                 .WithSubscribe(() => model.ReloadAsync());
             ToggleStreamingCommand = new ReactiveCommand()
-                .WithSubscribe(async () =>
-                {
-                    if (model.IsStreaming.Value)
-                        model.StopStreaming();
-                    else
-                        await model.StartStreamingAsync();
-                });
+                .WithSubscribe(() => model.StreamingStarting.Value = !IsStreaming.Value);
 
             var IsStatusSelected = SelectedItem.Select(x => x != null);
             OpenCommand = IsStatusSelected.ToReactiveCommand<StatusViewModel>()

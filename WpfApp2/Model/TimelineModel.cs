@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,7 +20,17 @@ namespace WpfApp2
         private TimelineStreaming streaming;
         private long? sinceId;
 
-        public ReactiveProperty<bool> IsStreaming = new ReactiveProperty<bool>(false);
+        /// <summary>
+        /// Set this property to start or stop streaming.
+        /// </summary>
+        public ReactiveProperty<bool> StreamingStarting { get; } = new ReactiveProperty<bool>(false);
+
+        /// <summary>
+        /// Tells if the streaming is actually started.
+        /// </summary>
+        public ReadOnlyReactiveProperty<bool> StreamingStarted { get; }
+        private ReactiveProperty<bool> streamingStarted = new ReactiveProperty<bool>(false);
+
         public ReadOnlyReactiveCollection<Status> Statuses { get; }
 
         private readonly Func<MastodonClient, ArrayOptions, Task<MastodonList<Status>>> GetTimeline;
@@ -31,13 +42,17 @@ namespace WpfApp2
         {
             GetTimeline = getTimeline;
             GetStreaming = getStreaming;
+
             Statuses = statuses.ToReadOnlyReactiveCollection();
+
+            StreamingStarted = streamingStarted.ToReadOnlyReactiveProperty();
             streaming = GetStreaming(client);
             if (streaming != null)
             {
                 streaming.OnUpdate += Streaming_OnUpdate;
                 streaming.OnDelete += Streaming_OnDelete;
             }
+            StreamingStarting.DistinctUntilChanged().Subscribe(OnStreamingChanged);
         }
 
         private void Streaming_OnDelete(object sender, StreamDeleteEventArgs e)
@@ -53,20 +68,24 @@ namespace WpfApp2
             addStatus(e.Status);
         }
 
-        public async Task StartStreamingAsync()
+        private async void OnStreamingChanged(bool b)
         {
-            if (IsStreaming.Value || streaming == null) return;
-            IsStreaming.Value = true;
-            try { await streaming.Start(); }
-            catch (TaskCanceledException) { }
+            if (b) { await StartStreamingAsync(); }
+            else { StopStreaming(); }
         }
 
-        public void StopStreaming()
+        private async Task StartStreamingAsync()
         {
-            if (!IsStreaming.Value || streaming == null) return;
-            streaming.Stop();
-            IsStreaming.Value = false;
+            try
+            {
+                streamingStarted.Value = true;
+                await streaming?.Start();
+            }
+            catch (TaskCanceledException) { }
+            finally { streamingStarted.Value = false; }
         }
+
+        private void StopStreaming() => streaming?.Stop();
 
         public async Task ReloadAsync()
         {
