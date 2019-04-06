@@ -39,7 +39,7 @@ namespace WpfApp2.View
                 nameof(Emojis),
                 typeof(IEnumerable<Emoji>),
                 typeof(TextBlockEx),
-                new FrameworkPropertyMetadata(new List<Emoji>(),
+                new FrameworkPropertyMetadata(Enumerable.Empty<Emoji>(),
                     (o, e) =>
                     {
                         TextBlockEx tb = (TextBlockEx)o;
@@ -69,7 +69,6 @@ namespace WpfApp2.View
 
         private void Render(string text, bool parseHTML, IEnumerable<Emoji> emojis)
         {
-            Console.WriteLine($"text:{text}, parseHTML:{parseHTML}, emojis:{emojis?.Count()}");
             Inlines.Clear();
             if (parseHTML)
             {
@@ -89,7 +88,7 @@ namespace WpfApp2.View
 
         private void OnFontSizeChanged(double size)
         {
-            foreach(Inline inline in Inlines)
+            foreach (Inline inline in Inlines)
             {
                 var container = inline as InlineUIContainer;
                 if (container != null)
