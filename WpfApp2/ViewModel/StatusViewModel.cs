@@ -18,8 +18,8 @@ namespace WpfApp2
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Status Status { get; private set; }
-        public Status OriginalStatus { get; private set; }
+        public Status Status { get; }
+        public Status OriginalStatus { get; }
         public string StaticAvatarUrl { get; }
         public string DisplayName { get; }
         public ReactiveProperty<bool> Deleted { get; }

@@ -53,7 +53,7 @@ namespace WpfApp2
                 .WithSubscribe(p => model.DeleteAsync(p.Status.Id));
         }
 
-        public TimelineType Type { get; set; }
+        public TimelineType Type { get; }
         public ReadOnlyReactiveCollection<StatusViewModel> Statuses { get; }
         public ReadOnlyReactiveProperty<bool> IsStreaming { get; }
         public ReactiveProperty<StatusViewModel> InReplyTo { get; } = new ReactiveProperty<StatusViewModel>();
