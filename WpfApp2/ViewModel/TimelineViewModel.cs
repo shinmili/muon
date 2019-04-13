@@ -20,10 +20,10 @@ namespace WpfApp2
         private TimelineModelBase model;
         private InReplyToModel inReplyToModel = InReplyToModel.Instance;
 
-        public TimelineViewModel(TimelineType type, bool streaming)
+        public TimelineViewModel(TimelineTabParameters param)
         {
-            Type = type;
-            switch (type)
+            Type = param.Type;
+            switch (Type)
             {
                 case TimelineType.Home:
                     model = new HomeTimelineModel();
@@ -55,7 +55,7 @@ namespace WpfApp2
             DeleteCommand = IsStatusSelected.ToAsyncReactiveCommand<StatusViewModel>()
                 .WithSubscribe(p => model.DeleteAsync(p.Status.Id));
 
-            model.StreamingStarting.Value = streaming;
+            model.StreamingStarting.Value = param.StreamingOnStartup;
         }
 
         public TimelineType Type { get; }

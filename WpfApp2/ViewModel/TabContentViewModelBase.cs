@@ -10,7 +10,7 @@ namespace WpfApp2.ViewModel
     {
         public static TabContentViewModelBase FromParam(TabParameters param)
         {
-            return new TimelineViewModel(((TimelineTabParameters)param).Type, ((TimelineTabParameters)param).StreamingOnStartup);
+            return new TimelineViewModel((TimelineTabParameters)param);
         }
     }
 }
