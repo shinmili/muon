@@ -95,6 +95,7 @@
     <Compile Include="ViewModel\StatusViewModel.cs" />
     <Compile Include="Model\TabSettings.cs" />
     <Compile Include="ViewModel\NewTootBoxViewModel.cs" />
+    <Compile Include="ViewModel\TabContentViewModelBase.cs" />
     <Compile Include="View\TextBlockEx.cs" />
     <Compile Include="View\TimelineControl.xaml.cs">
       <DependentUpon>TimelineControl.xaml</DependentUpon>

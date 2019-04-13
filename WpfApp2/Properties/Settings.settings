@@ -12,22 +12,23 @@
       <Value Profile="(Default)">S(K(SII))(S(S(KS)K)(K(SII)))</Value>
     </Setting>
     <Setting Name="Tabs" Type="System.Collections.ObjectModel.ObservableCollection&lt;TabParameters&gt;" Scope="User">
-      <Value Profile="(Default)">
-          &lt;ArrayOfTabParameters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
-            &lt;TabParameters&gt;
-              &lt;Type&gt;Home&lt;/Type&gt;
-              &lt;StreamingOnStartup&gt;true&lt;/StreamingOnStartup&gt;
-            &lt;/TabParameters&gt;
-            &lt;TabParameters&gt;
-              &lt;Type&gt;Local&lt;/Type&gt;
-              &lt;StreamingOnStartup&gt;false&lt;/StreamingOnStartup&gt;
-            &lt;/TabParameters&gt;
-            &lt;TabParameters&gt;
-              &lt;Type&gt;Federated&lt;/Type&gt;
-              &lt;StreamingOnStartup&gt;true&lt;/StreamingOnStartup&gt;
-            &lt;/TabParameters&gt;
-          &lt;/ArrayOfTabParameters&gt;
-        </Value>
+      <Value Profile="(Default)">&lt;ArrayOfTabParameters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;TabParameters xsi:type="TimelineTabParameters"&gt;
+    &lt;Name&gt;Home&lt;/Name&gt;
+    &lt;Type&gt;Home&lt;/Type&gt;
+    &lt;StreamingOnStartup&gt;true&lt;/StreamingOnStartup&gt;
+  &lt;/TabParameters&gt;
+  &lt;TabParameters xsi:type="TimelineTabParameters"&gt;
+    &lt;Name&gt;Local&lt;/Name&gt;
+    &lt;Type&gt;Local&lt;/Type&gt;
+    &lt;StreamingOnStartup&gt;false&lt;/StreamingOnStartup&gt;
+  &lt;/TabParameters&gt;
+  &lt;TabParameters xsi:type="TimelineTabParameters"&gt;
+    &lt;Name&gt;Federated&lt;/Name&gt;
+    &lt;Type&gt;Federated&lt;/Type&gt;
+    &lt;StreamingOnStartup&gt;true&lt;/StreamingOnStartup&gt;
+  &lt;/TabParameters&gt;
+&lt;/ArrayOfTabParameters&gt;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

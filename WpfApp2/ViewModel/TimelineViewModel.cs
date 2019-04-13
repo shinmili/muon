@@ -11,10 +11,11 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using WpfApp2.Model;
+using WpfApp2.ViewModel;
 
 namespace WpfApp2
 {
-    class TimelineViewModel : INotifyPropertyChanged
+    class TimelineViewModel : TabContentViewModelBase, INotifyPropertyChanged
     {
         private TimelineModelBase model;
         private InReplyToModel inReplyToModel = InReplyToModel.Instance;

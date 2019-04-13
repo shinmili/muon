@@ -59,22 +59,23 @@ namespace WpfApp2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"
-          <ArrayOfTabParameters xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
-            <TabParameters>
-              <Type>Home</Type>
-              <StreamingOnStartup>true</StreamingOnStartup>
-            </TabParameters>
-            <TabParameters>
-              <Type>Local</Type>
-              <StreamingOnStartup>false</StreamingOnStartup>
-            </TabParameters>
-            <TabParameters>
-              <Type>Federated</Type>
-              <StreamingOnStartup>true</StreamingOnStartup>
-            </TabParameters>
-          </ArrayOfTabParameters>
-        ")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<ArrayOfTabParameters xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <TabParameters xsi:type=""TimelineTabParameters"">
+    <Name>Home</Name>
+    <Type>Home</Type>
+    <StreamingOnStartup>true</StreamingOnStartup>
+  </TabParameters>
+  <TabParameters xsi:type=""TimelineTabParameters"">
+    <Name>Local</Name>
+    <Type>Local</Type>
+    <StreamingOnStartup>false</StreamingOnStartup>
+  </TabParameters>
+  <TabParameters xsi:type=""TimelineTabParameters"">
+    <Name>Federated</Name>
+    <Type>Federated</Type>
+    <StreamingOnStartup>true</StreamingOnStartup>
+  </TabParameters>
+</ArrayOfTabParameters>")]
         public global::System.Collections.ObjectModel.ObservableCollection<TabParameters> Tabs {
             get {
                 return ((global::System.Collections.ObjectModel.ObservableCollection<TabParameters>)(this["Tabs"]));
