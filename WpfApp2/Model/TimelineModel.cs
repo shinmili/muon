@@ -13,9 +13,9 @@ using System.Windows;
 
 namespace WpfApp2
 {
-    class TimelineModelBase
+    abstract class TimelineModelBase
     {
-        private MastodonClient client = new MastodonClient(Properties.Settings.Default.AppRegistration, Properties.Settings.Default.Auth);
+        protected MastodonClient client = new MastodonClient(Properties.Settings.Default.AppRegistration, Properties.Settings.Default.Auth);
         private ObservableCollection<Status> statuses = new ObservableCollection<Status>();
         private TimelineStreaming streaming;
         private long? sinceId;
@@ -33,20 +33,15 @@ namespace WpfApp2
 
         public ReadOnlyReactiveCollection<Status> Statuses { get; }
 
-        private readonly Func<MastodonClient, ArrayOptions, Task<MastodonList<Status>>> GetTimeline;
-        private readonly Func<MastodonClient, TimelineStreaming> GetStreaming;
+        protected abstract Task<MastodonList<Status>> GetTimeline(ArrayOptions options);
+        protected abstract TimelineStreaming GetStreaming();
 
-        public TimelineModelBase(
-            Func<MastodonClient, ArrayOptions, Task<MastodonList<Status>>> getTimeline,
-            Func<MastodonClient, TimelineStreaming> getStreaming)
+        protected TimelineModelBase()
         {
-            GetTimeline = getTimeline;
-            GetStreaming = getStreaming;
-
             Statuses = statuses.ToReadOnlyReactiveCollection();
 
             StreamingStarted = streamingStarted.ToReadOnlyReactiveProperty();
-            streaming = GetStreaming(client);
+            streaming = GetStreaming();
             if (streaming != null)
             {
                 streaming.OnUpdate += Streaming_OnUpdate;
@@ -89,7 +84,7 @@ namespace WpfApp2
 
         public async Task ReloadAsync()
         {
-            var newStatuses = await GetTimeline(client, new ArrayOptions() { SinceId = sinceId });
+            var newStatuses = await GetTimeline(new ArrayOptions() { SinceId = sinceId });
             newStatuses.Reverse();
             newStatuses.ForEach(addStatus);
         }
@@ -107,25 +102,19 @@ namespace WpfApp2
 
     class HomeTimelineModel : TimelineModelBase
     {
-        public HomeTimelineModel() : base(
-            (client, opts) => client.GetHomeTimeline(opts),
-            client => client.GetUserStreaming())
-        { }
+        protected override Task<MastodonList<Status>> GetTimeline(ArrayOptions options) => client.GetHomeTimeline(options);
+        protected override TimelineStreaming GetStreaming() => client.GetUserStreaming();
     }
 
     class LocalTimelineModel : TimelineModelBase
     {
-        public LocalTimelineModel() : base(
-            (client, opts) => client.GetPublicTimeline(opts, true),
-            client => null)
-        { }
+        protected override Task<MastodonList<Status>> GetTimeline(ArrayOptions options) => client.GetPublicTimeline(options, true);
+        protected override TimelineStreaming GetStreaming() => null;
     }
 
     class FederatedTimelineModel : TimelineModelBase
     {
-        public FederatedTimelineModel() : base(
-            (client, opts) => client.GetPublicTimeline(opts),
-            client => client.GetPublicStreaming())
-        { }
+        protected override Task<MastodonList<Status>> GetTimeline(ArrayOptions options) => client.GetPublicTimeline(options);
+        protected override TimelineStreaming GetStreaming() => client.GetPublicStreaming();
     }
 }
