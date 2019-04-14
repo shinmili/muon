@@ -20,7 +20,7 @@ namespace WpfApp2
         private TimelineModelBase model;
         private InReplyToModel inReplyToModel = InReplyToModel.Instance;
 
-        public TimelineViewModel(TimelineTabParameters param)
+        public TimelineViewModel(TimelineTabParameters param) : base(param)
         {
             Type = param.Type;
             switch (Type)

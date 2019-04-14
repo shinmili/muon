@@ -29,7 +29,7 @@
         <TabControl TabStripPlacement="Bottom" x:Name="Tab" Height="auto" ItemsSource="{Binding TimelineViewModels}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Type, Mode=OneTime}"/>
+                    <TextBlock Text="{Binding Name.Value}"/>
                 </DataTemplate>
             </TabControl.ItemTemplate>
             <TabControl.ContentTemplate>
