@@ -26,13 +26,5 @@ namespace WpfApp2
         {
             InitializeComponent();
         }
-
-        private void Window_ContentRendered(object sender, EventArgs e)
-        {
-            foreach (TimelineViewModel tlvm in Tab.Items)
-            {
-                tlvm.ReloadCommand.Execute();
-            }
-        }
     }
 }

@@ -56,6 +56,7 @@ namespace WpfApp2
                 .WithSubscribe(p => model.DeleteAsync(p.Status.Id));
 
             model.StreamingStarting.Value = param.StreamingOnStartup;
+            ReloadCommand.Execute();
         }
 
         public TimelineType Type { get; }
