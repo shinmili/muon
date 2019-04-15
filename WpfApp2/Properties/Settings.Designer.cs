@@ -76,9 +76,9 @@ namespace WpfApp2.Properties {
     <StreamingOnStartup>true</StreamingOnStartup>
   </TabParameters>
 </ArrayOfTabParameters>")]
-        public global::System.Collections.ObjectModel.ObservableCollection<TabParameters> Tabs {
+        public global::System.Collections.ObjectModel.ObservableCollection<Model.TabParameters> Tabs {
             get {
-                return ((global::System.Collections.ObjectModel.ObservableCollection<TabParameters>)(this["Tabs"]));
+                return ((global::System.Collections.ObjectModel.ObservableCollection<Model.TabParameters>)(this["Tabs"]));
             }
             set {
                 this["Tabs"] = value;

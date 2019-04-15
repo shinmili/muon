@@ -15,8 +15,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using WpfApp2.Model;
 
-namespace WpfApp2
+namespace WpfApp2.ViewModel
 {
     class SettingsViewModel : INotifyPropertyChanged
     {

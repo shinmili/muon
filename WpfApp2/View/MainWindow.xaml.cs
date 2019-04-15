@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp2
+namespace WpfApp2.View
 {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック

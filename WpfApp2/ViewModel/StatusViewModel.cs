@@ -12,7 +12,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 
-namespace WpfApp2
+namespace WpfApp2.ViewModel
 {
     class StatusViewModel : INotifyPropertyChanged
     {
