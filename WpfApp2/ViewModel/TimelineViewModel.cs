@@ -73,7 +73,4 @@ namespace WpfApp2.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
     }
-
-    public enum TimelineType { Home, Local, Federated }
-
 }

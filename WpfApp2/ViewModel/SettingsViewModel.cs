@@ -49,7 +49,7 @@ namespace WpfApp2.ViewModel
         public ReactiveProperty<string> AccessToken { get; }
         private ReactiveProperty<bool> WaitingForAuthCode = new ReactiveProperty<bool>(false);
 
-        public ObservableCollection<TabParameters> Tabs => Properties.Settings.Default.Tabs;
+        public TabSettingsModel Tabs { get; set; }
         public ReactiveProperty<TabParameters> SelectedTab { get; } = new ReactiveProperty<TabParameters>();
 
         #region Commands

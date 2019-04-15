@@ -11,6 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WpfApp2.Model;
 using WpfApp2.View;
 
 namespace WpfApp2.ViewModel
@@ -22,13 +23,28 @@ namespace WpfApp2.ViewModel
         public ReadOnlyReactiveCollection<TabContentViewModelBase> TimelineViewModels { get; }
 
         public ReactiveCommand OpenSettingsCommand { get; }
+        public ReactiveCommand NewTabCommand { get; }
+
+        private TabSettingsModel tabs = TabSettingsModel.Default;
 
         public MainViewModel()
         {
-            TimelineViewModels = Properties.Settings.Default.Tabs.ToReadOnlyReactiveCollection(p => TabContentViewModelBase.FromParam(p));
+            TimelineViewModels = tabs.ToReadOnlyReactiveCollection(p => TabContentViewModelBase.FromParam(p));
 
             OpenSettingsCommand = new ReactiveCommand()
-                .WithSubscribe(() => new SettingsWindow().ShowDialog());
+                .WithSubscribe(() =>
+                {
+                    var w = new SettingsWindow();
+                    ((SettingsViewModel)w.DataContext).Tabs = tabs;
+                    w.ShowDialog();
+                });
+            NewTabCommand = new ReactiveCommand()
+                .WithSubscribe(() =>
+                {
+                    var w = new NewTabWindow();
+                    ((NewTabViewModel)w.DataContext).Tabs = tabs;
+                    w.ShowDialog();
+                });
         }
     }
 }

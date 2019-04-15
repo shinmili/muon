@@ -16,7 +16,22 @@ namespace WpfApp2.Model
 
     public class TimelineTabParameters : TabParameters
     {
-        public ViewModel.TimelineType Type { get; set; }
+        public TimelineType Type { get; set; }
         public bool StreamingOnStartup { get; set; }
+    }
+
+    public class TabSettingsModel : ObservableCollection<TabParameters>
+    {
+        private static TabSettingsModel defaultInstance;
+        public static TabSettingsModel Default { get { return defaultInstance ?? (defaultInstance = new TabSettingsModel()); } }
+
+        public TabSettingsModel() : base(Properties.Settings.Default.Tabs)
+        {
+            CollectionChanged += (o, e) =>
+            {
+                Properties.Settings.Default.Tabs = this.ToList();
+                Properties.Settings.Default.Save();
+            };
+        }
     }
 }
