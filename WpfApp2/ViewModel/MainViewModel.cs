@@ -20,16 +20,17 @@ namespace WpfApp2.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ReadOnlyReactiveCollection<TabContentViewModelBase> TimelineViewModels { get; }
+        public ReadOnlyReactiveCollection<TabContentViewModelBase> TabViewModels { get; }
 
         public ReactiveCommand OpenSettingsCommand { get; }
         public ReactiveCommand NewTabCommand { get; }
+        public ReactiveCommand<TimelineViewModel> CloseTabCommand { get; }
 
         private TabSettingsModel tabs = TabSettingsModel.Default;
 
         public MainViewModel()
         {
-            TimelineViewModels = tabs.ToReadOnlyReactiveCollection(p => TabContentViewModelBase.FromParam(p));
+            TabViewModels = tabs.ToReadOnlyReactiveCollection(p => TabContentViewModelBase.FromParam(p));
 
             OpenSettingsCommand = new ReactiveCommand()
                 .WithSubscribe(() =>
@@ -44,6 +45,11 @@ namespace WpfApp2.ViewModel
                     var w = new NewTabWindow();
                     ((NewTabViewModel)w.DataContext).Tabs = tabs;
                     w.ShowDialog();
+                });
+            CloseTabCommand = new ReactiveCommand<TimelineViewModel>()
+                .WithSubscribe(vm =>
+                {
+                    tabs.RemoveAt(TabViewModels.IndexOf(vm));
                 });
         }
     }
