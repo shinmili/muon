@@ -9,7 +9,7 @@
     <DockPanel>
         <Grid DockPanel.Dock="Bottom">
             <Grid.Resources>
-                <Style TargetType="Button">
+                <Style TargetType="{x:Type Button}">
                     <Setter Property="Margin" Value="0,5,5,5"/>
                     <Setter Property="Width" Value="75"/>
                 </Style>
@@ -31,18 +31,18 @@
             <TabItem Header="Account">
                 <StackPanel>
                     <StackPanel.Style>
-                        <Style TargetType="StackPanel">
+                        <Style TargetType="{x:Type StackPanel}">
                             <Setter Property="Margin" Value="5" />
                         </Style>
                     </StackPanel.Style>
                     <StackPanel.Resources>
-                        <Style TargetType="Button">
+                        <Style TargetType="{x:Type Button}">
                             <Setter Property="Margin" Value="0,0,0,5" />
                         </Style>
-                        <Style TargetType="TextBlock">
+                        <Style TargetType="{x:Type TextBlock}">
                             <Setter Property="Margin" Value="0,0,0,5" />
                         </Style>
-                        <Style TargetType="TextBox">
+                        <Style TargetType="{x:Type TextBox}">
                             <Setter Property="Margin" Value="0,0,0,5" />
                         </Style>
                     </StackPanel.Resources>

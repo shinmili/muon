@@ -22,7 +22,7 @@
               SelectedItem="{Binding SelectedItem.Value}"
               BorderThickness="0">
         <ListView.ItemContainerStyle>
-            <Style TargetType="ListViewItem">
+            <Style TargetType="{x:Type ListViewItem}">
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Status.Reblog, Converter={StaticResource IsNotNullConverter}}" Value="True">
                         <Setter Property="Background" Value="LightGreen"/>
@@ -43,7 +43,7 @@
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
                             <DataTemplate.Resources>
-                                <Style TargetType="Image">
+                                <Style TargetType="{x:Type Image}">
                                     <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
                                 </Style>
                             </DataTemplate.Resources>
