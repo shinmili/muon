@@ -15,6 +15,7 @@ namespace WpfApp2.ViewModel
 
         public ReadOnlyReactiveCollection<StatusViewModel> Statuses { get; }
         public ReadOnlyReactiveProperty<bool> IsStreaming { get; }
+        public bool IsStreamingAvailable { get; }
         public ReactiveProperty<StatusViewModel> SelectedStatus { get; } = new ReactiveProperty<StatusViewModel>();
 
         public AsyncReactiveCommand ReloadCommand { get; }
@@ -30,11 +31,12 @@ namespace WpfApp2.ViewModel
         {
             this.model = model;
             IsStreaming = this.model.StreamingStarted.ToReadOnlyReactiveProperty();
+            IsStreamingAvailable = this.model.IsStreamingAvailable;
             Statuses = this.model.Statuses.ToReadOnlyReactiveCollection(s => new StatusViewModel(s));
 
             ReloadCommand = new AsyncReactiveCommand()
                 .WithSubscribe(() => this.model.ReloadAsync());
-            ToggleStreamingCommand = new ReactiveCommand()
+            ToggleStreamingCommand = Observable.Repeat(IsStreamingAvailable, 1).ToReactiveCommand()
                 .WithSubscribe(() => this.model.StreamingStarting.Value = !IsStreaming.Value);
 
             var IsStatusSelected = SelectedStatus.Select(x => x != null);

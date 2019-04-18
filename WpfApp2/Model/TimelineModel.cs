@@ -29,6 +29,9 @@ namespace WpfApp2.Model
         /// Tells if the streaming is actually started.
         /// </summary>
         public ReadOnlyReactiveProperty<bool> StreamingStarted { get; }
+
+        public abstract bool IsStreamingAvailable { get; }
+
         private ReactiveProperty<bool> streamingStarted = new ReactiveProperty<bool>(false);
 
         public ReadOnlyReactiveCollection<Status> Statuses { get; }
@@ -102,24 +105,28 @@ namespace WpfApp2.Model
 
     class HomeTimelineModel : TimelineModelBase
     {
+        public override bool IsStreamingAvailable => true;
         protected override Task<MastodonList<Status>> GetTimeline(ArrayOptions options) => client.GetHomeTimeline(options);
         protected override TimelineStreaming GetStreaming() => client.GetUserStreaming();
     }
 
     class LocalTimelineModel : TimelineModelBase
     {
+        public override bool IsStreamingAvailable => false;
         protected override Task<MastodonList<Status>> GetTimeline(ArrayOptions options) => client.GetPublicTimeline(options, true);
         protected override TimelineStreaming GetStreaming() => null;
     }
 
     class FederatedTimelineModel : TimelineModelBase
     {
+        public override bool IsStreamingAvailable => true;
         protected override Task<MastodonList<Status>> GetTimeline(ArrayOptions options) => client.GetPublicTimeline(options);
         protected override TimelineStreaming GetStreaming() => client.GetPublicStreaming();
     }
 
     class AccountTimelineModel : TimelineModelBase
     {
+        public override bool IsStreamingAvailable => false;
         public long Id { get; set; }
         protected override Task<MastodonList<Status>> GetTimeline(ArrayOptions options) => client.GetAccountStatuses(Id, options);
         protected override TimelineStreaming GetStreaming() => null;
