@@ -13,8 +13,6 @@ namespace WpfApp2.ViewModel
         private InReplyToModel inReplyToModel = InReplyToModel.Instance;
         private TabSettingsModel tabs = TabSettingsModel.Default;
 
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-
         public ReadOnlyReactiveCollection<StatusViewModel> Statuses { get; }
         public ReadOnlyReactiveProperty<bool> IsStreaming { get; }
         public ReactiveProperty<StatusViewModel> SelectedStatus { get; } = new ReactiveProperty<StatusViewModel>();
@@ -33,7 +31,6 @@ namespace WpfApp2.ViewModel
             this.model = model;
             IsStreaming = this.model.StreamingStarted.ToReadOnlyReactiveProperty();
             Statuses = this.model.Statuses.ToReadOnlyReactiveCollection(s => new StatusViewModel(s));
-            ((INotifyCollectionChanged)Statuses).CollectionChanged += (o, e) => CollectionChanged?.Invoke(this, e);
 
             ReloadCommand = new AsyncReactiveCommand()
                 .WithSubscribe(() => this.model.ReloadAsync());
