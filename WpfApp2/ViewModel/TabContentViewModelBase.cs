@@ -19,7 +19,15 @@ namespace WpfApp2.ViewModel
 
         public static TabContentViewModelBase FromParam(TabParameters param)
         {
-            return new TimelineViewModel((TimelineTabParameters)param);
+            switch (param)
+            {
+                case AccountTabParameters aparam:
+                    return new AccountTabViewModel(aparam);
+                case TimelineTabParameters tparam:
+                    return new TimelineViewModel(tparam);
+                default:
+                    throw new NotImplementedException();
+            }
         }
     }
 }

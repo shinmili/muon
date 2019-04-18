@@ -9,6 +9,7 @@ using System.Xml.Serialization;
 namespace WpfApp2.Model
 {
     [XmlInclude(typeof(TimelineTabParameters))]
+    [XmlInclude(typeof(AccountTabParameters))]
     public class TabParameters
     {
         public string Name { get; set; }
@@ -20,10 +21,15 @@ namespace WpfApp2.Model
         public bool StreamingOnStartup { get; set; }
     }
 
+    public class AccountTabParameters : TabParameters
+    {
+        public long Id { get; set; }
+    }
+
     public class TabSettingsModel : ObservableCollection<TabParameters>
     {
         private static TabSettingsModel defaultInstance;
-        public static TabSettingsModel Default { get { return defaultInstance ?? (defaultInstance = new TabSettingsModel()); } }
+        public static TabSettingsModel Default => defaultInstance ?? (defaultInstance = new TabSettingsModel());
 
         public TabSettingsModel() : base(Properties.Settings.Default.Tabs)
         {

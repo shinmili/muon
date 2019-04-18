@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace WpfApp2.View
 {
     /// <summary>
-    /// TimelineListBox.xaml の相互作用ロジック
+    /// AccountView.xaml の相互作用ロジック
     /// </summary>
-    public partial class TimelineControl : UserControl
+    public partial class AccountView : UserControl
     {
-        public TimelineControl()
+        public AccountView()
         {
             InitializeComponent();
         }

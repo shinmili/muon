@@ -12,8 +12,8 @@
         <vm:MainViewModel />
     </Window.DataContext>
     <Window.InputBindings>
-        <KeyBinding Key="F5" Command="{Binding SelectedItem.ReloadCommand, ElementName=Tab}"/>
-        <KeyBinding Gesture="Ctrl+S" Command="{Binding SelectedItem.ToggleStreamingCommand, ElementName=Tab}"/>
+        <KeyBinding Key="F5" Command="{Binding SelectedItem.Statuses.ReloadCommand, ElementName=Tab}"/>
+        <KeyBinding Gesture="Ctrl+S" Command="{Binding SelectedItem.Statuses.ToggleStreamingCommand, ElementName=Tab}"/>
     </Window.InputBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top" Focusable="False">
@@ -21,8 +21,8 @@
                 <MenuItem Header="_Settings" Command="{Binding OpenSettingsCommand}"/>
             </MenuItem>
             <MenuItem Header="_Timeline" Focusable="False">
-                <MenuItem Header="_Reload" InputGestureText="F5" Command="{Binding SelectedItem.ReloadCommand, ElementName=Tab}"/>
-                <MenuItem Header="_Streaming" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding SelectedItem.IsStreaming.Value, ElementName=Tab, Mode=OneWay}" Command="{Binding SelectedItem.ToggleStreamingCommand, ElementName=Tab}"/>
+                <MenuItem Header="_Reload" InputGestureText="F5" Command="{Binding SelectedItem.Statuses.ReloadCommand, ElementName=Tab}"/>
+                <MenuItem Header="_Streaming" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding SelectedItem.Statuses.IsStreaming.Value, ElementName=Tab, Mode=OneWay}" Command="{Binding SelectedItem.Statuses.ToggleStreamingCommand, ElementName=Tab}"/>
                 <Separator/>
                 <MenuItem Header="_New tab" Command="{Binding NewTabCommand}"/>
             </MenuItem>
@@ -41,16 +41,22 @@
                     </Setter>
                 </Style>
             </TabControl.ItemContainerStyle>
+            <TabControl.Resources>
+                <DataTemplate x:Key="Timeline">
+                    <v:StatusesView />
+                </DataTemplate>
+                <DataTemplate x:Key="Account">
+                    <v:AccountView />
+                </DataTemplate>
+            </TabControl.Resources>
             <TabControl.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Name.Value}"/>
                 </DataTemplate>
             </TabControl.ItemTemplate>
-            <TabControl.ContentTemplate>
-                <DataTemplate>
-                    <v:TimelineControl />
-                </DataTemplate>
-            </TabControl.ContentTemplate>
+            <TabControl.ContentTemplateSelector>
+                <v:TabTemplateSelector />
+            </TabControl.ContentTemplateSelector>
         </TabControl>
     </DockPanel>
 </Window>

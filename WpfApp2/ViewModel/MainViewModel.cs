@@ -24,7 +24,7 @@ namespace WpfApp2.ViewModel
 
         public ReactiveCommand OpenSettingsCommand { get; }
         public ReactiveCommand NewTabCommand { get; }
-        public ReactiveCommand<TimelineViewModel> CloseTabCommand { get; }
+        public ReactiveCommand<TabContentViewModelBase> CloseTabCommand { get; }
 
         private TabSettingsModel tabs = TabSettingsModel.Default;
 
@@ -46,7 +46,7 @@ namespace WpfApp2.ViewModel
                     ((NewTabViewModel)w.DataContext).Tabs = tabs;
                     w.ShowDialog();
                 });
-            CloseTabCommand = new ReactiveCommand<TimelineViewModel>()
+            CloseTabCommand = new ReactiveCommand<TabContentViewModelBase>()
                 .WithSubscribe(vm =>
                 {
                     tabs.RemoveAt(TabViewModels.IndexOf(vm));

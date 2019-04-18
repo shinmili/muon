@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="WpfApp2.View.TimelineControl"
+﻿<UserControl x:Class="WpfApp2.View.StatusesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -10,7 +10,7 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <CollectionViewSource x:Key="SortedStatus" Source="{Binding Statuses}">
+        <CollectionViewSource x:Key="SortedStatus" Source="{Binding Statuses.Statuses}">
             <CollectionViewSource.SortDescriptions>
                 <cm:SortDescription Direction="Descending" PropertyName="Status.Id" />
             </CollectionViewSource.SortDescriptions>
@@ -19,7 +19,7 @@
         <local:UtcToLocalConverter x:Key="UtcToLocalConverter"/>
     </UserControl.Resources>
     <ListView ItemsSource="{Binding Source={StaticResource SortedStatus}}"
-              SelectedItem="{Binding SelectedItem.Value}"
+              SelectedItem="{Binding Statuses.SelectedItem.Value}"
               BorderThickness="0">
         <ListView.ItemContainerStyle>
             <Style TargetType="{x:Type ListViewItem}">
@@ -31,11 +31,12 @@
             </Style>
         </ListView.ItemContainerStyle>
         <ListView.InputBindings>
-            <KeyBinding Key="O" Command="{Binding OpenCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
-            <KeyBinding Key="F" Command="{Binding FavouriteCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
-            <KeyBinding Key="B" Command="{Binding ReblogCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
-            <KeyBinding Key="R" Command="{Binding ReplyCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
-            <KeyBinding Key="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
+            <KeyBinding Key="O" Command="{Binding Statuses.OpenCommand}" />
+            <KeyBinding Key="F" Command="{Binding Statuses.FavouriteCommand}" />
+            <KeyBinding Key="B" Command="{Binding Statuses.ReblogCommand}" />
+            <KeyBinding Key="R" Command="{Binding Statuses.ReplyCommand}" />
+            <KeyBinding Key="Delete" Command="{Binding Statuses.DeleteCommand}" />
+            <KeyBinding Key="U" Command="{Binding Statuses.OpenAccountTabCommand}" />
         </ListView.InputBindings>
         <ListView.View>
             <GridView>
@@ -71,11 +72,11 @@
         </ListView.View>
         <ContextMenuService.ContextMenu>
             <ContextMenu>
-                <MenuItem Header="_Open" InputGestureText="O" Command="{Binding OpenCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
-                <MenuItem Header="_Favourite" InputGestureText="F" Command="{Binding FavouriteCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
-                <MenuItem Header="_Boost" InputGestureText="B" Command="{Binding ReblogCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
-                <MenuItem Header="_Reply" InputGestureText="R" Command="{Binding ReplyCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
-                <MenuItem Header="_Delete" InputGestureText="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedItem.Value}"/>
+                <MenuItem Header="_Open" InputGestureText="O" Command="{Binding Statuses.OpenCommand}" />
+                <MenuItem Header="_Favourite" InputGestureText="F" Command="{Binding Statuses.FavouriteCommand}" />
+                <MenuItem Header="_Boost" InputGestureText="B" Command="{Binding Statuses.ReblogCommand}" />
+                <MenuItem Header="_Reply" InputGestureText="R" Command="{Binding Statuses.ReplyCommand}" />
+                <MenuItem Header="_Delete" InputGestureText="Delete" Command="{Binding Statuses.DeleteCommand}" />
             </ContextMenu>
         </ContextMenuService.ContextMenu>
     </ListView>
