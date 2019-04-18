@@ -21,6 +21,7 @@ namespace WpfApp2.ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ReadOnlyReactiveCollection<TabContentViewModelBase> TabViewModels { get; }
+        public ReactiveProperty<TabContentViewModelBase> SelectedTab { get; } = new ReactiveProperty<TabContentViewModelBase>();
 
         public ReactiveCommand OpenSettingsCommand { get; }
         public ReactiveCommand NewTabCommand { get; }

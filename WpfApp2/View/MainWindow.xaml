@@ -12,8 +12,8 @@
         <vm:MainViewModel />
     </Window.DataContext>
     <Window.InputBindings>
-        <KeyBinding Key="F5" Command="{Binding SelectedItem.Statuses.ReloadCommand, ElementName=Tab}"/>
-        <KeyBinding Gesture="Ctrl+S" Command="{Binding SelectedItem.Statuses.ToggleStreamingCommand, ElementName=Tab}"/>
+        <KeyBinding Key="F5" Command="{Binding SelectedTab.Value.Statuses.ReloadCommand}"/>
+        <KeyBinding Gesture="Ctrl+S" Command="{Binding SelectedTab.Value.Statuses.ToggleStreamingCommand}"/>
     </Window.InputBindings>
     <DockPanel>
         <Menu DockPanel.Dock="Top" Focusable="False">
@@ -21,14 +21,14 @@
                 <MenuItem Header="_Settings" Command="{Binding OpenSettingsCommand}"/>
             </MenuItem>
             <MenuItem Header="_Timeline" Focusable="False">
-                <MenuItem Header="_Reload" InputGestureText="F5" Command="{Binding SelectedItem.Statuses.ReloadCommand, ElementName=Tab}"/>
-                <MenuItem Header="_Streaming" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding SelectedItem.Statuses.IsStreaming.Value, ElementName=Tab, Mode=OneWay}" Command="{Binding SelectedItem.Statuses.ToggleStreamingCommand, ElementName=Tab}"/>
+                <MenuItem Header="_Reload" InputGestureText="F5" Command="{Binding SelectedTab.Value.Statuses.ReloadCommand}"/>
+                <MenuItem Header="_Streaming" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding SelectedTab.Value.Statuses.IsStreaming.Value, Mode=OneWay}" Command="{Binding SelectedTab.Value.Statuses.ToggleStreamingCommand}"/>
                 <Separator/>
                 <MenuItem Header="_New tab" Command="{Binding NewTabCommand}"/>
             </MenuItem>
         </Menu>
         <v:NewTootBox x:Name="TootBox" DockPanel.Dock="Top"/>
-        <TabControl TabStripPlacement="Bottom" x:Name="Tab" Height="auto" ItemsSource="{Binding TabViewModels}">
+        <TabControl TabStripPlacement="Bottom" x:Name="Tab" Height="auto" ItemsSource="{Binding TabViewModels}" SelectedItem="{Binding SelectedTab.Value}">
             <TabControl.ItemContainerStyle>
                 <Style TargetType="{x:Type TabItem}">
                     <Setter Property="Tag" Value="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}"/>

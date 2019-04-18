@@ -17,7 +17,7 @@ namespace WpfApp2.ViewModel
 
         public ReadOnlyReactiveCollection<StatusViewModel> Statuses { get; }
         public ReadOnlyReactiveProperty<bool> IsStreaming { get; }
-        public ReactiveProperty<StatusViewModel> SelectedItem { get; } = new ReactiveProperty<StatusViewModel>();
+        public ReactiveProperty<StatusViewModel> SelectedStatus { get; } = new ReactiveProperty<StatusViewModel>();
 
         public AsyncReactiveCommand ReloadCommand { get; }
         public ReactiveCommand ToggleStreamingCommand { get; }
@@ -40,20 +40,20 @@ namespace WpfApp2.ViewModel
             ToggleStreamingCommand = new ReactiveCommand()
                 .WithSubscribe(() => this.model.StreamingStarting.Value = !IsStreaming.Value);
 
-            var IsStatusSelected = SelectedItem.Select(x => x != null);
+            var IsStatusSelected = SelectedStatus.Select(x => x != null);
             OpenCommand = IsStatusSelected.ToReactiveCommand()
-                .WithSubscribe(() => Process.Start(SelectedItem.Value.Status.Url ?? SelectedItem.Value.Status.Reblog.Url));
+                .WithSubscribe(() => Process.Start(SelectedStatus.Value.Status.Url ?? SelectedStatus.Value.Status.Reblog.Url));
             FavouriteCommand = IsStatusSelected.ToAsyncReactiveCommand()
-                .WithSubscribe(() => this.model.FavouriteAsync(SelectedItem.Value.Status.Id));
+                .WithSubscribe(() => this.model.FavouriteAsync(SelectedStatus.Value.Status.Id));
             ReblogCommand = IsStatusSelected.ToAsyncReactiveCommand()
-                .WithSubscribe(() => this.model.ReblogAsync(SelectedItem.Value.Status.Id));
+                .WithSubscribe(() => this.model.ReblogAsync(SelectedStatus.Value.Status.Id));
             ReplyCommand = IsStatusSelected.ToReactiveCommand()
-                .WithSubscribe(() => inReplyToModel.InReplyTo.Value = SelectedItem.Value.Status);
+                .WithSubscribe(() => inReplyToModel.InReplyTo.Value = SelectedStatus.Value.Status);
             DeleteCommand = IsStatusSelected.ToAsyncReactiveCommand()
-                .WithSubscribe(() => this.model.DeleteAsync(SelectedItem.Value.Status.Id));
+                .WithSubscribe(() => this.model.DeleteAsync(SelectedStatus.Value.Status.Id));
 
             OpenAccountTabCommand = IsStatusSelected.ToReactiveCommand()
-                .WithSubscribe(() => tabs.Add(new AccountTabParameters() { Id = SelectedItem.Value.OriginalStatus.Account.Id, Name = SelectedItem.Value.OriginalStatus.Account.AccountName }));
+                .WithSubscribe(() => tabs.Add(new AccountTabParameters() { Id = SelectedStatus.Value.OriginalStatus.Account.Id, Name = SelectedStatus.Value.OriginalStatus.Account.AccountName }));
 
             this.model.StreamingStarting.Value = streamingOnStartup;
             ReloadCommand.Execute();

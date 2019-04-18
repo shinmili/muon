@@ -19,7 +19,7 @@
         <local:UtcToLocalConverter x:Key="UtcToLocalConverter"/>
     </UserControl.Resources>
     <ListView ItemsSource="{Binding Source={StaticResource SortedStatus}}"
-              SelectedItem="{Binding Statuses.SelectedItem.Value}"
+              SelectedItem="{Binding Statuses.SelectedStatus.Value}"
               BorderThickness="0">
         <ListView.ItemContainerStyle>
             <Style TargetType="{x:Type ListViewItem}">
