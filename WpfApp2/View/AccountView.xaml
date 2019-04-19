@@ -10,13 +10,42 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Image Grid.Row="0" Grid.Column="0" Source="{Binding Account.Value.AvatarUrl}" Width="72" Height="72"/>
-        <v:StatusesView Grid.Row="1" Grid.ColumnSpan="2"/>
+        <Image Grid.Row="0" Grid.RowSpan="5" Grid.Column="0" Source="{Binding Account.Value.AvatarUrl}" Width="64" Height="64"/>
+        <TextBlock Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2">
+            <Run Text="{Binding Account.Value.DisplayName}"/>
+            <Hyperlink NavigateUri="{Binding Account.Value.ProfileUrl}" RequestNavigate="Hyperlink_RequestNavigate">
+                <Run Text="{Binding FullName.Value}"/>
+            </Hyperlink>
+        </TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right">
+            <Hyperlink NavigateUri="{Binding Account.Value.ProfileUrl}" RequestNavigate="Hyperlink_RequestNavigate">
+                <Run Text="{Binding Account.Value.StatusesCount}"/>
+            </Hyperlink>
+        </TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="2" Text=" Toots"/>
+        <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right">
+            <Hyperlink NavigateUri="{Binding FollowingUrl.Value}" RequestNavigate="Hyperlink_RequestNavigate">
+                <Run Text="{Binding Account.Value.FollowingCount}"/>
+            </Hyperlink>
+        </TextBlock>
+        <TextBlock Grid.Row="2" Grid.Column="2" Text=" Following"/>
+        <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right">
+            <Hyperlink NavigateUri="{Binding FollowersUrl.Value}" RequestNavigate="Hyperlink_RequestNavigate">
+                <Run Text="{Binding Account.Value.FollowersCount}"/>
+            </Hyperlink>
+        </TextBlock>
+        <TextBlock Grid.Row="3" Grid.Column="2" Text=" Followers"/>
+        <v:StatusesView Grid.Row="5" Grid.ColumnSpan="3"/>
     </Grid>
 </UserControl>
