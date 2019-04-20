@@ -22,6 +22,7 @@ namespace WpfApp2.ViewModel
 
         public ReadOnlyReactiveCollection<TabContentViewModelBase> TabViewModels { get; }
         public ReactiveProperty<TabContentViewModelBase> SelectedTab { get; } = new ReactiveProperty<TabContentViewModelBase>();
+        public ReactiveProperty<int> SelectedTabIndex { get; }
 
         public ReactiveCommand OpenSettingsCommand { get; }
         public ReactiveCommand NewTabCommand { get; }
@@ -32,6 +33,7 @@ namespace WpfApp2.ViewModel
         public MainViewModel()
         {
             TabViewModels = tabs.ToReadOnlyReactiveCollection(p => TabContentViewModelBase.FromParam(p));
+            SelectedTabIndex = tabs.SelectedIndex;
 
             OpenSettingsCommand = new ReactiveCommand()
                 .WithSubscribe(() =>

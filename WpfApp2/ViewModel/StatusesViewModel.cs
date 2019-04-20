@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using System.Linq;
 using System.Reactive.Linq;
 using WpfApp2.Model;
 
@@ -52,7 +53,20 @@ namespace WpfApp2.ViewModel
                 .WithSubscribe(() => this.model.DeleteAsync(SelectedStatus.Value.Status.Id));
 
             OpenAccountTabCommand = IsStatusSelected.ToReactiveCommand()
-                .WithSubscribe(() => tabs.Add(new AccountTabParameters() { Id = SelectedStatus.Value.OriginalStatus.Account.Id, Name = SelectedStatus.Value.OriginalStatus.Account.AccountName }));
+                .WithSubscribe(() =>
+                {
+                    long id = SelectedStatus.Value.OriginalStatus.Account.Id;
+                    int? i = tabs.Select((Value, Index) => new { Value, Index }).FirstOrDefault(x => (x.Value as AccountTabParameters)?.Id == id)?.Index;
+                    if (i.HasValue)
+                    {
+                        tabs.SelectedIndex.Value = i.Value;
+                    }
+                    else
+                    {
+                        tabs.Add(new AccountTabParameters() { Id = id, Name = SelectedStatus.Value.OriginalStatus.Account.AccountName });
+                        tabs.SelectedIndex.Value = tabs.Count() - 1;
+                    }
+                });
 
             this.model.StreamingStarting.Value = streamingOnStartup;
             ReloadCommand.Execute();

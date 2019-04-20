@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reactive.Bindings;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -30,6 +31,8 @@ namespace WpfApp2.Model
     {
         private static TabSettingsModel defaultInstance;
         public static TabSettingsModel Default => defaultInstance ?? (defaultInstance = new TabSettingsModel());
+
+        public ReactiveProperty<int> SelectedIndex { get; } = new ReactiveProperty<int>();
 
         public TabSettingsModel() : base(Properties.Settings.Default.Tabs)
         {
