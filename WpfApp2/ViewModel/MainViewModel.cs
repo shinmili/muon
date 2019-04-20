@@ -27,6 +27,8 @@ namespace WpfApp2.ViewModel
         public ReactiveCommand OpenSettingsCommand { get; }
         public ReactiveCommand NewTabCommand { get; }
         public ReactiveCommand<TabContentViewModelBase> CloseTabCommand { get; }
+        public ReactiveCommand PrevTabCommand { get; }
+        public ReactiveCommand NextTabCommand { get; }
 
         private TabSettingsModel tabs = TabSettingsModel.Default;
 
@@ -53,6 +55,16 @@ namespace WpfApp2.ViewModel
                 .WithSubscribe(vm =>
                 {
                     tabs.RemoveAt(TabViewModels.IndexOf(vm));
+                });
+            NextTabCommand = new ReactiveCommand()
+                .WithSubscribe(() =>
+                {
+                    SelectedTabIndex.Value = (SelectedTabIndex.Value + 1) % tabs.Count;
+                });
+            PrevTabCommand = new ReactiveCommand()
+                .WithSubscribe(() =>
+                {
+                    SelectedTabIndex.Value = (SelectedTabIndex.Value + tabs.Count() - 1) % tabs.Count;
                 });
         }
     }

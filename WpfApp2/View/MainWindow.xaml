@@ -29,6 +29,12 @@
         </Menu>
         <v:NewTootBox x:Name="TootBox" DockPanel.Dock="Top"/>
         <TabControl TabStripPlacement="Bottom" x:Name="Tab" Height="auto" ItemsSource="{Binding TabViewModels}" SelectedItem="{Binding SelectedTab.Value}" SelectedIndex="{Binding SelectedTabIndex.Value, Mode=TwoWay}">
+            <TabControl.InputBindings>
+                <KeyBinding Key="A" Command="{Binding PrevTabCommand}"/>
+                <KeyBinding Gesture="Ctrl+PageUp" Command="{Binding PrevTabCommand}"/>
+                <KeyBinding Key="S" Command="{Binding NextTabCommand}"/>
+                <KeyBinding Gesture="Ctrl+PageDown" Command="{Binding NextTabCommand}"/>
+            </TabControl.InputBindings>
             <TabControl.ItemContainerStyle>
                 <Style TargetType="{x:Type TabItem}">
                     <Setter Property="Tag" Value="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type TabControl}}}"/>
