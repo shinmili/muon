@@ -28,6 +28,18 @@
                         <Setter Property="Background" Value="LightGreen"/>
                     </DataTrigger>
                 </Style.Triggers>
+                <Setter Property="Tag" Value="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type ListView}}}"/>
+                <Setter Property="ContextMenu">
+                    <Setter.Value>
+                        <ContextMenu DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.Tag}">
+                            <MenuItem Header="_Open" InputGestureText="O" Command="{Binding Statuses.OpenCommand}" />
+                            <MenuItem Header="_Favourite" InputGestureText="F" Command="{Binding Statuses.FavouriteCommand}" />
+                            <MenuItem Header="_Boost" InputGestureText="B" Command="{Binding Statuses.ReblogCommand}" />
+                            <MenuItem Header="_Reply" InputGestureText="R" Command="{Binding Statuses.ReplyCommand}" />
+                            <MenuItem Header="_Delete" InputGestureText="Delete" Command="{Binding Statuses.DeleteCommand}" />
+                        </ContextMenu>
+                    </Setter.Value>
+                </Setter>
             </Style>
         </ListView.ItemContainerStyle>
         <ListView.InputBindings>
@@ -48,7 +60,7 @@
                                     <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
                                 </Style>
                             </DataTemplate.Resources>
-                            <Image Source="{Binding StaticAvatarUrl, Mode=OneTime}" Margin="-6,-2"/>
+                            <Image Source="{Binding StaticAvatarUrl, Mode=OneTime}" Margin="-6,-1"/>
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
@@ -70,14 +82,5 @@
                 <GridViewColumn Header="App" DisplayMemberBinding="{Binding Status.Application.Name, Mode=OneTime}" />
             </GridView>
         </ListView.View>
-        <ContextMenuService.ContextMenu>
-            <ContextMenu>
-                <MenuItem Header="_Open" InputGestureText="O" Command="{Binding Statuses.OpenCommand}" />
-                <MenuItem Header="_Favourite" InputGestureText="F" Command="{Binding Statuses.FavouriteCommand}" />
-                <MenuItem Header="_Boost" InputGestureText="B" Command="{Binding Statuses.ReblogCommand}" />
-                <MenuItem Header="_Reply" InputGestureText="R" Command="{Binding Statuses.ReplyCommand}" />
-                <MenuItem Header="_Delete" InputGestureText="Delete" Command="{Binding Statuses.DeleteCommand}" />
-            </ContextMenu>
-        </ContextMenuService.ContextMenu>
     </ListView>
 </UserControl>
