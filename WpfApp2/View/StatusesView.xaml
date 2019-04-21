@@ -52,7 +52,7 @@
         </ListView.InputBindings>
         <ListView.View>
             <GridView>
-                <GridViewColumn><!-- Icon -->
+                <GridViewColumn Width="18"><!-- Icon -->
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
                             <DataTemplate.Resources>
