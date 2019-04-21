@@ -39,6 +39,12 @@ namespace WpfApp2.Model
         protected abstract Task<MastodonList<Status>> GetTimeline(ArrayOptions options);
         protected abstract TimelineStreaming GetStreaming();
 
+        public event EventHandler<StreamNotificationEventArgs> OnNotification
+        {
+            add { streaming.OnNotification += value; }
+            remove { streaming.OnNotification -= value; }
+        }
+
         protected TimelineModelBase()
         {
             Statuses = statuses.ToReadOnlyReactiveCollection();

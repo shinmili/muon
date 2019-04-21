@@ -1,6 +1,6 @@
-﻿using Reactive.Bindings;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
+﻿using Mastonet;
+using Reactive.Bindings;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
@@ -27,6 +27,12 @@ namespace WpfApp2.ViewModel
         public AsyncReactiveCommand ReblogCommand { get; }
         public AsyncReactiveCommand DeleteCommand { get; }
         public ReactiveCommand OpenAccountTabCommand { get; }
+
+        public event EventHandler<StreamNotificationEventArgs> OnNotification
+        {
+            add { model.OnNotification += value; }
+            remove { model.OnNotification -= value; }
+        }
 
         public StatusesViewModel(TimelineModelBase model, bool streamingOnStartup = false)
         {

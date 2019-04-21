@@ -3,19 +3,22 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:tb="http://www.hardcodet.net/taskbar"
         xmlns:local="clr-namespace:WpfApp2"
         xmlns:v="clr-namespace:WpfApp2.View"
         xmlns:vm="clr-namespace:WpfApp2.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        Closing="Window_Closing">
     <Window.DataContext>
-        <vm:MainViewModel />
+        <vm:MainViewModel x:Name="ViewModel"/>
     </Window.DataContext>
     <Window.InputBindings>
         <KeyBinding Key="F5" Command="{Binding SelectedTab.Value.Statuses.ReloadCommand}"/>
         <KeyBinding Gesture="Ctrl+S" Command="{Binding SelectedTab.Value.Statuses.ToggleStreamingCommand}"/>
     </Window.InputBindings>
     <DockPanel>
+        <tb:TaskbarIcon x:Name="TaskbarIcon" ToolTipText="Mastodon"/>
         <Menu DockPanel.Dock="Top" Focusable="False">
             <MenuItem Header="_App" Focusable="False">
                 <MenuItem Header="_Settings" Command="{Binding OpenSettingsCommand}"/>
