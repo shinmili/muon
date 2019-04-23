@@ -13,12 +13,10 @@ using System.Windows;
 
 namespace WpfApp2.Model
 {
-    abstract class TimelineModelBase
+    abstract class TimelineModelBase : PagenatedCollection<Status>
     {
         protected MastodonClient client = new MastodonClient(Properties.Settings.Default.AppRegistration, Properties.Settings.Default.Auth);
-        private ObservableCollection<Status> statuses = new ObservableCollection<Status>();
         private TimelineStreaming streaming;
-        private long? sinceId;
 
         /// <summary>
         /// Set this property to start or stop streaming.
@@ -34,9 +32,8 @@ namespace WpfApp2.Model
 
         private ReactiveProperty<bool> streamingStarted = new ReactiveProperty<bool>(false);
 
-        public ReadOnlyReactiveCollection<Status> Statuses { get; }
-
         protected abstract Task<MastodonList<Status>> GetTimeline(ArrayOptions options);
+        protected override Task<MastodonList<Status>> FetchAsync(ArrayOptions options) => GetTimeline(options);
         protected abstract TimelineStreaming GetStreaming();
 
         public event EventHandler<StreamNotificationEventArgs> OnNotification
@@ -47,8 +44,6 @@ namespace WpfApp2.Model
 
         protected TimelineModelBase()
         {
-            Statuses = statuses.ToReadOnlyReactiveCollection();
-
             StreamingStarted = streamingStarted.ToReadOnlyReactiveProperty();
             streaming = GetStreaming();
             if (streaming != null)
@@ -61,16 +56,13 @@ namespace WpfApp2.Model
 
         private void Streaming_OnDelete(object sender, StreamDeleteEventArgs e)
         {
-            int? index = statuses.Select((s, i) => new { s, i })
+            int? index = this.Select((s, i) => new { s, i })
                 .FirstOrDefault(x => x.s.Id == e.StatusId)
                 ?.i;
-            if (index.HasValue) statuses.RemoveAt(index.Value);
+            if (index.HasValue) RemoveAt(index.Value);
         }
 
-        private void Streaming_OnUpdate(object sender, StreamUpdateEventArgs e)
-        {
-            addStatus(e.Status);
-        }
+        private void Streaming_OnUpdate(object sender, StreamUpdateEventArgs e) => Add(e.Status);
 
         private async void OnStreamingChanged(bool b)
         {
@@ -91,22 +83,9 @@ namespace WpfApp2.Model
 
         private void StopStreaming() => streaming?.Stop();
 
-        public async Task ReloadAsync()
-        {
-            var newStatuses = await GetTimeline(new ArrayOptions() { SinceId = sinceId });
-            newStatuses.Reverse();
-            newStatuses.ForEach(addStatus);
-        }
-
         public async Task<Status> FavouriteAsync(long id) => await client.Favourite(id);
         public async Task<Status> ReblogAsync(long id) => await client.Reblog(id);
         public async Task DeleteAsync(long id) => await client.DeleteStatus(id);
-
-        private void addStatus(Status status)
-        {
-            statuses.Add(status);
-            sinceId = sinceId > status.Id ? sinceId : status.Id;
-        }
     }
 
     class HomeTimelineModel : TimelineModelBase

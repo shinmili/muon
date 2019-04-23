@@ -1,4 +1,5 @@
 ﻿using Mastonet;
+using Mastonet.Entities;
 using Reactive.Bindings;
 using System;
 using System.Diagnostics;
@@ -39,10 +40,10 @@ namespace WpfApp2.ViewModel
             this.model = model;
             IsStreaming = this.model.StreamingStarted.ToReadOnlyReactiveProperty();
             IsStreamingAvailable = this.model.IsStreamingAvailable;
-            Statuses = this.model.Statuses.ToReadOnlyReactiveCollection(s => new StatusViewModel(s));
+            Statuses = this.model.ToReadOnlyReactiveCollection(s => new StatusViewModel(s));
 
             ReloadCommand = new AsyncReactiveCommand()
-                .WithSubscribe(() => this.model.ReloadAsync());
+                .WithSubscribe(() => this.model.FetchPreviousAsync());
             ToggleStreamingCommand = Observable.Repeat(IsStreamingAvailable, 1).ToReactiveCommand()
                 .WithSubscribe(() => this.model.StreamingStarting.Value = !IsStreaming.Value);
 
