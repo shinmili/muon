@@ -15,6 +15,7 @@
     </Window.DataContext>
     <Window.InputBindings>
         <KeyBinding Key="F5" Command="{Binding SelectedTab.Value.Statuses.ReloadCommand}"/>
+        <KeyBinding Gesture="Shift+F5" Command="{Binding SelectedTab.Value.Statuses.ReloadOlderCommand}"/>
         <KeyBinding Gesture="Ctrl+S" Command="{Binding SelectedTab.Value.Statuses.ToggleStreamingCommand}"/>
     </Window.InputBindings>
     <DockPanel>
@@ -25,6 +26,7 @@
             </MenuItem>
             <MenuItem Header="_Timeline" Focusable="False">
                 <MenuItem Header="_Reload" InputGestureText="F5" Command="{Binding SelectedTab.Value.Statuses.ReloadCommand}"/>
+                <MenuItem Header="Reload _older toots" InputGestureText="Shift+F5" Command="{Binding SelectedTab.Value.Statuses.ReloadOlderCommand}"/>
                 <MenuItem Header="_Streaming" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding SelectedTab.Value.Statuses.IsStreaming.Value, Mode=OneWay}" Command="{Binding SelectedTab.Value.Statuses.ToggleStreamingCommand}"/>
                 <Separator/>
                 <MenuItem Header="_New tab" Command="{Binding NewTabCommand}"/>

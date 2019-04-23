@@ -21,6 +21,7 @@ namespace WpfApp2.ViewModel
         public ReactiveProperty<StatusViewModel> SelectedStatus { get; } = new ReactiveProperty<StatusViewModel>();
 
         public AsyncReactiveCommand ReloadCommand { get; }
+        public AsyncReactiveCommand ReloadOlderCommand { get; }
         public ReactiveCommand ToggleStreamingCommand { get; }
         public ReactiveCommand OpenCommand { get; }
         public ReactiveCommand ReplyCommand { get; }
@@ -44,6 +45,8 @@ namespace WpfApp2.ViewModel
 
             ReloadCommand = new AsyncReactiveCommand()
                 .WithSubscribe(() => this.model.FetchPreviousAsync());
+            ReloadOlderCommand = new AsyncReactiveCommand()
+                .WithSubscribe(() => this.model.FetchNextAsync());
             ToggleStreamingCommand = Observable.Repeat(IsStreamingAvailable, 1).ToReactiveCommand()
                 .WithSubscribe(() => this.model.StreamingStarting.Value = !IsStreaming.Value);
 
