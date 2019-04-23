@@ -108,9 +108,11 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Model\InReplyToModel.cs" />
+    <Compile Include="Model\NotificationsModel.cs" />
     <Compile Include="Model\PagenatedCollection.cs" />
     <Compile Include="ViewModel\NewTabViewModel.cs" />
     <Compile Include="ViewModel\AccountTabViewModel.cs" />
+    <Compile Include="ViewModel\NotificationsViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="Converters.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -121,6 +123,9 @@
     <Compile Include="ViewModel\TabContentViewModelBase.cs" />
     <Compile Include="View\NewTabWindow.xaml.cs">
       <DependentUpon>NewTabWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NotificationsView.xaml.cs">
+      <DependentUpon>NotificationsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TabTemplateSelector.cs" />
     <Compile Include="View\TextBlockEx.cs" />
@@ -139,6 +144,10 @@
     <Compile Include="View\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\NotificationsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\SettingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -25,6 +25,8 @@ namespace WpfApp2.ViewModel
                     return new AccountTabViewModel(aparam);
                 case TimelineTabParameters tparam:
                     return new TimelineViewModel(tparam);
+                case NotificationTabParameters nparam:
+                    return new NotificationsViewModel(nparam);
                 default:
                     throw new NotImplementedException();
             }

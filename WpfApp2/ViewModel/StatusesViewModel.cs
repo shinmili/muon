@@ -30,12 +30,6 @@ namespace WpfApp2.ViewModel
         public AsyncReactiveCommand DeleteCommand { get; }
         public ReactiveCommand OpenAccountTabCommand { get; }
 
-        public event EventHandler<StreamNotificationEventArgs> OnNotification
-        {
-            add { model.OnNotification += value; }
-            remove { model.OnNotification -= value; }
-        }
-
         public StatusesViewModel(TimelineModelBase model, bool streamingOnStartup = false)
         {
             this.model = model;

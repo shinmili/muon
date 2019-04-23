@@ -18,8 +18,12 @@ namespace WpfApp2.View
             {
                 case AccountTabViewModel _:
                     return (DataTemplate)((FrameworkElement)container).FindResource("Account");
-                default:
+                case TimelineViewModel _:
                     return (DataTemplate)((FrameworkElement)container).FindResource("Timeline");
+                case NotificationsViewModel _:
+                    return (DataTemplate)((FrameworkElement)container).FindResource("Notifications");
+                default:
+                    throw new NotImplementedException();
             }
         }
     }

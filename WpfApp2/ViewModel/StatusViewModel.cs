@@ -1,5 +1,4 @@
-﻿using HtmlAgilityPack;
-using Mastonet.Entities;
+﻿using Mastonet.Entities;
 using Reactive.Bindings;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using Reactive.Bindings;
+using System.ComponentModel;
 using WpfApp2.Model;
 
 namespace WpfApp2.ViewModel
@@ -6,6 +7,10 @@ namespace WpfApp2.ViewModel
     class TimelineViewModel : TabContentViewModelBase, INotifyPropertyChanged
     {
         public StatusesViewModel Statuses { get; }
+        public ReadOnlyReactiveProperty<bool> IsStreaming => Statuses.IsStreaming;
+        public AsyncReactiveCommand ReloadCommand => Statuses.ReloadCommand;
+        public AsyncReactiveCommand ReloadOlderCommand => Statuses.ReloadOlderCommand;
+        public ReactiveCommand ToggleStreamingCommand => Statuses.ToggleStreamingCommand;
 
         public event PropertyChangedEventHandler PropertyChanged;
 

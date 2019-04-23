@@ -65,6 +65,11 @@ namespace WpfApp2.Properties {
     <Type>Home</Type>
     <StreamingOnStartup>true</StreamingOnStartup>
   </TabParameters>
+  <TabParameters xsi:type=""NotificationTabParameters"">
+    <Name>Notifications</Name>
+    <Type>Notifications</Type>
+    <StreamingOnStartup>true</StreamingOnStartup>
+  </TabParameters>
   <TabParameters xsi:type=""TimelineTabParameters"">
     <Name>Local</Name>
     <Type>Local</Type>

@@ -23,7 +23,7 @@ namespace WpfApp2.ViewModel
         public ReadOnlyReactiveCollection<TabContentViewModelBase> TabViewModels { get; }
         public ReactiveProperty<TabContentViewModelBase> SelectedTab { get; } = new ReactiveProperty<TabContentViewModelBase>();
         public ReactiveProperty<int> SelectedTabIndex { get; }
-        public StatusesViewModel NotificationStream { get; } = new StatusesViewModel(new HomeTimelineModel(), true);
+        public ReadOnlyObservableCollection<Notification> Notifications { get; }
 
         public ReactiveCommand OpenSettingsCommand { get; }
         public ReactiveCommand NewTabCommand { get; }
@@ -37,6 +37,7 @@ namespace WpfApp2.ViewModel
         {
             TabViewModels = tabs.ToReadOnlyReactiveCollection(p => TabContentViewModelBase.FromParam(p));
             SelectedTabIndex = tabs.SelectedIndex;
+            Notifications = TabViewModels.OfType<NotificationsViewModel>().FirstOrDefault().Notifications;
 
             OpenSettingsCommand = new ReactiveCommand()
                 .WithSubscribe(() =>

@@ -11,6 +11,7 @@ namespace WpfApp2.Model
 {
     [XmlInclude(typeof(TimelineTabParameters))]
     [XmlInclude(typeof(AccountTabParameters))]
+    [XmlInclude(typeof(NotificationTabParameters))]
     public class TabParameters
     {
         public string Name { get; set; }
@@ -25,6 +26,11 @@ namespace WpfApp2.Model
     public class AccountTabParameters : TabParameters
     {
         public long Id { get; set; }
+    }
+
+    public class NotificationTabParameters : TabParameters
+    {
+        public bool StreamingOnStartup { get; set; }
     }
 
     public class TabSettingsModel : ObservableCollection<TabParameters>

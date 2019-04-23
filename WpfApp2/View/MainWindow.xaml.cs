@@ -1,7 +1,9 @@
 ﻿using Hardcodet.Wpf.TaskbarNotification;
+using Mastonet.Entities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
@@ -26,13 +28,14 @@ namespace WpfApp2.View
         public MainWindow()
         {
             InitializeComponent();
-            ViewModel.NotificationStream.OnNotification += NotificationStream_OnNotification;
+            (ViewModel.Notifications as INotifyCollectionChanged).CollectionChanged += MainWindow_CollectionChanged;
         }
 
-        private void NotificationStream_OnNotification(object sender, Mastonet.StreamNotificationEventArgs e)
+        private void MainWindow_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            string format;
-            switch (e.Notification.Type)
+            string format = "";
+            var notification = (Notification)e.NewItems[0];
+            switch (notification.Type)
             {
                 case "follow":
                     format = "{0} has followed you";
@@ -46,11 +49,9 @@ namespace WpfApp2.View
                 case "favourite":
                     format = "{0} has favourited your toot";
                     break;
-                default:
-                    throw new NotImplementedException();
             }
-            string title = string.Format(format, e.Notification.Account.DisplayName);
-            string message = e.Notification.Status.Content;
+            string title = string.Format(format, notification.Account.DisplayName);
+            string message = notification.Status.Content;
             TaskbarIcon.ShowBalloonTip(title, message, BalloonIcon.Info);
         }
 
