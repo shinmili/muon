@@ -17,7 +17,7 @@ namespace WpfApp2.Model
         public string Name { get; set; }
     }
 
-    public class TimelineTabParameters : TabParameters
+    public class TimelineTabParameters : TabParameters, IStreamingTabParameters
     {
         public TimelineType Type { get; set; }
         public bool StreamingOnStartup { get; set; }
@@ -28,9 +28,14 @@ namespace WpfApp2.Model
         public long Id { get; set; }
     }
 
-    public class NotificationTabParameters : TabParameters
+    public class NotificationTabParameters : TabParameters, IStreamingTabParameters
     {
         public bool StreamingOnStartup { get; set; }
+    }
+
+    interface IStreamingTabParameters
+    {
+        bool StreamingOnStartup { get; set; }
     }
 
     public class TabSettingsModel : ObservableCollection<TabParameters>
