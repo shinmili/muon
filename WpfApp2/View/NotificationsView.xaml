@@ -10,10 +10,15 @@
         <ListView.View>
             <GridView>
                 <GridViewColumn Header="Type" DisplayMemberBinding="{Binding Type}"/>
-                <GridViewColumn>
+                <GridViewColumn Width="18">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding Account.StaticAvatarUrl}"/>
+                            <DataTemplate.Resources>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
+                                </Style>
+                            </DataTemplate.Resources>
+                            <Image Source="{Binding Account.StaticAvatarUrl, Mode=OneTime}" Margin="-6,-1"/>
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
