@@ -1,4 +1,5 @@
-﻿using Mastonet.Entities;
+﻿using Mastonet;
+using Mastonet.Entities;
 using Reactive.Bindings;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace WpfApp2.ViewModel
 {
     class NotificationsViewModel : TabContentViewModelBase
     {
-        private NotificationsModel model = new NotificationsModel();
+        private NotificationsModel model;
 
         public ReadOnlyObservableCollection<Notification> Notifications { get; }
         public ReadOnlyReactiveProperty<bool> IsStreaming { get; }
@@ -21,8 +22,9 @@ namespace WpfApp2.ViewModel
         public AsyncReactiveCommand ReloadOlderCommand { get; }
         public ReactiveCommand ToggleStreamingCommand { get; }
 
-        public NotificationsViewModel(NotificationTabParameters param) : base(param, null)
+        public NotificationsViewModel(NotificationTabParameters param, IMastodonClient client) : base(param, null)
         {
+            model = new NotificationsModel(client);
             Notifications = new ReadOnlyObservableCollection<Notification>(model);
             IsStreaming = model.StreamingStarted;
             ReloadCommand = new AsyncReactiveCommand().WithSubscribe(() => model.FetchPreviousAsync());

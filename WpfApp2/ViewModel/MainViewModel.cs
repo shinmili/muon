@@ -41,8 +41,8 @@ namespace WpfApp2.ViewModel
         public MainViewModel(MainModel model)
         {
             this.model = model;
-            NewTootBoxViewModel = new NewTootBoxViewModel(this.model.InReplyTo);
-            TabViewModels = tabs.ToReadOnlyReactiveCollection(p => TabContentViewModelBase.FromParam(p, this.model.InReplyTo));
+            NewTootBoxViewModel = new NewTootBoxViewModel(this.model.InReplyTo, this.model.Client);
+            TabViewModels = tabs.ToReadOnlyReactiveCollection(p => TabContentViewModelBase.FromParam(p, this.model.InReplyTo, this.model.Client));
             SelectedTabIndex = tabs.SelectedIndex;
             Notifications = TabViewModels.OfType<NotificationsViewModel>().FirstOrDefault().Notifications;
 

@@ -15,7 +15,7 @@ namespace WpfApp2.ViewModel
 {
     class NewTootBoxViewModel : INotifyPropertyChanged
     {
-        private MastodonClient client;
+        private IMastodonClient client;
         private IReactiveProperty<Status> inReplyTo;
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -27,11 +27,11 @@ namespace WpfApp2.ViewModel
         public AsyncReactiveCommand TootCommand { get; }
         public ReactiveCommand CancelReplyCommand { get; }
 
-        public NewTootBoxViewModel(IReactiveProperty<Status> inReplyTo)
+        public NewTootBoxViewModel(IReactiveProperty<Status> inReplyTo, IMastodonClient client)
         {
             this.inReplyTo = inReplyTo;
+            this.client = client;
             InReplyTo = inReplyTo.ToReadOnlyReactiveProperty();
-            client = new MastodonClient(Properties.Settings.Default.AppRegistration, Properties.Settings.Default.Auth);
 
             TootCommand = Text.Select(t => t.Length > 0)
                 .ToAsyncReactiveCommand()

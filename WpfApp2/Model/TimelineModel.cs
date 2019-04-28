@@ -15,7 +15,7 @@ namespace WpfApp2.Model
 {
     abstract class TimelineModelBase : PagenatedCollection<Status>
     {
-        protected MastodonClient client = new MastodonClient(Properties.Settings.Default.AppRegistration, Properties.Settings.Default.Auth);
+        protected IMastodonClient client;
         private TimelineStreaming streaming;
 
         /// <summary>
@@ -42,8 +42,9 @@ namespace WpfApp2.Model
             remove { streaming.OnNotification -= value; }
         }
 
-        protected TimelineModelBase()
+        protected TimelineModelBase(IMastodonClient client)
         {
+            this.client = client;
             StreamingStarted = streamingStarted.ToReadOnlyReactiveProperty();
             streaming = GetStreaming();
             if (streaming != null)
@@ -90,6 +91,7 @@ namespace WpfApp2.Model
 
     class HomeTimelineModel : TimelineModelBase
     {
+        public HomeTimelineModel(IMastodonClient client) : base(client) { }
         public override bool IsStreamingAvailable => true;
         protected override Task<MastodonList<Status>> GetTimeline(ArrayOptions options) => client.GetHomeTimeline(options);
         protected override TimelineStreaming GetStreaming() => client.GetUserStreaming();
@@ -97,6 +99,7 @@ namespace WpfApp2.Model
 
     class LocalTimelineModel : TimelineModelBase
     {
+        public LocalTimelineModel(IMastodonClient client) : base(client) { }
         public override bool IsStreamingAvailable => false;
         protected override Task<MastodonList<Status>> GetTimeline(ArrayOptions options) => client.GetPublicTimeline(options, true);
         protected override TimelineStreaming GetStreaming() => null;
@@ -104,6 +107,7 @@ namespace WpfApp2.Model
 
     class FederatedTimelineModel : TimelineModelBase
     {
+        public FederatedTimelineModel(IMastodonClient client) : base(client) { }
         public override bool IsStreamingAvailable => true;
         protected override Task<MastodonList<Status>> GetTimeline(ArrayOptions options) => client.GetPublicTimeline(options);
         protected override TimelineStreaming GetStreaming() => client.GetPublicStreaming();
@@ -115,6 +119,7 @@ namespace WpfApp2.Model
         public long Id { get; set; }
         protected override Task<MastodonList<Status>> GetTimeline(ArrayOptions options) => client.GetAccountStatuses(Id, options);
         protected override TimelineStreaming GetStreaming() => null;
+        public AccountTimelineModel(IMastodonClient client) : base(client) { }
     }
 
     public enum TimelineType { Home, Local, Federated }

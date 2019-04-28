@@ -13,7 +13,7 @@ namespace WpfApp2.Model
 {
     class NotificationsModel : PagenatedCollection<Notification>
     {
-        private MastodonClient client = new MastodonClient(Properties.Settings.Default.AppRegistration, Properties.Settings.Default.Auth);
+        private IMastodonClient client;
         private TimelineStreaming streaming;
         private ReactiveProperty<bool> streamingStarted = new ReactiveProperty<bool>();
 
@@ -27,9 +27,10 @@ namespace WpfApp2.Model
         /// </summary>
         public ReadOnlyReactiveProperty<bool> StreamingStarted { get; }
 
-        public NotificationsModel()
+        public NotificationsModel(IMastodonClient client)
         {
-            streaming = client.GetUserStreaming();
+            this.client = client;
+            streaming = this.client.GetUserStreaming();
             StreamingStarted = streamingStarted.ToReadOnlyReactiveProperty();
             StreamingStarting.DistinctUntilChanged().Subscribe(OnStreamingChanged);
             streaming.OnNotification += Streaming_OnNotification;
