@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Mastonet.Entities;
+using Reactive.Bindings;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
@@ -25,18 +27,22 @@ namespace WpfApp2.View
         public NewTootBox()
         {
             InitializeComponent();
+        }
+
+        private void MoveCaretToEnd()
+        {
+            TextBox.Focus();
+            TextBox.CaretIndex = TextBox.Text.Length;
+        }
+
+        private void UserControl_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
             NewTootBoxViewModel vm = (NewTootBoxViewModel)DataContext;
-            Model.InReplyToModel.Instance.InReplyTo.Where(s => s != null)
+            vm.InReplyTo.Where(s => s != null)
                 .Subscribe(_ =>
-                {
                     Observable.FromEventPattern(TextBox, "TextChanged")
                         .Take(1)
-                        .Subscribe(__ =>
-                        {
-                            TextBox.Focus();
-                            TextBox.CaretIndex = TextBox.Text.Length;
-                        });
-                });
+                        .Subscribe(__ => MoveCaretToEnd()));
         }
     }
 }

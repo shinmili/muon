@@ -21,7 +21,7 @@ namespace WpfApp2.ViewModel
         public AsyncReactiveCommand ReloadOlderCommand { get; }
         public ReactiveCommand ToggleStreamingCommand { get; }
 
-        public NotificationsViewModel(NotificationTabParameters param) : base(param)
+        public NotificationsViewModel(NotificationTabParameters param) : base(param, null)
         {
             Notifications = new ReadOnlyObservableCollection<Notification>(model);
             IsStreaming = model.StreamingStarted;

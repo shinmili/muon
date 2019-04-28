@@ -10,9 +10,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Closing="Window_Closing">
-    <Window.DataContext>
-        <vm:MainViewModel x:Name="ViewModel"/>
-    </Window.DataContext>
     <Window.InputBindings>
         <KeyBinding Key="F5" Command="{Binding SelectedTab.Value.ReloadCommand}"/>
         <KeyBinding Gesture="Shift+F5" Command="{Binding SelectedTab.Value.ReloadOlderCommand}"/>
@@ -32,7 +29,7 @@
                 <MenuItem Header="_New tab" Command="{Binding NewTabCommand}"/>
             </MenuItem>
         </Menu>
-        <v:NewTootBox x:Name="TootBox" DockPanel.Dock="Top"/>
+        <v:NewTootBox x:Name="TootBox" DockPanel.Dock="Top" DataContext="{Binding NewTootBoxViewModel}"/>
         <TabControl TabStripPlacement="Bottom" x:Name="Tab" Height="auto" ItemsSource="{Binding TabViewModels}" SelectedItem="{Binding SelectedTab.Value}" SelectedIndex="{Binding SelectedTabIndex.Value, Mode=TwoWay}">
             <TabControl.InputBindings>
                 <KeyBinding Key="A" Command="{Binding PrevTabCommand}"/>

@@ -20,6 +20,11 @@ namespace WpfApp2.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private MainModel model;
+
+        public NewTootBoxViewModel NewTootBoxViewModel { get; }
+
+        public ReactiveProperty<Status> InReplyTo => model.InReplyTo;
         public ReadOnlyReactiveCollection<TabContentViewModelBase> TabViewModels { get; }
         public ReactiveProperty<TabContentViewModelBase> SelectedTab { get; } = new ReactiveProperty<TabContentViewModelBase>();
         public ReactiveProperty<int> SelectedTabIndex { get; }
@@ -33,9 +38,11 @@ namespace WpfApp2.ViewModel
 
         private TabSettingsModel tabs = TabSettingsModel.Default;
 
-        public MainViewModel()
+        public MainViewModel(MainModel model)
         {
-            TabViewModels = tabs.ToReadOnlyReactiveCollection(p => TabContentViewModelBase.FromParam(p));
+            this.model = model;
+            NewTootBoxViewModel = new NewTootBoxViewModel(this.model.InReplyTo);
+            TabViewModels = tabs.ToReadOnlyReactiveCollection(p => TabContentViewModelBase.FromParam(p, this.model.InReplyTo));
             SelectedTabIndex = tabs.SelectedIndex;
             Notifications = TabViewModels.OfType<NotificationsViewModel>().FirstOrDefault().Notifications;
 

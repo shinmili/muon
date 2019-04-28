@@ -12,7 +12,7 @@ namespace WpfApp2.ViewModel
     class StatusesViewModel
     {
         private TimelineModelBase model;
-        private InReplyToModel inReplyToModel = InReplyToModel.Instance;
+        private IReactiveProperty<Status> inReplyTo;
         private TabSettingsModel tabs = TabSettingsModel.Default;
 
         public ReadOnlyReactiveCollection<StatusViewModel> Statuses { get; }
@@ -30,9 +30,10 @@ namespace WpfApp2.ViewModel
         public AsyncReactiveCommand DeleteCommand { get; }
         public ReactiveCommand OpenAccountTabCommand { get; }
 
-        public StatusesViewModel(TimelineModelBase model, bool streamingOnStartup = false)
+        public StatusesViewModel(TimelineModelBase model, IReactiveProperty<Status> inReplyTo, bool streamingOnStartup = false)
         {
             this.model = model;
+            this.inReplyTo = inReplyTo;
             IsStreaming = this.model.StreamingStarted.ToReadOnlyReactiveProperty();
             IsStreamingAvailable = this.model.IsStreamingAvailable;
             Statuses = this.model.ToReadOnlyReactiveCollection(s => new StatusViewModel(s));
@@ -52,7 +53,7 @@ namespace WpfApp2.ViewModel
             ReblogCommand = IsStatusSelected.ToAsyncReactiveCommand()
                 .WithSubscribe(() => this.model.ReblogAsync(SelectedStatus.Value.Status.Id));
             ReplyCommand = IsStatusSelected.ToReactiveCommand()
-                .WithSubscribe(() => inReplyToModel.InReplyTo.Value = SelectedStatus.Value.Status);
+                .WithSubscribe(() => this.inReplyTo.Value = SelectedStatus.Value.Status);
             DeleteCommand = IsStatusSelected.ToAsyncReactiveCommand()
                 .WithSubscribe(() => this.model.DeleteAsync(SelectedStatus.Value.Status.Id));
 

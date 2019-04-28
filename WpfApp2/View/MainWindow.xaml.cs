@@ -17,6 +17,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp2.Model;
+using WpfApp2.ViewModel;
 
 namespace WpfApp2.View
 {
@@ -28,7 +30,9 @@ namespace WpfApp2.View
         public MainWindow()
         {
             InitializeComponent();
-            (ViewModel.Notifications as INotifyCollectionChanged).CollectionChanged += MainWindow_CollectionChanged;
+            var vm = new MainViewModel(new MainModel());
+            DataContext = vm;
+            (vm.Notifications as INotifyCollectionChanged).CollectionChanged += MainWindow_CollectionChanged;
         }
 
         private void MainWindow_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
