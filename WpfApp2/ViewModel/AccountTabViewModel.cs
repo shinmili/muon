@@ -22,7 +22,7 @@ namespace WpfApp2.ViewModel
         public AccountTabViewModel(AccountTabParameters param, IReactiveProperty<Status> inReplyTo, IMastodonClient client) : base(param, inReplyTo)
         {
             GetAccount(param.Id);
-            Statuses = new StatusesViewModel(new AccountTimelineModel(client) { Id = param.Id }, inReplyTo);
+            Statuses = new StatusesViewModel(new AccountTimelineModel(param.Id, client), inReplyTo);
         }
 
         private async void GetAccount(long id)

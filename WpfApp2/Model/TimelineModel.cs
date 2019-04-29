@@ -116,10 +116,13 @@ namespace WpfApp2.Model
     class AccountTimelineModel : TimelineModelBase
     {
         public override bool IsStreamingAvailable => false;
-        public long Id { get; set; }
+        public long Id { get; }
         protected override Task<MastodonList<Status>> GetTimeline(ArrayOptions options) => client.GetAccountStatuses(Id, options);
         protected override TimelineStreaming GetStreaming() => null;
-        public AccountTimelineModel(IMastodonClient client) : base(client) { }
+        public AccountTimelineModel(long id, IMastodonClient client) : base(client)
+        {
+            Id = id;
+        }
     }
 
     public enum TimelineType { Home, Local, Federated }
