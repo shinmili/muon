@@ -57,7 +57,7 @@ namespace WpfApp2.View
                     break;
             }
             string title = string.Format(format, notification.Account.DisplayName);
-            string message = notification.Status.Content;
+            string message = notification.Status?.Content ?? "";
             TaskbarIcon.ShowBalloonTip(title, message, BalloonIcon.Info);
         }
 
