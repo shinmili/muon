@@ -13,7 +13,7 @@ using System.Windows;
 
 namespace WpfApp2.Model
 {
-    abstract class TimelineModelBase : PagenatedCollection<Status>
+    public abstract class TimelineModelBase : PagenatedCollection<Status>
     {
         protected IMastodonClient client;
         private TimelineStreaming streaming;

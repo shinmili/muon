@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp2.Model
 {
-    abstract class PagenatedCollection<T> : ObservableCollection<T>
+    public abstract class PagenatedCollection<T> : ObservableCollection<T>
     {
         private long? sinceId;
         private long? maxId;

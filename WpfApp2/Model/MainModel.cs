@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp2.Model
 {
-    class MainModel : INotifyPropertyChanged
+    public class MainModel : INotifyPropertyChanged
     {
         public ReactiveProperty<Status> InReplyTo { get; }
         public MastodonClient Client { get; }

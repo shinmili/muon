@@ -9,7 +9,7 @@ using WpfApp2.Model;
 
 namespace WpfApp2.ViewModel
 {
-    class NewTabViewModel
+    public class NewTabViewModel
     {
         public static IEnumerable<TimelineType> Types { get; } = new List<TimelineType> { TimelineType.Home, TimelineType.Local, TimelineType.Federated };
         public ReactiveProperty<TimelineType?> SelectedType { get; } = new ReactiveProperty<TimelineType?>();

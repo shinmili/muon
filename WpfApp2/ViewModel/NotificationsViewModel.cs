@@ -11,7 +11,7 @@ using WpfApp2.Model;
 
 namespace WpfApp2.ViewModel
 {
-    class NotificationsViewModel : TabContentViewModelBase
+    public class NotificationsViewModel : TabContentViewModelBase
     {
         private NotificationsModel model;
 

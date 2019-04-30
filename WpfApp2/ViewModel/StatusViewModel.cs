@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 
 namespace WpfApp2.ViewModel
 {
-    class StatusViewModel : INotifyPropertyChanged
+    public class StatusViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

@@ -9,7 +9,7 @@ using WpfApp2.ViewModel;
 
 namespace WpfApp2.View
 {
-    class TabTemplateSelector : DataTemplateSelector
+    public class TabTemplateSelector : DataTemplateSelector
     {
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {

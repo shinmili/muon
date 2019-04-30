@@ -16,7 +16,7 @@ using WpfApp2.View;
 
 namespace WpfApp2.ViewModel
 {
-    class MainViewModel : INotifyPropertyChanged
+    public class MainViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

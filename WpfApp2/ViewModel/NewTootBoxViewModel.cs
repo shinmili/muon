@@ -13,7 +13,7 @@ using WpfApp2.Model;
 
 namespace WpfApp2.ViewModel
 {
-    class NewTootBoxViewModel : INotifyPropertyChanged
+    public class NewTootBoxViewModel : INotifyPropertyChanged
     {
         private IMastodonClient client;
         private IReactiveProperty<Status> inReplyTo;

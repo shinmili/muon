@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace WpfApp2.Model
 {
-    class NotificationsModel : PagenatedCollection<Notification>
+    public class NotificationsModel : PagenatedCollection<Notification>
     {
         private IMastodonClient client;
         private TimelineStreaming streaming;

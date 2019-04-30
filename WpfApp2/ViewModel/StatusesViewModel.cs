@@ -9,7 +9,7 @@ using WpfApp2.Model;
 
 namespace WpfApp2.ViewModel
 {
-    class StatusesViewModel
+    public class StatusesViewModel
     {
         private TimelineModelBase model;
         private IReactiveProperty<Status> inReplyTo;

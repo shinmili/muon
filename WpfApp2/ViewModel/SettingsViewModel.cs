@@ -19,7 +19,7 @@ using WpfApp2.Model;
 
 namespace WpfApp2.ViewModel
 {
-    class SettingsViewModel : INotifyPropertyChanged
+    public class SettingsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public event EventHandler<DialogClosingEventArgs> Closing;
@@ -104,7 +104,7 @@ namespace WpfApp2.ViewModel
         protected void OnClosing(DialogClosingEventArgs e) => Closing?.Invoke(this, e);
     }
 
-    class DialogClosingEventArgs : EventArgs
+    public class DialogClosingEventArgs : EventArgs
     {
         public bool DialogResult { get; private set; }
         public DialogClosingEventArgs(bool dialogResult) { DialogResult = dialogResult; }

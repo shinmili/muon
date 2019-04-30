@@ -10,7 +10,7 @@ using WpfApp2.Model;
 
 namespace WpfApp2.ViewModel
 {
-    abstract class TabContentViewModelBase
+    public abstract class TabContentViewModelBase
     {
         private IReactiveProperty<Status> inReplyTo;
 

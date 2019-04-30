@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 
 namespace WpfApp2.View
 {
-    class TextBlockEx : TextBlock
+    public class TextBlockEx : TextBlock
     {
         public static readonly DependencyProperty ParseHTMLProperty =
             DependencyProperty.Register(

@@ -11,7 +11,7 @@ using WpfApp2.Model;
 
 namespace WpfApp2.ViewModel
 {
-    class AccountTabViewModel : TabContentViewModelBase
+    public class AccountTabViewModel : TabContentViewModelBase
     {
         public ReactiveProperty<Account> Account { get; } = new ReactiveProperty<Account>();
         public ReactiveProperty<string> FullName { get; } = new ReactiveProperty<string>();

@@ -6,7 +6,7 @@ using WpfApp2.Model;
 
 namespace WpfApp2.ViewModel
 {
-    class TimelineViewModel : TabContentViewModelBase, INotifyPropertyChanged
+    public class TimelineViewModel : TabContentViewModelBase, INotifyPropertyChanged
     {
         public StatusesViewModel Statuses { get; }
         public ReadOnlyReactiveProperty<bool> IsStreaming => Statuses.IsStreaming;
