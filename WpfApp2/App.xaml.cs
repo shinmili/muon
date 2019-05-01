@@ -20,14 +20,10 @@ namespace WpfApp2
             {
                 ShutdownMode = ShutdownMode.OnExplicitShutdown;
                 bool? authResult = new SettingsWindow().ShowDialog();
-                if (!authResult.HasValue || authResult.Value == false)
-                {
-                    Shutdown();
-                }
+                if (authResult != true) { Shutdown(); }
+                ShutdownMode = ShutdownMode.OnLastWindowClose;
             }
-            Window w = new MainWindow();
-            w.Show();
-            ShutdownMode = ShutdownMode.OnLastWindowClose;
+            new MainWindow().Show();
         }
     }
 }
