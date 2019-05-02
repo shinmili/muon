@@ -22,19 +22,9 @@
             <Button Grid.Column="1" Command="{Binding OkCommand}">OK</Button>
             <Button Grid.Column="2" Command="{Binding CancelCommand}">Cancel</Button>
         </Grid>
-        <TabControl>
-            <TabControl.Resources>
-                <Style TargetType="{x:Type TabControl}">
-                    <Setter Property="Margin" Value="5"/>
-                </Style>
-            </TabControl.Resources>
+        <TabControl Margin="5">
             <TabItem Header="Account">
-                <StackPanel>
-                    <StackPanel.Style>
-                        <Style TargetType="{x:Type StackPanel}">
-                            <Setter Property="Margin" Value="5" />
-                        </Style>
-                    </StackPanel.Style>
+                <StackPanel Margin="5">
                     <StackPanel.Resources>
                         <Style TargetType="{x:Type Button}">
                             <Setter Property="Margin" Value="0,0,0,5" />
@@ -67,13 +57,8 @@
                 </StackPanel>
             </TabItem>
             <TabItem Header="Tabs">
-                <TabItem.Resources>
-                    <Style TargetType="{x:Type ListBox}">
-                        <Setter Property="Margin" Value="5"/>
-                    </Style>
-                </TabItem.Resources>
                 <StackPanel Orientation="Horizontal">
-                    <ListBox ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedTab.Value}" DisplayMemberPath="Name"/>
+                    <ListBox Margin="5" ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedTab.Value}" DisplayMemberPath="Name"/>
                     <StackPanel>
                         <Grid>
                             <Grid.Style>

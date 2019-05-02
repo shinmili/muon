@@ -55,12 +55,7 @@
                 <GridViewColumn Width="18"><!-- Icon -->
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <DataTemplate.Resources>
-                                <Style TargetType="{x:Type Image}">
-                                    <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
-                                </Style>
-                            </DataTemplate.Resources>
-                            <Image Source="{Binding StaticAvatarUrl, Mode=OneTime}" Margin="-6,-1"/>
+                            <Image Source="{Binding StaticAvatarUrl, Mode=OneTime}" Margin="-6,-1" RenderOptions.BitmapScalingMode="Fant"/>
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
