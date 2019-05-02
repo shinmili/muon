@@ -20,6 +20,9 @@ namespace WpfApp2.Model
             Properties.Settings.Default.Save();
         }
 
+        public void SwitchToNextTab() => SelectedIndex.Value = (SelectedIndex.Value + 1) % Count;
+        public void SwitchToPrevTab() => SelectedIndex.Value = (SelectedIndex.Value + Count - 1) % Count;
+
         private void InitializeAutoSave() => CollectionChanged += (o, e) => Save();
     }
 }

@@ -64,15 +64,9 @@ namespace WpfApp2.ViewModel
                     this.model.Tabs.RemoveAt(TabViewModels.IndexOf(vm));
                 });
             NextTabCommand = new ReactiveCommand()
-                .WithSubscribe(() =>
-                {
-                    SelectedTabIndex.Value = (SelectedTabIndex.Value + 1) % this.model.Tabs.Count;
-                });
+                .WithSubscribe(this.model.Tabs.SwitchToNextTab);
             PrevTabCommand = new ReactiveCommand()
-                .WithSubscribe(() =>
-                {
-                    SelectedTabIndex.Value = (SelectedTabIndex.Value + this.model.Tabs.Count() - 1) % this.model.Tabs.Count;
-                });
+                .WithSubscribe(this.model.Tabs.SwitchToPrevTab);
         }
     }
 }
