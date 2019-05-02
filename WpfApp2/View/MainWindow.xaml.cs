@@ -32,7 +32,10 @@ namespace WpfApp2.View
         public MainWindow()
         {
             InitializeComponent();
-            var vm = new MainViewModel(new MainModel(new ReactiveProperty<Status>(), new MastodonClient(Properties.Settings.Default.AppRegistration, Properties.Settings.Default.Auth)));
+            var vm = new MainViewModel(new MainModel(
+                new ReactiveProperty<Status>(),
+                new MastodonClient(Properties.Settings.Default.AppRegistration, Properties.Settings.Default.Auth),
+                new TabsModel(Properties.Settings.Default.Tabs)));
             DataContext = vm;
             (vm.Notifications as INotifyCollectionChanged).CollectionChanged += MainWindow_CollectionChanged;
         }

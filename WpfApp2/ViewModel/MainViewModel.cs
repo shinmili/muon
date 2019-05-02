@@ -36,44 +36,42 @@ namespace WpfApp2.ViewModel
         public ReactiveCommand PrevTabCommand { get; }
         public ReactiveCommand NextTabCommand { get; }
 
-        private TabSettingsModel tabs = TabSettingsModel.Default;
-
         public MainViewModel(MainModel model)
         {
             this.model = model;
             NewTootBoxViewModel = new NewTootBoxViewModel(this.model.InReplyTo, this.model.Client);
-            TabViewModels = tabs.ToReadOnlyReactiveCollection(p => TabContentViewModelBase.FromParam(p, this.model.InReplyTo, this.model.Client));
-            SelectedTabIndex = tabs.SelectedIndex;
+            TabViewModels = this.model.Tabs.ToReadOnlyReactiveCollection(p => TabContentViewModelBase.FromParam(p, this.model.InReplyTo, this.model.Tabs, this.model.Client));
+            SelectedTabIndex = this.model.Tabs.SelectedIndex;
             Notifications = TabViewModels.OfType<NotificationsViewModel>().FirstOrDefault().Notifications;
 
             OpenSettingsCommand = new ReactiveCommand()
                 .WithSubscribe(() =>
                 {
                     var w = new SettingsWindow();
-                    ((SettingsViewModel)w.DataContext).Tabs = tabs;
+                    ((SettingsViewModel)w.DataContext).Tabs = this.model.Tabs;
                     w.ShowDialog();
                 });
             NewTabCommand = new ReactiveCommand()
                 .WithSubscribe(() =>
                 {
                     var w = new NewTabWindow();
-                    ((NewTabViewModel)w.DataContext).Tabs = tabs;
+                    ((NewTabViewModel)w.DataContext).Tabs = this.model.Tabs;
                     w.ShowDialog();
                 });
             CloseTabCommand = new ReactiveCommand<TabContentViewModelBase>()
                 .WithSubscribe(vm =>
                 {
-                    tabs.RemoveAt(TabViewModels.IndexOf(vm));
+                    this.model.Tabs.RemoveAt(TabViewModels.IndexOf(vm));
                 });
             NextTabCommand = new ReactiveCommand()
                 .WithSubscribe(() =>
                 {
-                    SelectedTabIndex.Value = (SelectedTabIndex.Value + 1) % tabs.Count;
+                    SelectedTabIndex.Value = (SelectedTabIndex.Value + 1) % this.model.Tabs.Count;
                 });
             PrevTabCommand = new ReactiveCommand()
                 .WithSubscribe(() =>
                 {
-                    SelectedTabIndex.Value = (SelectedTabIndex.Value + tabs.Count() - 1) % tabs.Count;
+                    SelectedTabIndex.Value = (SelectedTabIndex.Value + this.model.Tabs.Count() - 1) % this.model.Tabs.Count;
                 });
         }
     }

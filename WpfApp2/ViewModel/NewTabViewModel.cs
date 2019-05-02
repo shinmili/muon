@@ -14,9 +14,10 @@ namespace WpfApp2.ViewModel
         public static IEnumerable<TimelineType> Types { get; } = new List<TimelineType> { TimelineType.Home, TimelineType.Local, TimelineType.Federated };
         public ReactiveProperty<TimelineType?> SelectedType { get; } = new ReactiveProperty<TimelineType?>();
         public ReactiveCommand AddCommand { get; }
-        public TabSettingsModel Tabs { get; set; }
-        public NewTabViewModel()
+        public TabsModel Tabs { get; set; }
+        public NewTabViewModel(TabsModel tabs)
         {
+            Tabs = tabs;
             AddCommand = SelectedType
                 .Select(x => x != null)
                 .ToReactiveCommand()

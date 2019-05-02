@@ -13,7 +13,7 @@ namespace WpfApp2.ViewModel
     {
         private TimelineModelBase model;
         private IReactiveProperty<Status> inReplyTo;
-        private TabSettingsModel tabs = TabSettingsModel.Default;
+        private TabsModel tabs;
 
         public ReadOnlyReactiveCollection<StatusViewModel> Statuses { get; }
         public ReadOnlyReactiveProperty<bool> IsStreaming { get; }
@@ -30,10 +30,11 @@ namespace WpfApp2.ViewModel
         public AsyncReactiveCommand DeleteCommand { get; }
         public ReactiveCommand OpenAccountTabCommand { get; }
 
-        public StatusesViewModel(TimelineModelBase model, IReactiveProperty<Status> inReplyTo, bool streamingOnStartup = false)
+        public StatusesViewModel(TimelineModelBase model, IReactiveProperty<Status> inReplyTo, TabsModel tabs, bool streamingOnStartup = false)
         {
             this.model = model;
             this.inReplyTo = inReplyTo;
+            this.tabs = tabs;
             IsStreaming = this.model.StreamingStarted.ToReadOnlyReactiveProperty();
             IsStreamingAvailable = this.model.IsStreamingAvailable;
             Statuses = this.model.ToReadOnlyReactiveCollection(s => new StatusViewModel(s));
@@ -64,12 +65,12 @@ namespace WpfApp2.ViewModel
                     int? i = tabs.Select((Value, Index) => new { Value, Index }).FirstOrDefault(x => (x.Value as AccountTabParameters)?.Id == id)?.Index;
                     if (i.HasValue)
                     {
-                        tabs.SelectedIndex.Value = i.Value;
+                        this.tabs.SelectedIndex.Value = i.Value;
                     }
                     else
                     {
-                        tabs.Add(new AccountTabParameters() { Id = id, Name = SelectedStatus.Value.OriginalStatus.Account.AccountName });
-                        tabs.SelectedIndex.Value = tabs.Count() - 1;
+                        this.tabs.Add(new AccountTabParameters() { Id = id, Name = SelectedStatus.Value.OriginalStatus.Account.AccountName });
+                        this.tabs.SelectedIndex.Value = tabs.Count() - 1;
                     }
                 });
 

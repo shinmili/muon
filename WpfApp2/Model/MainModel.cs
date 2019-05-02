@@ -14,11 +14,13 @@ namespace WpfApp2.Model
     {
         public ReactiveProperty<Status> InReplyTo { get; }
         public MastodonClient Client { get; }
+        public TabsModel Tabs { get; }
 
-        public MainModel(ReactiveProperty<Status> irt, MastodonClient cli)
+        public MainModel(ReactiveProperty<Status> irt, MastodonClient cli, TabsModel tabs)
         {
             InReplyTo = irt;
             Client = cli;
+            Tabs = tabs;
         }
         public event PropertyChangedEventHandler PropertyChanged;
     }

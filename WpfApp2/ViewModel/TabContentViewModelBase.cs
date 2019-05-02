@@ -22,14 +22,14 @@ namespace WpfApp2.ViewModel
             this.inReplyTo = inReplyTo;
         }
 
-        public static TabContentViewModelBase FromParam(TabParameters param, IReactiveProperty<Status> inReplyTo, IMastodonClient client)
+        public static TabContentViewModelBase FromParam(TabParameters param, IReactiveProperty<Status> inReplyTo, TabsModel tabs, IMastodonClient client)
         {
             switch (param)
             {
                 case AccountTabParameters aparam:
-                    return new AccountTabViewModel(aparam, inReplyTo, client);
+                    return new AccountTabViewModel(aparam, inReplyTo, tabs, client);
                 case TimelineTabParameters tparam:
-                    return new TimelineViewModel(tparam, inReplyTo, client);
+                    return new TimelineViewModel(tparam, inReplyTo, tabs, client);
                 case NotificationTabParameters nparam:
                     return new NotificationsViewModel(nparam, client);
                 default:

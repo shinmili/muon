@@ -37,21 +37,4 @@ namespace WpfApp2.Model
     {
         bool StreamingOnStartup { get; set; }
     }
-
-    public class TabSettingsModel : ObservableCollection<TabParameters>
-    {
-        private static TabSettingsModel defaultInstance;
-        public static TabSettingsModel Default => defaultInstance ?? (defaultInstance = new TabSettingsModel());
-
-        public ReactiveProperty<int> SelectedIndex { get; } = new ReactiveProperty<int>();
-
-        public TabSettingsModel() : base(Properties.Settings.Default.Tabs)
-        {
-            CollectionChanged += (o, e) =>
-            {
-                Properties.Settings.Default.Tabs = this.ToList();
-                Properties.Settings.Default.Save();
-            };
-        }
-    }
 }

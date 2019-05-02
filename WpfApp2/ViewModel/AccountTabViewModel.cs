@@ -19,10 +19,10 @@ namespace WpfApp2.ViewModel
         public ReactiveProperty<string> FollowersUrl { get; } = new ReactiveProperty<string>();
         public StatusesViewModel Statuses { get; }
 
-        public AccountTabViewModel(AccountTabParameters param, IReactiveProperty<Status> inReplyTo, IMastodonClient client) : base(param, inReplyTo)
+        public AccountTabViewModel(AccountTabParameters param, IReactiveProperty<Status> inReplyTo, TabsModel tabs, IMastodonClient client) : base(param, inReplyTo)
         {
             GetAccount(param.Id);
-            Statuses = new StatusesViewModel(new AccountTimelineModel(param.Id, client), inReplyTo);
+            Statuses = new StatusesViewModel(new AccountTimelineModel(param.Id, client), inReplyTo, tabs);
         }
 
         private async void GetAccount(long id)

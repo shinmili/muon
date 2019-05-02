@@ -16,18 +16,18 @@ namespace WpfApp2.ViewModel
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public TimelineViewModel(TimelineTabParameters param, IReactiveProperty<Status> inReplyTo, IMastodonClient client) : base(param, inReplyTo)
+        public TimelineViewModel(TimelineTabParameters param, IReactiveProperty<Status> inReplyTo, TabsModel tabs, IMastodonClient client) : base(param, inReplyTo)
         {
             switch (param.Type)
             {
                 case TimelineType.Home:
-                    Statuses = new StatusesViewModel(new HomeTimelineModel(client), inReplyTo, param.StreamingOnStartup);
+                    Statuses = new StatusesViewModel(new HomeTimelineModel(client), inReplyTo, tabs, param.StreamingOnStartup);
                     break;
                 case TimelineType.Local:
-                    Statuses = new StatusesViewModel(new LocalTimelineModel(client), inReplyTo, param.StreamingOnStartup);
+                    Statuses = new StatusesViewModel(new LocalTimelineModel(client), inReplyTo, tabs, param.StreamingOnStartup);
                     break;
                 case TimelineType.Federated:
-                    Statuses = new StatusesViewModel(new FederatedTimelineModel(client), inReplyTo, param.StreamingOnStartup);
+                    Statuses = new StatusesViewModel(new FederatedTimelineModel(client), inReplyTo, tabs, param.StreamingOnStartup);
                     break;
             }
         }

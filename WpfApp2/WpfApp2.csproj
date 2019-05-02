@@ -110,6 +110,7 @@
     <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\NotificationsModel.cs" />
     <Compile Include="Model\PagenatedCollection.cs" />
+    <Compile Include="Model\TabsModel.cs" />
     <Compile Include="ViewModel\NewTabViewModel.cs" />
     <Compile Include="ViewModel\AccountTabViewModel.cs" />
     <Compile Include="ViewModel\NotificationsViewModel.cs" />
