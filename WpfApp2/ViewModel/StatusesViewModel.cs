@@ -61,17 +61,8 @@ namespace WpfApp2.ViewModel
             OpenAccountTabCommand = IsStatusSelected.ToReactiveCommand()
                 .WithSubscribe(() =>
                 {
-                    long id = SelectedStatus.Value.OriginalStatus.Account.Id;
-                    int? i = tabs.Select((Value, Index) => new { Value, Index }).FirstOrDefault(x => (x.Value as AccountTabParameters)?.Id == id)?.Index;
-                    if (i.HasValue)
-                    {
-                        this.tabs.SelectedIndex.Value = i.Value;
-                    }
-                    else
-                    {
-                        this.tabs.Add(new AccountTabParameters() { Id = id, Name = SelectedStatus.Value.OriginalStatus.Account.AccountName });
-                        this.tabs.SelectedIndex.Value = tabs.Count() - 1;
-                    }
+                    Account account = SelectedStatus.Value.OriginalStatus.Account;
+                    this.tabs.SwitchToOrOpen(new AccountTabParameters() { Name = $"user: {account.AccountName}", Id = account.Id });
                 });
 
             this.model.StreamingStarting.Value = streamingOnStartup;
