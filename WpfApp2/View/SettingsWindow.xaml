@@ -54,6 +54,14 @@
                         <TextBox Grid.Column="1" Text="{Binding AccessToken.Value, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding WaitingForAuthCode}" />
                     </Grid>
                     <Button Content="Authorize Brillenetui" Command="{Binding AuthorizeCommand}" />
+                    <GroupBox Header="Account specific tabs to show">
+                        <StackPanel>
+                            <CheckBox Content="Home" IsChecked="{Binding ShowHomeTimelineTab.Value}"/>
+                            <CheckBox Content="Notifications" IsChecked="{Binding ShowNotificationsTab.Value}"/>
+                            <CheckBox Content="Local" IsChecked="{Binding ShowLocalTimelineTab.Value}"/>
+                            <CheckBox Content="Federated" IsChecked="{Binding ShowFederatedTimelineTab.Value}"/>
+                        </StackPanel>
+                    </GroupBox>
                 </StackPanel>
             </TabItem>
             <TabItem Header="Tabs">

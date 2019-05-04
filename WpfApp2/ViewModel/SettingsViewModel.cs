@@ -31,6 +31,11 @@ namespace WpfApp2.ViewModel
             Instance = new ReactiveProperty<string>(Properties.Settings.Default.AppRegistration?.Instance);
             AccessToken = new ReactiveProperty<string>(Properties.Settings.Default.Auth?.AccessToken ?? "");
 
+            ShowHomeTimelineTab = new ReactiveProperty<bool>(Properties.Settings.Default.Tabs?.OfType<TimelineTabParameters>()?.Any(x => x.Type == TimelineType.Home) ?? false);
+            ShowLocalTimelineTab = new ReactiveProperty<bool>(Properties.Settings.Default.Tabs?.OfType<TimelineTabParameters>()?.Any(x => x.Type == TimelineType.Local) ?? false);
+            ShowFederatedTimelineTab = new ReactiveProperty<bool>(Properties.Settings.Default.Tabs?.OfType<TimelineTabParameters>()?.Any(x => x.Type == TimelineType.Federated) ?? false);
+            ShowNotificationsTab = new ReactiveProperty<bool>(Properties.Settings.Default.Tabs?.OfType<NotificationTabParameters>()?.Any() ?? false);
+
             RequestTokenCommand = Instance
                 .Select(x => !string.IsNullOrEmpty(x))
                 .ToAsyncReactiveCommand()
@@ -48,6 +53,11 @@ namespace WpfApp2.ViewModel
         public ReactiveProperty<string> Instance { get; }
         public ReactiveProperty<string> AccessToken { get; }
         private ReactiveProperty<bool> WaitingForAuthCode = new ReactiveProperty<bool>(false);
+
+        public ReactiveProperty<bool> ShowHomeTimelineTab { get; }
+        public ReactiveProperty<bool> ShowNotificationsTab { get; }
+        public ReactiveProperty<bool> ShowLocalTimelineTab { get; }
+        public ReactiveProperty<bool> ShowFederatedTimelineTab { get; }
 
         public TabsModel Tabs { get; set; }
         public ReactiveProperty<TabParameters> SelectedTab { get; } = new ReactiveProperty<TabParameters>();
@@ -91,6 +101,38 @@ namespace WpfApp2.ViewModel
         private void executeOkCommand()
         {
             Properties.Settings.Default.Save();
+            if (ShowHomeTimelineTab.Value)
+            {
+                Tabs.OpenIfNotPresent(new TimelineTabParameters() { Name = "Home", Type = TimelineType.Home });
+            }
+            else
+            {
+                Tabs.CloseTab(new TimelineTabParameters() { Type = TimelineType.Home });
+            }
+            if (ShowNotificationsTab.Value)
+            {
+                Tabs.OpenIfNotPresent(new NotificationTabParameters() { Name = "Notifications" });
+            }
+            else
+            {
+                Tabs.CloseTab(new NotificationTabParameters());
+            }
+            if (ShowLocalTimelineTab.Value)
+            {
+                Tabs.OpenIfNotPresent(new TimelineTabParameters() { Name = "Local", Type = TimelineType.Local });
+            }
+            else
+            {
+                Tabs.CloseTab(new TimelineTabParameters() { Type = TimelineType.Local });
+            }
+            if (ShowFederatedTimelineTab.Value)
+            {
+                Tabs.OpenIfNotPresent(new TimelineTabParameters() { Name = "Federated", Type = TimelineType.Federated });
+            }
+            else
+            {
+                Tabs.CloseTab(new TimelineTabParameters() { Type = TimelineType.Federated });
+            }
             OnClosing(new DialogClosingEventArgs(true));
         }
 

@@ -31,7 +31,6 @@ namespace WpfApp2.ViewModel
         public ReadOnlyObservableCollection<Notification> Notifications { get; }
 
         public ReactiveCommand OpenSettingsCommand { get; }
-        public ReactiveCommand NewTabCommand { get; }
         public ReactiveCommand<TabContentViewModelBase> CloseTabCommand { get; }
         public ReactiveCommand PrevTabCommand { get; }
         public ReactiveCommand NextTabCommand { get; }
@@ -49,13 +48,6 @@ namespace WpfApp2.ViewModel
                 {
                     var w = new SettingsWindow();
                     ((SettingsViewModel)w.DataContext).Tabs = this.model.Tabs;
-                    w.ShowDialog();
-                });
-            NewTabCommand = new ReactiveCommand()
-                .WithSubscribe(() =>
-                {
-                    var w = new NewTabWindow();
-                    ((NewTabViewModel)w.DataContext).Tabs = this.model.Tabs;
                     w.ShowDialog();
                 });
             CloseTabCommand = new ReactiveCommand<TabContentViewModelBase>()

@@ -22,6 +22,10 @@ namespace WpfApp2.Model
 
         public void SwitchToNextTab() => SelectedIndex.Value = (SelectedIndex.Value + 1) % Count;
         public void SwitchToPrevTab() => SelectedIndex.Value = (SelectedIndex.Value + Count - 1) % Count;
+        public void OpenIfNotPresent(TabParameters p)
+        {
+            if (!this.Any(x => x.Equals(p))) { Add(p); }
+        }
         public void SwitchToOrOpen(TabParameters p)
         {
             int? i = this
@@ -37,6 +41,14 @@ namespace WpfApp2.Model
                 Add(p);
                 SelectedIndex.Value = Count - 1;
             }
+        }
+        public void CloseTab(TabParameters p)
+        {
+            int? i = this
+                .Select((Item, Index) => new { Item, Index })
+                .FirstOrDefault(x => x.Item.Equals(p))
+                ?.Index;
+            if (i.HasValue) { RemoveAt(i.Value); }
         }
 
         private void InitializeAutoSave() => CollectionChanged += (o, e) => Save();
