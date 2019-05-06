@@ -6,6 +6,7 @@
              xmlns:cm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              xmlns:g="clr-namespace:System.Globalization;assembly=mscorlib"
              xmlns:local="clr-namespace:WpfApp2"
+             xmlns:prop="clr-namespace:WpfApp2.Properties"
              xmlns:v="clr-namespace:WpfApp2.View"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
@@ -32,11 +33,12 @@
                 <Setter Property="ContextMenu">
                     <Setter.Value>
                         <ContextMenu DataContext="{Binding RelativeSource={RelativeSource Self}, Path=PlacementTarget.Tag}">
-                            <MenuItem Header="_Open" InputGestureText="O" Command="{Binding Statuses.OpenCommand}" />
-                            <MenuItem Header="_Favourite" InputGestureText="F" Command="{Binding Statuses.FavouriteCommand}" />
-                            <MenuItem Header="_Boost" InputGestureText="B" Command="{Binding Statuses.ReblogCommand}" />
-                            <MenuItem Header="_Reply" InputGestureText="R" Command="{Binding Statuses.ReplyCommand}" />
-                            <MenuItem Header="_Delete" InputGestureText="Delete" Command="{Binding Statuses.DeleteCommand}" />
+                            <MenuItem Header="{x:Static prop:Resources.StatusesViewContextMenuOpen}" InputGestureText="O" Command="{Binding Statuses.OpenCommand}" />
+                            <MenuItem Header="{x:Static prop:Resources.StatusesViewContextMenuFavourite}" InputGestureText="F" Command="{Binding Statuses.FavouriteCommand}" />
+                            <MenuItem Header="{x:Static prop:Resources.StatusesViewContextMenuBoost}" InputGestureText="B" Command="{Binding Statuses.ReblogCommand}" />
+                            <MenuItem Header="{x:Static prop:Resources.StatusesViewContextMenuReply}" InputGestureText="R" Command="{Binding Statuses.ReplyCommand}" />
+                            <MenuItem Header="{x:Static prop:Resources.StatusesViewContextMenuDelete}" InputGestureText="Delete" Command="{Binding Statuses.DeleteCommand}" />
+                            <MenuItem Header="{x:Static prop:Resources.StatusesViewContextMenuOpenAccountTab}" InputGestureText="U" Command="{Binding Statuses.OpenAccountTabCommand}" />
                         </ContextMenu>
                     </Setter.Value>
                 </Setter>

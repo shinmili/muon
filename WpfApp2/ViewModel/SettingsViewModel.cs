@@ -80,7 +80,7 @@ namespace WpfApp2.ViewModel
             }
             catch (HttpRequestException)
             {
-                MessageBox.Show("Cannot connect to the instance.");
+                MessageBox.Show(Properties.Resources.InitialServerConnectionFailedMessage);
             }
         }
 
@@ -89,12 +89,12 @@ namespace WpfApp2.ViewModel
             try
             {
                 Properties.Settings.Default.Auth = await authenticationClient.ConnectWithCode(AccessToken.Value);
-                MessageBox.Show("Successfully authorized!");
+                MessageBox.Show(Properties.Resources.AuthorizedMessage);
                 WaitingForAuthCode.Value = false;
             }
             catch (ServerErrorException)
             {
-                MessageBox.Show("Authorization failed.");
+                MessageBox.Show(Properties.Resources.AuthorizationFailedMessage);
             }
         }
 

@@ -118,60 +118,60 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccountViewFollowersSuffix" xml:space="preserve">
-    <value> followers</value>
+    <value> フォロワー</value>
   </data>
   <data name="AccountViewFollowingSuffix" xml:space="preserve">
-    <value> following</value>
+    <value> フォロー</value>
   </data>
   <data name="AccountViewTootsSuffix" xml:space="preserve">
-    <value> toots</value>
+    <value> トゥート</value>
   </data>
   <data name="AuthorizationFailedMessage" xml:space="preserve">
-    <value>Authorization failed.</value>
+    <value>認証に失敗しました。</value>
   </data>
   <data name="AuthorizedMessage" xml:space="preserve">
-    <value>Successfully authorized!</value>
+    <value>認証に成功しました。</value>
   </data>
   <data name="InitialServerConnectionFailedMessage" xml:space="preserve">
-    <value>Cannot connect to the instance.</value>
+    <value>サーバに接続できません。</value>
   </data>
   <data name="MenuHeaderApp" xml:space="preserve">
-    <value>_App</value>
+    <value>アプリケーション(_A)</value>
   </data>
   <data name="MenuHeaderAppSettings" xml:space="preserve">
-    <value>_Settings</value>
+    <value>設定(_S)</value>
   </data>
   <data name="MenuHeaderTimeline" xml:space="preserve">
-    <value>_Timeline</value>
+    <value>タイムライン(_T)</value>
   </data>
   <data name="MenuHeaderTimelineReload" xml:space="preserve">
-    <value>_Reload</value>
+    <value>再読み込み(_R)</value>
   </data>
   <data name="MenuHeaderTimelineReloadOlder" xml:space="preserve">
-    <value>Reload _older toots</value>
+    <value>古いトゥートから再読み込み(_O)</value>
   </data>
   <data name="MenuHeaderTimelineStreaming" xml:space="preserve">
-    <value>_Streaming</value>
+    <value>ストリーミング(_S)</value>
   </data>
   <data name="StatusesViewContextMenuBoost" xml:space="preserve">
-    <value>_Boost</value>
+    <value>ブースト(_B)</value>
   </data>
   <data name="StatusesViewContextMenuDelete" xml:space="preserve">
-    <value>_Delete</value>
+    <value>削除(_D)</value>
   </data>
   <data name="StatusesViewContextMenuFavourite" xml:space="preserve">
-    <value>_Favourite</value>
+    <value>お気に入り(_F)</value>
   </data>
   <data name="StatusesViewContextMenuOpen" xml:space="preserve">
-    <value>_Open</value>
+    <value>開く(_O)</value>
   </data>
   <data name="StatusesViewContextMenuOpenAccountTab" xml:space="preserve">
-    <value>Open this _user's tab</value>
+    <value>このユーザのタブを開く(_U)</value>
   </data>
   <data name="StatusesViewContextMenuReply" xml:space="preserve">
-    <value>_Reply</value>
+    <value>リプライ(_R)</value>
   </data>
   <data name="TootButtonText" xml:space="preserve">
-    <value>Toot!</value>
+    <value>トゥート!</value>
   </data>
 </root>

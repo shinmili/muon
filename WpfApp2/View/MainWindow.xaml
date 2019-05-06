@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:WpfApp2"
         xmlns:v="clr-namespace:WpfApp2.View"
         xmlns:vm="clr-namespace:WpfApp2.ViewModel"
+        xmlns:prop="clr-namespace:WpfApp2.Properties"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
         Closing="Window_Closing">
@@ -18,13 +19,13 @@
     <DockPanel>
         <tb:TaskbarIcon x:Name="TaskbarIcon" ToolTipText="Mastodon"/>
         <Menu DockPanel.Dock="Top" Focusable="False">
-            <MenuItem Header="_App" Focusable="False">
-                <MenuItem Header="_Settings" Command="{Binding OpenSettingsCommand}"/>
+            <MenuItem Header="{x:Static prop:Resources.MenuHeaderApp}" Focusable="False">
+                <MenuItem Header="{x:Static prop:Resources.MenuHeaderAppSettings}" Command="{Binding OpenSettingsCommand}"/>
             </MenuItem>
-            <MenuItem Header="_Timeline" Focusable="False">
-                <MenuItem Header="_Reload" InputGestureText="F5" Command="{Binding SelectedTab.Value.ReloadCommand}"/>
-                <MenuItem Header="Reload _older toots" InputGestureText="Shift+F5" Command="{Binding SelectedTab.Value.ReloadOlderCommand}"/>
-                <MenuItem Header="_Streaming" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding SelectedTab.Value.IsStreaming.Value, Mode=OneWay}" Command="{Binding SelectedTab.Value.ToggleStreamingCommand}"/>
+            <MenuItem Header="{x:Static prop:Resources.MenuHeaderTimeline}" Focusable="False">
+                <MenuItem Header="{x:Static prop:Resources.MenuHeaderTimelineReload}" InputGestureText="F5" Command="{Binding SelectedTab.Value.ReloadCommand}"/>
+                <MenuItem Header="{x:Static prop:Resources.MenuHeaderTimelineReloadOlder}" InputGestureText="Shift+F5" Command="{Binding SelectedTab.Value.ReloadOlderCommand}"/>
+                <MenuItem Header="{x:Static prop:Resources.MenuHeaderTimelineStreaming}" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding SelectedTab.Value.IsStreaming.Value, Mode=OneWay}" Command="{Binding SelectedTab.Value.ToggleStreamingCommand}"/>
             </MenuItem>
         </Menu>
         <v:NewTootBox x:Name="TootBox" DockPanel.Dock="Top" DataContext="{Binding NewTootBoxViewModel}"/>

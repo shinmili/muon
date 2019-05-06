@@ -4,67 +4,230 @@
 //     ランタイム バージョン:4.0.30319.42000
 //
 //     このファイルへの変更は、以下の状況下で不正な動作の原因になったり、
-//     コードが再生成されるときに損失したりします
+//     コードが再生成されるときに損失したりします。
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WpfApp2.Properties
-{
-
-
+namespace WpfApp2.Properties {
+    using System;
+    
+    
     /// <summary>
     ///   ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
     /// </summary>
-    // このクラスは StronglyTypedResourceBuilder クラスによって ResGen
+    // このクラスは StronglyTypedResourceBuilder クラスが ResGen
     // または Visual Studio のようなツールを使用して自動生成されました。
     // メンバーを追加または削除するには、.ResX ファイルを編集して、/str オプションと共に
-    // ResGen を実行し直すか、または VS プロジェクトをリビルドします。
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    // ResGen を実行し直すか、または VS プロジェクトをビルドし直します。
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources
-    {
-
+    public class Resources {
+        
         private static global::System.Resources.ResourceManager resourceMan;
-
+        
         private static global::System.Globalization.CultureInfo resourceCulture;
-
+        
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Resources()
-        {
+        internal Resources() {
         }
-
+        
         /// <summary>
-        ///   このクラスで使用されるキャッシュされた ResourceManager インスタンスを返します。
+        ///   このクラスで使用されているキャッシュされた ResourceManager インスタンスを返します。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager
-        {
-            get
-            {
-                if ((resourceMan == null))
-                {
+        public static global::System.Resources.ResourceManager ResourceManager {
+            get {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("WpfApp2.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
             }
         }
-
+        
         /// <summary>
         ///   すべてについて、現在のスレッドの CurrentUICulture プロパティをオーバーライドします
         ///   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture
-        {
-            get
-            {
+        public static global::System.Globalization.CultureInfo Culture {
+            get {
                 return resourceCulture;
             }
-            set
-            {
+            set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///    followers に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string AccountViewFollowersSuffix {
+            get {
+                return ResourceManager.GetString("AccountViewFollowersSuffix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    following に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string AccountViewFollowingSuffix {
+            get {
+                return ResourceManager.GetString("AccountViewFollowingSuffix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    toots に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string AccountViewTootsSuffix {
+            get {
+                return ResourceManager.GetString("AccountViewTootsSuffix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Authorization failed. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string AuthorizationFailedMessage {
+            get {
+                return ResourceManager.GetString("AuthorizationFailedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Successfully authorized! に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string AuthorizedMessage {
+            get {
+                return ResourceManager.GetString("AuthorizedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cannot connect to the instance. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string InitialServerConnectionFailedMessage {
+            get {
+                return ResourceManager.GetString("InitialServerConnectionFailedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   _App に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MenuHeaderApp {
+            get {
+                return ResourceManager.GetString("MenuHeaderApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   _Settings に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MenuHeaderAppSettings {
+            get {
+                return ResourceManager.GetString("MenuHeaderAppSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   _Timeline に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MenuHeaderTimeline {
+            get {
+                return ResourceManager.GetString("MenuHeaderTimeline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   _Reload に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MenuHeaderTimelineReload {
+            get {
+                return ResourceManager.GetString("MenuHeaderTimelineReload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Reload _older toots に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MenuHeaderTimelineReloadOlder {
+            get {
+                return ResourceManager.GetString("MenuHeaderTimelineReloadOlder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   _Streaming に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string MenuHeaderTimelineStreaming {
+            get {
+                return ResourceManager.GetString("MenuHeaderTimelineStreaming", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   _Boost に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string StatusesViewContextMenuBoost {
+            get {
+                return ResourceManager.GetString("StatusesViewContextMenuBoost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   _Delete に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string StatusesViewContextMenuDelete {
+            get {
+                return ResourceManager.GetString("StatusesViewContextMenuDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   _Favourite に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string StatusesViewContextMenuFavourite {
+            get {
+                return ResourceManager.GetString("StatusesViewContextMenuFavourite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   _Open に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string StatusesViewContextMenuOpen {
+            get {
+                return ResourceManager.GetString("StatusesViewContextMenuOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Open this _user&apos;s tab に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string StatusesViewContextMenuOpenAccountTab {
+            get {
+                return ResourceManager.GetString("StatusesViewContextMenuOpenAccountTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   _Reply に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string StatusesViewContextMenuReply {
+            get {
+                return ResourceManager.GetString("StatusesViewContextMenuReply", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Toot! に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string TootButtonText {
+            get {
+                return ResourceManager.GetString("TootButtonText", resourceCulture);
             }
         }
     }

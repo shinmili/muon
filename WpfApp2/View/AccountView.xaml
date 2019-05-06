@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WpfApp2"
+             xmlns:prop="clr-namespace:WpfApp2.Properties"
              xmlns:v="clr-namespace:WpfApp2.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -33,19 +34,19 @@
                 <Run Text="{Binding Account.Value.StatusesCount}"/>
             </Hyperlink>
         </TextBlock>
-        <TextBlock Grid.Row="1" Grid.Column="2" Text=" Toots"/>
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="{x:Static prop:Resources.AccountViewTootsSuffix}"/>
         <TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Right">
             <Hyperlink NavigateUri="{Binding FollowingUrl.Value}" RequestNavigate="Hyperlink_RequestNavigate">
                 <Run Text="{Binding Account.Value.FollowingCount}"/>
             </Hyperlink>
         </TextBlock>
-        <TextBlock Grid.Row="2" Grid.Column="2" Text=" Following"/>
+        <TextBlock Grid.Row="2" Grid.Column="2" Text="{x:Static prop:Resources.AccountViewFollowingSuffix}"/>
         <TextBlock Grid.Row="3" Grid.Column="1" HorizontalAlignment="Right">
             <Hyperlink NavigateUri="{Binding FollowersUrl.Value}" RequestNavigate="Hyperlink_RequestNavigate">
                 <Run Text="{Binding Account.Value.FollowersCount}"/>
             </Hyperlink>
         </TextBlock>
-        <TextBlock Grid.Row="3" Grid.Column="2" Text=" Followers"/>
+        <TextBlock Grid.Row="3" Grid.Column="2" Text="{x:Static prop:Resources.AccountViewFollowersSuffix}"/>
         <v:StatusesView Grid.Row="5" Grid.ColumnSpan="3"/>
     </Grid>
 </UserControl>
