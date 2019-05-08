@@ -73,7 +73,7 @@ namespace WpfApp2.Properties {
   <TabParameters xsi:type=""TimelineTabParameters"">
     <Name>Local</Name>
     <Type>Local</Type>
-    <StreamingOnStartup>false</StreamingOnStartup>
+    <StreamingOnStartup>true</StreamingOnStartup>
   </TabParameters>
   <TabParameters xsi:type=""TimelineTabParameters"">
     <Name>Federated</Name>

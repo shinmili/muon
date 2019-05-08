@@ -100,9 +100,9 @@ namespace WpfApp2.Model
     class LocalTimelineModel : TimelineModelBase
     {
         public LocalTimelineModel(IMastodonClient client) : base(client) { }
-        public override bool IsStreamingAvailable => false;
+        public override bool IsStreamingAvailable => true;
         protected override Task<MastodonList<Status>> GetTimeline(ArrayOptions options) => client.GetPublicTimeline(options, true);
-        protected override TimelineStreaming GetStreaming() => null;
+        protected override TimelineStreaming GetStreaming() => ((MastodonClient)client).GetPublicLocalStreaming();
     }
 
     class FederatedTimelineModel : TimelineModelBase

@@ -26,7 +26,7 @@
   &lt;TabParameters xsi:type="TimelineTabParameters"&gt;
     &lt;Name&gt;Local&lt;/Name&gt;
     &lt;Type&gt;Local&lt;/Type&gt;
-    &lt;StreamingOnStartup&gt;false&lt;/StreamingOnStartup&gt;
+    &lt;StreamingOnStartup&gt;true&lt;/StreamingOnStartup&gt;
   &lt;/TabParameters&gt;
   &lt;TabParameters xsi:type="TimelineTabParameters"&gt;
     &lt;Name&gt;Federated&lt;/Name&gt;
