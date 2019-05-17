@@ -19,10 +19,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApp2.Model;
-using WpfApp2.ViewModel;
+using Muon.Model;
+using Muon.ViewModel;
 
-namespace WpfApp2.View
+namespace Muon.View
 {
     /// <summary>
     /// MainWindow.xaml の相互作用ロジック

@@ -15,9 +15,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WpfApp2.ViewModel;
+using Muon.ViewModel;
 
-namespace WpfApp2.View
+namespace Muon.View
 {
     /// <summary>
     /// TootBox.xaml の相互作用ロジック

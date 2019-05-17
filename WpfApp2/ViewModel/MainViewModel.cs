@@ -11,10 +11,10 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using WpfApp2.Model;
-using WpfApp2.View;
+using Muon.Model;
+using Muon.View;
 
-namespace WpfApp2.ViewModel
+namespace Muon.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {

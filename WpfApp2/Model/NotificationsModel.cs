@@ -9,7 +9,7 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp2.Model
+namespace Muon.Model
 {
     public class NotificationsModel : PagenatedCollection<Notification>
     {

@@ -5,9 +5,9 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
-using WpfApp2.Model;
+using Muon.Model;
 
-namespace WpfApp2.ViewModel
+namespace Muon.ViewModel
 {
     public class StatusesViewModel
     {

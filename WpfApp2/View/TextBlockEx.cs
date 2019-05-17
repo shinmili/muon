@@ -12,7 +12,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace WpfApp2.View
+namespace Muon.View
 {
     public class TextBlockEx : TextBlock
     {

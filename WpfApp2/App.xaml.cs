@@ -5,9 +5,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
-using WpfApp2.View;
+using Muon.View;
 
-namespace WpfApp2
+namespace Muon
 {
     /// <summary>
     /// App.xaml の相互作用ロジック
@@ -16,7 +16,7 @@ namespace WpfApp2
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            if (WpfApp2.Properties.Settings.Default.Auth == null)
+            if (Muon.Properties.Settings.Default.Auth == null)
             {
                 ShutdownMode = ShutdownMode.OnExplicitShutdown;
                 bool? authResult = new SettingsWindow().ShowDialog();

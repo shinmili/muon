@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace WpfApp2.Model
+namespace Muon.Model
 {
     public class TabsModel : ObservableCollection<TabParameters>
     {

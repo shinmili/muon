@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
-namespace WpfApp2.Model
+namespace Muon.Model
 {
     [XmlInclude(typeof(TimelineTabParameters))]
     [XmlInclude(typeof(AccountTabParameters))]

@@ -15,9 +15,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Navigation;
-using WpfApp2.Model;
+using Muon.Model;
 
-namespace WpfApp2.ViewModel
+namespace Muon.ViewModel
 {
     public class SettingsViewModel : INotifyPropertyChanged
     {

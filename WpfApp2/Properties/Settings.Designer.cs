@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WpfApp2.Properties {
+namespace Muon.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -81,9 +81,9 @@ namespace WpfApp2.Properties {
     <StreamingOnStartup>true</StreamingOnStartup>
   </TabParameters>
 </ArrayOfTabParameters>")]
-        public global::System.Collections.Generic.List<WpfApp2.Model.TabParameters> Tabs {
+        public global::System.Collections.Generic.List<Muon.Model.TabParameters> Tabs {
             get {
-                return ((global::System.Collections.Generic.List<WpfApp2.Model.TabParameters>)(this["Tabs"]));
+                return ((global::System.Collections.Generic.List<Muon.Model.TabParameters>)(this["Tabs"]));
             }
             set {
                 this["Tabs"] = value;

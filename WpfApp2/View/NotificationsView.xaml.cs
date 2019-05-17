@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp2.View
+namespace Muon.View
 {
     /// <summary>
     /// NotificationsView.xaml の相互作用ロジック

@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using WpfApp2.ViewModel;
+using Muon.ViewModel;
 
-namespace WpfApp2.View
+namespace Muon.View
 {
     public class TabTemplateSelector : DataTemplateSelector
     {

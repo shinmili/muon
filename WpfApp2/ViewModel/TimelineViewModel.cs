@@ -2,9 +2,9 @@
 using Mastonet.Entities;
 using Reactive.Bindings;
 using System.ComponentModel;
-using WpfApp2.Model;
+using Muon.Model;
 
-namespace WpfApp2.ViewModel
+namespace Muon.ViewModel
 {
     public class TimelineViewModel : TabContentViewModelBase, INotifyPropertyChanged
     {

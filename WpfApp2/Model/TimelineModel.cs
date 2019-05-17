@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp2.Model
+namespace Muon.Model
 {
     public abstract class TimelineModelBase : PagenatedCollection<Status>
     {

@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using WpfApp2.Model;
+using Muon.Model;
 
-namespace WpfApp2.ViewModel
+namespace Muon.ViewModel
 {
     public class AccountTabViewModel : TabContentViewModelBase
     {

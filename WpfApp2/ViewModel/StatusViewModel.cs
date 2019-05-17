@@ -11,7 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media.Imaging;
 
-namespace WpfApp2.ViewModel
+namespace Muon.ViewModel
 {
     public class StatusViewModel : INotifyPropertyChanged
     {
