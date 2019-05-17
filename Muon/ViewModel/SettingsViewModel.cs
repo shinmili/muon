@@ -52,6 +52,7 @@ namespace Muon.ViewModel
 
         public ReactiveProperty<string> Instance { get; }
         public ReactiveProperty<string> AccessToken { get; }
+        public string AuthorizeButtonText => string.Format(Properties.Resources.AuthorizeAppButtonText, Properties.Settings.Default.AppName);
         private ReactiveProperty<bool> WaitingForAuthCode = new ReactiveProperty<bool>(false);
 
         public ReactiveProperty<bool> ShowHomeTimelineTab { get; }

@@ -88,11 +88,29 @@ namespace Muon.Properties {
         }
         
         /// <summary>
+        ///   Authorization code に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string AuthorizationCode {
+            get {
+                return ResourceManager.GetString("AuthorizationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Authorization failed. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string AuthorizationFailedMessage {
             get {
                 return ResourceManager.GetString("AuthorizationFailedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Authorize {0} に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string AuthorizeAppButtonText {
+            get {
+                return ResourceManager.GetString("AuthorizeAppButtonText", resourceCulture);
             }
         }
         
@@ -106,11 +124,29 @@ namespace Muon.Properties {
         }
         
         /// <summary>
+        ///   Cancel に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string CancelButtonText {
+            get {
+                return ResourceManager.GetString("CancelButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cannot connect to the instance. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string InitialServerConnectionFailedMessage {
             get {
                 return ResourceManager.GetString("InitialServerConnectionFailedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Instance to connect に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string InstanceToConnect {
+            get {
+                return ResourceManager.GetString("InstanceToConnect", resourceCulture);
             }
         }
         
@@ -165,6 +201,96 @@ namespace Muon.Properties {
         public static string MenuHeaderTimelineStreaming {
             get {
                 return ResourceManager.GetString("MenuHeaderTimelineStreaming", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   OK に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string OkButtonText {
+            get {
+                return ResourceManager.GetString("OkButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Open authorization page に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string OpenAuthPageButtonText {
+            get {
+                return ResourceManager.GetString("OpenAuthPageButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Federated に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsAccountTabsFederated {
+            get {
+                return ResourceManager.GetString("SettingsAccountTabsFederated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Account specific tabs to show に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsAccountTabsHeader {
+            get {
+                return ResourceManager.GetString("SettingsAccountTabsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Home に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsAccountTabsHome {
+            get {
+                return ResourceManager.GetString("SettingsAccountTabsHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Local に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsAccountTabsLocal {
+            get {
+                return ResourceManager.GetString("SettingsAccountTabsLocal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Notifications に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsAccountTabsNotifications {
+            get {
+                return ResourceManager.GetString("SettingsAccountTabsNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Account に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsTabAccount {
+            get {
+                return ResourceManager.GetString("SettingsTabAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Tabs に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsTabTabs {
+            get {
+                return ResourceManager.GetString("SettingsTabTabs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Settings に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsWindowTitle {
+            get {
+                return ResourceManager.GetString("SettingsWindowTitle", resourceCulture);
             }
         }
         

@@ -126,14 +126,26 @@
   <data name="AccountViewTootsSuffix" xml:space="preserve">
     <value> toots</value>
   </data>
+  <data name="AuthorizationCode" xml:space="preserve">
+    <value>Authorization code</value>
+  </data>
   <data name="AuthorizationFailedMessage" xml:space="preserve">
     <value>Authorization failed.</value>
+  </data>
+  <data name="AuthorizeAppButtonText" xml:space="preserve">
+    <value>Authorize {0}</value>
   </data>
   <data name="AuthorizedMessage" xml:space="preserve">
     <value>Successfully authorized!</value>
   </data>
+  <data name="CancelButtonText" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="InitialServerConnectionFailedMessage" xml:space="preserve">
     <value>Cannot connect to the instance.</value>
+  </data>
+  <data name="InstanceToConnect" xml:space="preserve">
+    <value>Instance to connect</value>
   </data>
   <data name="MenuHeaderApp" xml:space="preserve">
     <value>_App</value>
@@ -152,6 +164,36 @@
   </data>
   <data name="MenuHeaderTimelineStreaming" xml:space="preserve">
     <value>_Streaming</value>
+  </data>
+  <data name="OkButtonText" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OpenAuthPageButtonText" xml:space="preserve">
+    <value>Open authorization page</value>
+  </data>
+  <data name="SettingsAccountTabsFederated" xml:space="preserve">
+    <value>Federated</value>
+  </data>
+  <data name="SettingsAccountTabsHeader" xml:space="preserve">
+    <value>Account specific tabs to show</value>
+  </data>
+  <data name="SettingsAccountTabsHome" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="SettingsAccountTabsLocal" xml:space="preserve">
+    <value>Local</value>
+  </data>
+  <data name="SettingsAccountTabsNotifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="SettingsTabAccount" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="SettingsTabTabs" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="SettingsWindowTitle" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="StatusesViewContextMenuBoost" xml:space="preserve">
     <value>_Boost</value>

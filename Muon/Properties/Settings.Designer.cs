@@ -47,18 +47,6 @@ namespace Muon.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("S(K(SII))(S(S(KS)K)(K(SII)))")]
-        public string AppName {
-            get {
-                return ((string)(this["AppName"]));
-            }
-            set {
-                this["AppName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute(@"<ArrayOfTabParameters xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
   <TabParameters xsi:type=""TimelineTabParameters"">
     <Name>Home</Name>
@@ -87,6 +75,18 @@ namespace Muon.Properties {
             }
             set {
                 this["Tabs"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Muon")]
+        public string AppName {
+            get {
+                return ((string)(this["AppName"]));
+            }
+            set {
+                this["AppName"] = value;
             }
         }
     }

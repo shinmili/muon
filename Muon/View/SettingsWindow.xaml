@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Muon"
+        xmlns:prop="clr-namespace:Muon.Properties"
         mc:Ignorable="d"
-        Title="Settings" Height="450" Width="800">
+        Title="{x:Static prop:Resources.SettingsWindowTitle}" Height="450" Width="800">
     <DockPanel>
         <Grid DockPanel.Dock="Bottom">
             <Grid.Resources>
@@ -19,11 +20,11 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Command="{Binding OkCommand}">OK</Button>
-            <Button Grid.Column="2" Command="{Binding CancelCommand}">Cancel</Button>
+            <Button Grid.Column="1" Command="{Binding OkCommand}" Content="{x:Static prop:Resources.OkButtonText}"/>
+            <Button Grid.Column="2" Command="{Binding CancelCommand}" Content="{x:Static prop:Resources.CancelButtonText}"/>
         </Grid>
         <TabControl Margin="5">
-            <TabItem Header="Account">
+            <TabItem Header="{x:Static prop:Resources.SettingsTabAccount}" Height="22" VerticalAlignment="Bottom">
                 <StackPanel Margin="5">
                     <StackPanel.Resources>
                         <Style TargetType="{x:Type Button}">
@@ -41,30 +42,30 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0">Instance to connect</TextBlock>
+                        <TextBlock Grid.Column="0" Text="{x:Static prop:Resources.InstanceToConnect}"/>
                         <TextBox Grid.Column="1" Text="{Binding Instance.Value, UpdateSourceTrigger=PropertyChanged}" />
                     </Grid>
-                    <Button Content="Open authorization page" Command="{Binding RequestTokenCommand}" />
+                    <Button Content="{x:Static prop:Resources.OpenAuthPageButtonText}" Command="{Binding RequestTokenCommand}" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0">Authorization code</TextBlock>
+                        <TextBlock Grid.Column="0" Text="{x:Static prop:Resources.AuthorizationCode}"/>
                         <TextBox Grid.Column="1" Text="{Binding AccessToken.Value, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding WaitingForAuthCode}" />
                     </Grid>
-                    <Button Content="Authorize Brillenetui" Command="{Binding AuthorizeCommand}" />
-                    <GroupBox Header="Account specific tabs to show">
+                    <Button Command="{Binding AuthorizeCommand}" Content="{Binding AuthorizeButtonText}"/>
+                    <GroupBox Header="{x:Static prop:Resources.SettingsAccountTabsHeader}">
                         <StackPanel>
-                            <CheckBox Content="Home" IsChecked="{Binding ShowHomeTimelineTab.Value}"/>
-                            <CheckBox Content="Notifications" IsChecked="{Binding ShowNotificationsTab.Value}"/>
-                            <CheckBox Content="Local" IsChecked="{Binding ShowLocalTimelineTab.Value}"/>
-                            <CheckBox Content="Federated" IsChecked="{Binding ShowFederatedTimelineTab.Value}"/>
+                            <CheckBox Content="{x:Static prop:Resources.SettingsAccountTabsHome}" IsChecked="{Binding ShowHomeTimelineTab.Value}"/>
+                            <CheckBox Content="{x:Static prop:Resources.SettingsAccountTabsNotifications}" IsChecked="{Binding ShowNotificationsTab.Value}"/>
+                            <CheckBox Content="{x:Static prop:Resources.SettingsAccountTabsLocal}" IsChecked="{Binding ShowLocalTimelineTab.Value}"/>
+                            <CheckBox Content="{x:Static prop:Resources.SettingsAccountTabsFederated}" IsChecked="{Binding ShowFederatedTimelineTab.Value}"/>
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>
             </TabItem>
-            <TabItem Header="Tabs">
+            <TabItem Header="{x:Static prop:Resources.SettingsTabTabs}">
                 <StackPanel Orientation="Horizontal">
                     <ListBox Margin="5" ItemsSource="{Binding Tabs}" SelectedItem="{Binding SelectedTab.Value}" DisplayMemberPath="Name"/>
                     <StackPanel>

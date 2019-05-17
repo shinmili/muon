@@ -126,14 +126,26 @@
   <data name="AccountViewTootsSuffix" xml:space="preserve">
     <value> トゥート</value>
   </data>
+  <data name="AuthorizationCode" xml:space="preserve">
+    <value>認証コード</value>
+  </data>
   <data name="AuthorizationFailedMessage" xml:space="preserve">
     <value>認証に失敗しました。</value>
+  </data>
+  <data name="AuthorizeAppButtonText" xml:space="preserve">
+    <value>{0}を認証する</value>
   </data>
   <data name="AuthorizedMessage" xml:space="preserve">
     <value>認証に成功しました。</value>
   </data>
+  <data name="CancelButtonText" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
   <data name="InitialServerConnectionFailedMessage" xml:space="preserve">
     <value>サーバに接続できません。</value>
+  </data>
+  <data name="InstanceToConnect" xml:space="preserve">
+    <value>接続するインスタンス</value>
   </data>
   <data name="MenuHeaderApp" xml:space="preserve">
     <value>アプリケーション(_A)</value>
@@ -152,6 +164,36 @@
   </data>
   <data name="MenuHeaderTimelineStreaming" xml:space="preserve">
     <value>ストリーミング(_S)</value>
+  </data>
+  <data name="OkButtonText" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OpenAuthPageButtonText" xml:space="preserve">
+    <value>認証ページを開く</value>
+  </data>
+  <data name="SettingsAccountTabsFederated" xml:space="preserve">
+    <value>連合</value>
+  </data>
+  <data name="SettingsAccountTabsHeader" xml:space="preserve">
+    <value>アカウント固有タブの表示</value>
+  </data>
+  <data name="SettingsAccountTabsHome" xml:space="preserve">
+    <value>ホーム</value>
+  </data>
+  <data name="SettingsAccountTabsLocal" xml:space="preserve">
+    <value>ローカル</value>
+  </data>
+  <data name="SettingsAccountTabsNotifications" xml:space="preserve">
+    <value>通知</value>
+  </data>
+  <data name="SettingsTabAccount" xml:space="preserve">
+    <value>アカウント</value>
+  </data>
+  <data name="SettingsTabTabs" xml:space="preserve">
+    <value>タブ</value>
+  </data>
+  <data name="SettingsWindowTitle" xml:space="preserve">
+    <value>設定</value>
   </data>
   <data name="StatusesViewContextMenuBoost" xml:space="preserve">
     <value>ブースト(_B)</value>

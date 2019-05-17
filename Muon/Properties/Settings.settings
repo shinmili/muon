@@ -8,9 +8,6 @@
     <Setting Name="Auth" Type="Mastonet.Entities.Auth" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="AppName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">S(K(SII))(S(S(KS)K)(K(SII)))</Value>
-    </Setting>
     <Setting Name="Tabs" Type="System.Collections.Generic.List&lt;Muon.Model.TabParameters&gt;" Scope="User">
       <Value Profile="(Default)">&lt;ArrayOfTabParameters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;TabParameters xsi:type="TimelineTabParameters"&gt;
@@ -34,6 +31,9 @@
     &lt;StreamingOnStartup&gt;true&lt;/StreamingOnStartup&gt;
   &lt;/TabParameters&gt;
 &lt;/ArrayOfTabParameters&gt;</Value>
+    </Setting>
+    <Setting Name="AppName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Muon</Value>
     </Setting>
   </Settings>
 </SettingsFile>
