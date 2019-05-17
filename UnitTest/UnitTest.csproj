@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WpfApp2\Muon.csproj" />
+    <ProjectReference Include="..\Muon\Muon.csproj" />
   </ItemGroup>
 
 </Project>
