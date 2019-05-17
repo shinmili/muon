@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="WpfApp2.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Muon.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="AppRegistration" Type="Mastonet.Entities.AppRegistration" Scope="User">
@@ -11,7 +11,7 @@
     <Setting Name="AppName" Type="System.String" Scope="User">
       <Value Profile="(Default)">S(K(SII))(S(S(KS)K)(K(SII)))</Value>
     </Setting>
-    <Setting Name="Tabs" Type="System.Collections.Generic.List&lt;WpfApp2.Model.TabParameters&gt;" Scope="User">
+    <Setting Name="Tabs" Type="System.Collections.Generic.List&lt;Muon.Model.TabParameters&gt;" Scope="User">
       <Value Profile="(Default)">&lt;ArrayOfTabParameters xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
   &lt;TabParameters xsi:type="TimelineTabParameters"&gt;
     &lt;Name&gt;Home&lt;/Name&gt;
