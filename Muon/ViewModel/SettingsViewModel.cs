@@ -42,7 +42,7 @@ namespace Muon.ViewModel
                 .WithSubscribe(executeRequestTokenCommand);
 
             AuthorizeCommand = AccessToken
-                .CombineLatest(WaitingForAuthCode, (token, waiting) => waiting && token.Length == 64)
+                .CombineLatest(WaitingForAuthCode, (token, waiting) => waiting && token.Length > 0)
                 .ToAsyncReactiveCommand()
                 .WithSubscribe(executeAuthorizeCommand);
 
