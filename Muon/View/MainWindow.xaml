@@ -16,7 +16,13 @@
         <KeyBinding Gesture="Shift+F5" Command="{Binding SelectedTab.Value.ReloadOlderCommand}"/>
         <KeyBinding Gesture="Ctrl+S" Command="{Binding SelectedTab.Value.ToggleStreamingCommand}"/>
     </Window.InputBindings>
-    <DockPanel>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
         <tb:TaskbarIcon x:Name="TaskbarIcon" ToolTipText="Mastodon"/>
         <Menu DockPanel.Dock="Top" Focusable="False">
             <MenuItem Header="{x:Static prop:Resources.MenuHeaderApp}" Focusable="False">
@@ -28,8 +34,8 @@
                 <MenuItem Header="{x:Static prop:Resources.MenuHeaderTimelineStreaming}" InputGestureText="Ctrl+S" IsCheckable="True" IsChecked="{Binding SelectedTab.Value.IsStreaming.Value, Mode=OneWay}" Command="{Binding SelectedTab.Value.ToggleStreamingCommand}"/>
             </MenuItem>
         </Menu>
-        <v:NewTootBox x:Name="TootBox" DockPanel.Dock="Top" DataContext="{Binding NewTootBoxViewModel}"/>
-        <TabControl TabStripPlacement="Bottom" x:Name="Tab" Height="auto" ItemsSource="{Binding TabViewModels}" SelectedItem="{Binding SelectedTab.Value}" SelectedIndex="{Binding SelectedTabIndex.Value, Mode=TwoWay}">
+        <v:NewTootBox x:Name="TootBox" Grid.Row="1" DataContext="{Binding NewTootBoxViewModel}"/>
+        <TabControl Grid.Row="2" TabStripPlacement="Bottom" x:Name="Tab" Height="auto" ItemsSource="{Binding TabViewModels}" SelectedItem="{Binding SelectedTab.Value}" SelectedIndex="{Binding SelectedTabIndex.Value, Mode=TwoWay}">
             <TabControl.InputBindings>
                 <KeyBinding Key="A" Command="{Binding PrevTabCommand}"/>
                 <KeyBinding Gesture="Ctrl+PageUp" Command="{Binding PrevTabCommand}"/>
@@ -68,5 +74,5 @@
                 <v:TabTemplateSelector />
             </TabControl.ContentTemplateSelector>
         </TabControl>
-    </DockPanel>
+    </Grid>
 </Window>
