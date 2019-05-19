@@ -4,4 +4,4 @@ muonはOpenTween的な操作感を目指したMastodonクライアントです
 
 # license
 
-MIT License
+[MIT License](https://opensource.org/licenses/MIT)
