@@ -20,7 +20,11 @@ namespace Muon
             {
                 ShutdownMode = ShutdownMode.OnExplicitShutdown;
                 bool? authResult = new SettingsWindow().ShowDialog();
-                if (authResult != true) { Shutdown(); }
+                if (authResult != true)
+                {
+                    Shutdown();
+                    return;
+                }
                 ShutdownMode = ShutdownMode.OnLastWindowClose;
             }
             new MainWindow().Show();
