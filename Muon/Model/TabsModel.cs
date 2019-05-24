@@ -1,4 +1,6 @@
-﻿using Reactive.Bindings;
+﻿using Muon.Properties;
+using Reactive.Bindings;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -9,15 +11,20 @@ namespace Muon.Model
     {
         public ReactiveProperty<int> SelectedIndex { get; } = new ReactiveProperty<int>();
 
-        public TabsModel() => InitializeAutoSave();
-        public TabsModel(List<TabParameters> list) : base(list) => InitializeAutoSave();
-        public TabsModel(IEnumerable<TabParameters> collection) : base(collection) => InitializeAutoSave();
+        [NonSerialized]
+        private readonly Settings settings;
+
+        internal TabsModel(Settings settings) : base(settings.Tabs)
+        {
+            this.settings = settings;
+            CollectionChanged += (o, e) => Save();
+        }
 
         public void Save()
         {
-            Properties.Settings.Default.Reload();
-            Properties.Settings.Default.Tabs = this.ToList();
-            Properties.Settings.Default.Save();
+            settings.Reload();
+            settings.Tabs = this.ToList();
+            settings.Save();
         }
 
         public void SwitchToNextTab() => SelectedIndex.Value = (SelectedIndex.Value + 1) % Count;
@@ -50,7 +57,5 @@ namespace Muon.Model
                 ?.Index;
             if (i.HasValue) { RemoveAt(i.Value); }
         }
-
-        private void InitializeAutoSave() => CollectionChanged += (o, e) => Save();
     }
 }

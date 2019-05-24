@@ -35,7 +35,7 @@ namespace Muon.View
             var vm = new MainViewModel(new MainModel(
                 new ReactiveProperty<Status>(),
                 new MastodonClient(Properties.Settings.Default.AppRegistration, Properties.Settings.Default.Auth),
-                new TabsModel(Properties.Settings.Default.Tabs)));
+                new TabsModel(Properties.Settings.Default)));
             DataContext = vm;
             (vm.Notifications as INotifyCollectionChanged).CollectionChanged += MainWindow_CollectionChanged;
         }
