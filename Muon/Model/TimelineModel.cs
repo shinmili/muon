@@ -102,7 +102,7 @@ namespace Muon.Model
         public LocalTimelineModel(IMastodonClient client) : base(client) { }
         public override bool IsStreamingAvailable => true;
         protected override Task<MastodonList<Status>> GetTimeline(ArrayOptions options) => client.GetPublicTimeline(options, true);
-        protected override TimelineStreaming GetStreaming() => ((MastodonClient)client).GetPublicLocalStreaming();
+        protected override TimelineStreaming GetStreaming() => client.GetPublicLocalStreaming();
     }
 
     class FederatedTimelineModel : TimelineModelBase
