@@ -55,7 +55,8 @@ namespace Muon.Model
                 .Select((Item, Index) => new { Item, Index })
                 .FirstOrDefault(x => x.Item.Equals(p))
                 ?.Index;
-            if (i.HasValue) { RemoveAt(i.Value); }
+            if (i.HasValue) { CloseTab(i.Value); }
         }
+        public void CloseTab(int index) => RemoveAt(index);
     }
 }

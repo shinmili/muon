@@ -53,7 +53,7 @@ namespace Muon.ViewModel
             CloseTabCommand = new ReactiveCommand<TabContentViewModelBase>()
                 .WithSubscribe(vm =>
                 {
-                    this.model.Tabs.RemoveAt(TabViewModels.IndexOf(vm));
+                    this.model.Tabs.CloseTab(TabViewModels.IndexOf(vm));
                 });
             NextTabCommand = new ReactiveCommand()
                 .WithSubscribe(this.model.Tabs.SwitchToNextTab);
