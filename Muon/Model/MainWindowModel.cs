@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace Muon.Model
 {
-    public class MainModel : INotifyPropertyChanged
+    public class MainWindowModel : INotifyPropertyChanged
     {
         public ReactiveProperty<Status> InReplyTo { get; }
         public MastodonClient Client { get; }
         public TabsModel Tabs { get; }
 
-        public MainModel(ReactiveProperty<Status> irt, MastodonClient cli, TabsModel tabs)
+        public MainWindowModel(ReactiveProperty<Status> irt, MastodonClient cli, TabsModel tabs)
         {
             InReplyTo = irt;
             Client = cli;

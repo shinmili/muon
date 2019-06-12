@@ -32,7 +32,7 @@ namespace Muon.View
         public MainWindow()
         {
             InitializeComponent();
-            var vm = new MainViewModel(new MainModel(
+            var vm = new MainWindowViewModel(new MainWindowModel(
                 new ReactiveProperty<Status>(),
                 new MastodonClient(Properties.Settings.Default.AppRegistration, Properties.Settings.Default.Auth),
                 new TabsModel(Properties.Settings.Default)));

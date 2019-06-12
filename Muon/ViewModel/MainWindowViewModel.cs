@@ -16,11 +16,11 @@ using Muon.View;
 
 namespace Muon.ViewModel
 {
-    public class MainViewModel : INotifyPropertyChanged
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private MainModel model;
+        private MainWindowModel model;
 
         public NewTootBoxViewModel NewTootBoxViewModel { get; }
 
@@ -35,7 +35,7 @@ namespace Muon.ViewModel
         public ReactiveCommand PrevTabCommand { get; }
         public ReactiveCommand NextTabCommand { get; }
 
-        public MainViewModel(MainModel model)
+        public MainWindowViewModel(MainWindowModel model)
         {
             this.model = model;
             NewTootBoxViewModel = new NewTootBoxViewModel(this.model.InReplyTo, this.model.Client);

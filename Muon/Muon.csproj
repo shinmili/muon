@@ -107,7 +107,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\MainModel.cs" />
+    <Compile Include="Model\MainWindowModel.cs" />
     <Compile Include="Model\NotificationsModel.cs" />
     <Compile Include="Model\PagenatedCollection.cs" />
     <Compile Include="Model\TabsModel.cs" />
@@ -125,7 +125,7 @@
     <Compile Include="ViewModel\NotificationsViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="Converters.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\StatusesViewModel.cs" />
     <Compile Include="ViewModel\StatusViewModel.cs" />
     <Compile Include="Model\TabSettings.cs" />
