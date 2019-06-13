@@ -21,11 +21,8 @@ namespace Muon
     {
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            var mainWindowViewModel = new MainWindowViewModel(new MainWindowModel(
-                new ReactiveProperty<Status>(),
-                new MastodonClient(Muon.Properties.Settings.Default.AppRegistration, Muon.Properties.Settings.Default.Auth),
-                new TabsModel(Muon.Properties.Settings.Default)));
-            var settingsViewModel = new SettingsViewModel();
+            var tabsModel = new TabsModel(Muon.Properties.Settings.Default);
+            var settingsViewModel = new SettingsViewModel(tabsModel);
             if (Muon.Properties.Settings.Default.Auth == null)
             {
                 ShutdownMode = ShutdownMode.OnExplicitShutdown;
@@ -37,6 +34,10 @@ namespace Muon
                 }
                 ShutdownMode = ShutdownMode.OnLastWindowClose;
             }
+            var mainWindowViewModel = new MainWindowViewModel(new MainWindowModel(
+                new ReactiveProperty<Status>(),
+                new MastodonClient(Muon.Properties.Settings.Default.AppRegistration, Muon.Properties.Settings.Default.Auth),
+                tabsModel));
             new MainWindow(mainWindowViewModel).Show();
         }
     }

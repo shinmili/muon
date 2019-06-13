@@ -26,15 +26,16 @@ namespace Muon.ViewModel
 
         private AuthenticationClient authenticationClient;
 
-        public SettingsViewModel()
+        public SettingsViewModel(TabsModel tabsModel)
         {
+            Tabs = tabsModel;
             Instance = new ReactiveProperty<string>(Properties.Settings.Default.AppRegistration?.Instance);
             AccessToken = new ReactiveProperty<string>(Properties.Settings.Default.Auth?.AccessToken ?? "");
 
-            ShowHomeTimelineTab = new ReactiveProperty<bool>(Properties.Settings.Default.Tabs?.OfType<TimelineTabParameters>()?.Any(x => x.Type == TimelineType.Home) ?? false);
-            ShowLocalTimelineTab = new ReactiveProperty<bool>(Properties.Settings.Default.Tabs?.OfType<TimelineTabParameters>()?.Any(x => x.Type == TimelineType.Local) ?? false);
-            ShowFederatedTimelineTab = new ReactiveProperty<bool>(Properties.Settings.Default.Tabs?.OfType<TimelineTabParameters>()?.Any(x => x.Type == TimelineType.Federated) ?? false);
-            ShowNotificationsTab = new ReactiveProperty<bool>(Properties.Settings.Default.Tabs?.OfType<NotificationTabParameters>()?.Any() ?? false);
+            ShowHomeTimelineTab = new ReactiveProperty<bool>(tabsModel.OfType<TimelineTabParameters>()?.Any(x => x.Type == TimelineType.Home) ?? false);
+            ShowLocalTimelineTab = new ReactiveProperty<bool>(tabsModel.OfType<TimelineTabParameters>()?.Any(x => x.Type == TimelineType.Local) ?? false);
+            ShowFederatedTimelineTab = new ReactiveProperty<bool>(tabsModel.OfType<TimelineTabParameters>()?.Any(x => x.Type == TimelineType.Federated) ?? false);
+            ShowNotificationsTab = new ReactiveProperty<bool>(tabsModel.OfType<NotificationTabParameters>()?.Any() ?? false);
 
             RequestTokenCommand = Instance
                 .Select(x => !string.IsNullOrEmpty(x))
