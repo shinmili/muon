@@ -21,13 +21,11 @@ namespace Muon.View
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        private SettingsViewModel ViewModel = new SettingsViewModel();
-
-        public SettingsWindow()
+        public SettingsWindow(SettingsViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = ViewModel;
-            ViewModel.Closing += (s, e) => { DialogResult = e.DialogResult; Close(); };
+            DataContext = viewModel;
+            viewModel.Closing += (s, e) => { DialogResult = e.DialogResult; Close(); };
         }
     }
 }

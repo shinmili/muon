@@ -29,15 +29,11 @@ namespace Muon.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow(MainWindowViewModel viewModel)
         {
             InitializeComponent();
-            var vm = new MainWindowViewModel(new MainWindowModel(
-                new ReactiveProperty<Status>(),
-                new MastodonClient(Properties.Settings.Default.AppRegistration, Properties.Settings.Default.Auth),
-                new TabsModel(Properties.Settings.Default)));
-            DataContext = vm;
-            (vm.Notifications as INotifyCollectionChanged).CollectionChanged += MainWindow_CollectionChanged;
+            DataContext = viewModel;
+            (viewModel.Notifications as INotifyCollectionChanged).CollectionChanged += MainWindow_CollectionChanged;
         }
 
         private void MainWindow_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

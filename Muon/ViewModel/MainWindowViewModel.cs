@@ -46,7 +46,7 @@ namespace Muon.ViewModel
             OpenSettingsCommand = new ReactiveCommand()
                 .WithSubscribe(() =>
                 {
-                    var w = new SettingsWindow();
+                    var w = new SettingsWindow(new SettingsViewModel());
                     ((SettingsViewModel)w.DataContext).Tabs = this.model.Tabs;
                     w.ShowDialog();
                 });
