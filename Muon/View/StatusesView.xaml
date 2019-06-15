@@ -64,7 +64,7 @@
                 <GridViewColumn Header="Name">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <v:TextBlockEx Text="{Binding DisplayName, Mode=OneTime}" Emojis="{Binding Status.Account.Emojis}"/>
+                            <v:TextBlockEx Text="{Binding DisplayName, Mode=OneTime}" Emojis="{Binding OriginalStatus.Account.Emojis}"/>
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn> 
