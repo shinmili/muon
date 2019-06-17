@@ -28,6 +28,8 @@ namespace Muon.Model
         /// </summary>
         public ReadOnlyReactiveProperty<bool> StreamingStarted { get; }
 
+        public event EventHandler<Notification> OnNotification;
+
         public NotificationsModel(IMastodonClient client)
         {
             this.client = client;
@@ -58,6 +60,13 @@ namespace Muon.Model
         }
 
         private void StopStreaming() => streaming.Stop();
+
+        protected override void InsertItem(int index, Notification item)
+        {
+            base.InsertItem(index, item);
+            if (IsInitialFetchDone)
+                OnNotification?.Invoke(this, item);
+        }
 
         protected override Task<MastodonList<Notification>> FetchAsync(ArrayOptions options) => client.GetNotifications(options);
     }

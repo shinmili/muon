@@ -16,6 +16,8 @@ namespace Muon.Model
 
         public int? Limit { get; set; }
 
+        public bool IsInitialFetchDone { get; private set; } = false;
+
         public ArrayOptions Previous => new ArrayOptions() { SinceId = sinceId, Limit = Limit };
         public ArrayOptions Next => new ArrayOptions() { MaxId = maxId, Limit = Limit };
 
@@ -50,6 +52,7 @@ namespace Muon.Model
             foreach (T item in items) { InsertItem(this.Count(), item); }
             if (items.PreviousPageSinceId.HasValue) { UpdateSinceId(items.PreviousPageSinceId.Value); }
             if (items.NextPageMaxId.HasValue) { UpdateMaxId(items.NextPageMaxId.Value); }
+            IsInitialFetchDone = true;
         }
 
         protected abstract Task<MastodonList<T>> FetchAsync(ArrayOptions options);

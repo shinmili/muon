@@ -33,13 +33,12 @@ namespace Muon.View
         {
             InitializeComponent();
             DataContext = viewModel;
-            (viewModel.Notifications as INotifyCollectionChanged).CollectionChanged += MainWindow_CollectionChanged;
+            viewModel.OnNotification += NotifyBalloon;
         }
 
-        private void MainWindow_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void NotifyBalloon(object sender, Notification notification)
         {
             string format = "";
-            var notification = (Notification)e.NewItems[0];
             switch (notification.Type)
             {
                 case "follow":
@@ -63,6 +62,7 @@ namespace Muon.View
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             TaskbarIcon.Dispose();
+            ((MainWindowViewModel)DataContext).OnNotification -= NotifyBalloon;
         }
     }
 }

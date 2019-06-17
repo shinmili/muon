@@ -19,6 +19,11 @@ namespace Muon.ViewModel
     public class MainWindowViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<Notification> OnNotification
+        {
+            add { TabViewModels.OfType<NotificationsViewModel>().SingleOrDefault().OnNotification += value; }
+            remove { TabViewModels.OfType<NotificationsViewModel>().SingleOrDefault().OnNotification -= value; }
+        }
 
         private MainWindowModel model;
 
@@ -28,7 +33,6 @@ namespace Muon.ViewModel
         public ReadOnlyReactiveCollection<TabContentViewModelBase> TabViewModels { get; }
         public ReactiveProperty<TabContentViewModelBase> SelectedTab { get; } = new ReactiveProperty<TabContentViewModelBase>();
         public ReactiveProperty<int> SelectedTabIndex { get; }
-        public ReadOnlyObservableCollection<Notification> Notifications { get; }
 
         public ReactiveCommand OpenSettingsCommand { get; }
         public ReactiveCommand<TabContentViewModelBase> CloseTabCommand { get; }
@@ -41,7 +45,6 @@ namespace Muon.ViewModel
             NewTootBoxViewModel = new NewTootBoxViewModel(this.model.InReplyTo, this.model.Client);
             TabViewModels = this.model.Tabs.ToReadOnlyReactiveCollection(p => TabContentViewModelBase.FromParam(p, this.model.InReplyTo, this.model.Tabs, this.model.Client));
             SelectedTabIndex = this.model.Tabs.SelectedIndex;
-            Notifications = TabViewModels.OfType<NotificationsViewModel>().FirstOrDefault().Notifications;
 
             OpenSettingsCommand = new ReactiveCommand()
                 .WithSubscribe(() =>

@@ -13,6 +13,12 @@ namespace Muon.ViewModel
 {
     public class NotificationsViewModel : TabContentViewModelBase
     {
+        public event EventHandler<Notification> OnNotification
+        {
+            add { model.OnNotification += value; }
+            remove { model.OnNotification -= value; }
+        }
+
         private NotificationsModel model;
 
         public ReadOnlyObservableCollection<Notification> Notifications { get; }
