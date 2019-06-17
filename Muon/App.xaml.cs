@@ -19,8 +19,20 @@ namespace Muon
     /// </summary>
     public partial class App : Application
     {
+        private void UpgradeSettings()
+        {
+            if (Muon.Properties.Settings.Default.IsSettingsFresh)
+            {
+                Muon.Properties.Settings.Default.Upgrade();
+                Muon.Properties.Settings.Default.IsSettingsFresh = false;
+                Muon.Properties.Settings.Default.Save();
+            }
+        }
+
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            UpgradeSettings();
+
             var tabsModel = new TabsModel(Muon.Properties.Settings.Default);
             var settingsViewModel = new SettingsViewModel(tabsModel);
             if (Muon.Properties.Settings.Default.Auth == null)
